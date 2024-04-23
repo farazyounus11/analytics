@@ -6,7 +6,8 @@ from matplotlib.image import imread
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-from pillow import Image
+from PIL import Image
+
 
 st.set_option('deprecation.showPyplotGlobalUse', False)  # Disable the warning
 st.markdown("## Upload a Random Photo to Reduce Photo Size Using SVD")
