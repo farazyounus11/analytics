@@ -13,8 +13,7 @@ def load_data():
     df1 = pd.read_csv("worlddata.csv", dtype=str)
 
     # Replace all non-alphanumeric characters with an empty string
-    df1 = df1.replace(r'\W', '', regex=True)
-
+    df1 = df1.replace(r'[^\w.]', '', regex=True)
     # Convert columns except the first one to floats
     for col in df1.columns[1:]:
         df1[col] = pd.to_numeric(df1[col], errors='coerce')
