@@ -4,8 +4,7 @@ from streamlit_pdf_viewer import pdf_viewer
 
 
 st.set_page_config(
-    page_title="Home")
-st.set_page_config(layout="wide")
+    page_title="Home",layout="wide")
 
 st.title("Hi I'm Faraz.")
 st.title("I am a Masters Data Science Student!")
