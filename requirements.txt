@@ -1,0 +1,16 @@
+streamlit
+joblib
+sklearn
+os
+re
+matplotlib
+nltk
+numpy
+PIL
+streamlit_pandas
+streamlit_pdf_viewer
+plotly
+itertools
+collections
+
+
