@@ -23,7 +23,7 @@ if uploaded_file is not None:
     img = ax.imshow(256 - X, cmap='gray')
     ax.axis('off')
     ax.set_title('Original Image')
-    st.pyplot(fig)
+    #st.pyplot(fig)
 
     # Perform Singular Value Decomposition (SVD)
     U, S, VT = np.linalg.svd(X, full_matrices=False)
