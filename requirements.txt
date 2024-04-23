@@ -8,7 +8,3 @@ Pillow
 streamlit_pandas
 streamlit_pdf_viewer
 plotly
-itertools
-collections
-
-
