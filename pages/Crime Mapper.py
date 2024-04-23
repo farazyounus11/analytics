@@ -109,4 +109,4 @@ for city in selected_cities:
             ],
         ))
     else:
-        st.warning("No data available for the selected criteria.")
+        st.warning("Select a Crime Type Using the Sidebar")
