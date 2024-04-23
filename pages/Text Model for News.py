@@ -6,7 +6,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.stem import PorterStemmer
 import nltk
 from nltk.corpus import stopwords
-
+nltk.download('stopwords')
 current_directory = os.path.dirname(os.path.abspath(__file__))
 os.chdir(current_directory)
 
