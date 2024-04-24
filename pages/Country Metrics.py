@@ -50,40 +50,6 @@ with col2:
     st.subheader('GDP')
     st.line_chart(df, x="Year", y="Gdp", color="Country")
 
-st.markdown("## Below Select a Metirc for Heatmap")
-
-
-selected_variable = st.selectbox('Select Variable', ['Gdp', 'Co2_consump', 'Hdi_index', 'Life_exp'])
-
-df_2018 = df[df['Year'] == 2018]
-
-# Calculate the maximum value for the selected variable by country for the year 2018
-max_values_by_country = df_2018.groupby('Country')[selected_variable].max().reset_index()
-
-# Define the color scale for each variable
-color_scales = {
-    'Gdp': 'Viridis',
-    'Co2_consump': 'YlOrRd',
-    'Hdi_index': 'Plasma',
-    'Life_exp': 'YlOrRd'
-}
-
-# Create the choropleth map using the maximum value for each country in 2018
-fig = px.choropleth(max_values_by_country, 
-                    locations='Country',  
-                    locationmode='country names',  
-                    color=selected_variable,  # Dynamically change the color variable
-                    hover_name='Country',
-                    projection='natural earth',  
-                    title=f'Maximum {selected_variable.replace("_", " ").title()} in 2018 by Country',
-                    color_continuous_scale=color_scales[selected_variable])
-
-st.plotly_chart(fig)
-
-
-
-
-
 
 def run_predictions():
     X = df['Year'].values.reshape(-1, 1)  # Features (Year)
