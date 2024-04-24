@@ -11,19 +11,25 @@ st.set_page_config(layout="wide")
 current_directory = os.path.dirname(__file__)
 os.chdir(current_directory)
 
+import streamlit as st
+import pandas as pd
+
 @st.cache
 def load_data():
     df = pd.read_csv("gdpdata.csv")
     return df
 
+# Load data
 df1 = load_data()
 df1.columns = df1.columns.str.capitalize()
 
+# Create widget for selecting countries
 selected_countries = st.multiselect("Select countries", df1["Country"].unique())
-selected_continents = st.multiselect("Select continents", df1["Continent"].unique())
 
-filtered_df = df1[df1["Country"].isin(selected_countries) & df1["Continent"].isin(selected_continents)]
+# Filter data based on selected countries
+filtered_df = df1[df1["Country"].isin(selected_countries)]
 
+# Plot line charts
 st.markdown("## Use the Side-bar to select countries to View")
 col1, col2 = st.columns(2)
 with col1:
@@ -39,6 +45,7 @@ with col2:
 
     st.subheader('GDP')
     st.line_chart(filtered_df, x="Year", y="Gdp", color="Country")
+
 
 
 
