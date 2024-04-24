@@ -13,39 +13,27 @@ if uploaded_file is not None:
     image = Image.open(uploaded_file)
     st.image(image, caption='Original Image', use_column_width=True)
 
-    A = np.array(image)  # Convert PIL image to NumPy array
+    # Resize the image to reduce computational load
+    image_resized = image.resize((200, 200))  # Adjust the size as needed
+    A = np.array(image_resized)  # Convert PIL image to NumPy array
     X = np.mean(A, -1)  # Convert RGB to grayscale
-
-    plt.rcParams['figure.figsize'] = [8, 4]
-
-    # Show the original image
-    fig, ax = plt.subplots()
-    img = ax.imshow(256 - X, cmap='gray')
-    ax.axis('off')
-    ax.set_title('Original Image')
-    #st.pyplot(fig)
 
     # Perform Singular Value Decomposition (SVD)
     U, S, VT = np.linalg.svd(X, full_matrices=False)
     S = np.diag(S)
 
-    # Create two columns in Streamlit layout
-    col1, col2 = st.columns(2)
+    # Create a single Matplotlib figure
+    fig, ax = plt.subplots(2, 2, figsize=(10, 10))
 
-    for r in (5, 20, 100, 200):
+    for i, r in enumerate([5, 20, 100, 200]):
         # Construct approximate image
         Xapprox = U[:, :r] @ S[0:r, :r] @ VT[:r, :]
 
-        # Create a new figure
-        fig, ax = plt.subplots()
+        # Display the image in the corresponding subplot
+        ax[i // 2, i % 2].imshow(256 - Xapprox, cmap='gray')
+        ax[i // 2, i % 2].axis('off')
+        ax[i // 2, i % 2].set_title('r = ' + str(r))
 
-        # Display the image
-        ax.imshow(256 - Xapprox, cmap='gray')
-        ax.axis('off')
-        ax.set_title('r = ' + str(r))
-
-        # Display the Matplotlib figure in Streamlit columns
-        if r in (5, 20):
-            col1.pyplot(fig)
-        else:
-            col2.pyplot(fig)
+    # Adjust layout and display the Matplotlib figure
+    plt.tight_layout()
+    st.pyplot(fig)
