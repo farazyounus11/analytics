@@ -59,3 +59,31 @@ fig = px.choropleth(df,
                     height=600   # Adjust height as needed
 )
 st.plotly_chart(fig)
+
+@st.cache
+def load_data():
+    df = pd.read_csv("gdpdata.csv")
+    return df
+
+original_df = load_data()
+original_df.columns = original_df.columns.str.capitalize()
+
+selected_countries = st.multiselect("Select countries", original_df["Country"].unique())
+
+filtered_df = original_df[original_df["Country"].isin(selected_countries)]
+
+st.markdown("## Use the Side-bar to select countries to View")
+col1, col2 = st.columns(2)
+with col1:
+    st.subheader('Life Expectancy')
+    st.line_chart(filtered_df, x="Year", y="Life_exp", color="Country")
+
+    st.subheader('HDI Index')
+    st.line_chart(filtered_df, x="Year", y="Hdi_index", color="Country")
+
+with col2:
+    st.subheader('CO2 Consumption')
+    st.line_chart(filtered_df, x="Year", y="Co2_consump", color="Country")
+
+    st.subheader('GDP')
+    st.line_chart(filtered_df, x="Year", y="Gdp", color="Country")
