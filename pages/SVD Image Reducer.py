@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from PIL import Image
 import io
-
+st.set_page_config(layout="wide")
 st.set_option('deprecation.showPyplotGlobalUse', False)
 st.markdown("## Upload a Random Photo to Reduce Photo Size Using SVD")
 st.markdown("## Apps Such as Instagram/WhatsApp/Zoom reduce Image/Video Size to save user data and data center computation")
