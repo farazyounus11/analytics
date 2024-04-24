@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import streamlit_pandas as sp
 import plotly.express as px
-
+st.set_page_config(layout="wide")
 st.markdown("# Country Mapper Created by Faraz")
 st.header('Select Heatmap Variable Below', divider='red')
 
