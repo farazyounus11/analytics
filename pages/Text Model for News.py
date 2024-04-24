@@ -11,6 +11,7 @@ current_directory = os.path.dirname(os.path.abspath(__file__))
 os.chdir(current_directory)
 
 
+import streamlit as st
 
 label_to_category = {
     1: "World",
@@ -19,10 +20,14 @@ label_to_category = {
     4: "Sci/Tech"
 }
 
-selcat = st.radio("Select a category", list(label_to_category.values()))
+selected_category_label = st.radio("Select a category", list(label_to_category.values()))
 
-# Print the selected category
-st.write("Selected category:", selcat)
+# Get the corresponding numerical key for the selected category
+selected_category_key = [key for key, value in label_to_category.items() if value == selected_category_label][0]
+
+# Print the selected category key
+st.write("Selected category key:", selected_category_key)
+
 
 
 porter_stemmer = PorterStemmer()
