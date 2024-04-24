@@ -61,7 +61,6 @@ st.plotly_chart(fig)
 
 st.header('Select the Countries for Line Chart', divider='red')
 
-@st.cache
 def load_data():
     df = pd.read_csv("gdpdata.csv")
     return df
