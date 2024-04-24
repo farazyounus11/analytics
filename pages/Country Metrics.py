@@ -11,7 +11,7 @@ st.set_page_config(layout="wide")
 current_directory = os.path.dirname(__file__)
 os.chdir(current_directory)
 
-@st.cache_data
+@st.cache
 def load_data():
     df = pd.read_csv("gdpdata.csv")
     return df
@@ -19,36 +19,27 @@ def load_data():
 df1 = load_data()
 df1.columns = df1.columns.str.capitalize()
 
+selected_countries = st.multiselect("Select countries", df1["Country"].unique())
+selected_continents = st.multiselect("Select continents", df1["Continent"].unique())
 
-print(df1.columns)
-create_data = {
-                "Country": "multiselect",
-                "Continent": "multiselect"}
-
-all_widgets = sp.create_widgets(df1, create_data)
-
-
-df = sp.filter_df(df1, all_widgets)
-
+filtered_df = df1[df1["Country"].isin(selected_countries) & df1["Continent"].isin(selected_continents)]
 
 st.markdown("## Use the Side-bar to select countries to View")
-import streamlit as st
-
-# Assuming df is your DataFrame containing the data
 col1, col2 = st.columns(2)
 with col1:
     st.subheader('Life Expectancy')
-    st.line_chart(df, x="Year", y="Life_exp", color="Country")
-with col1:
+    st.line_chart(filtered_df, x="Year", y="Life_exp", color="Country")
+
     st.subheader('HDI Index')
-    st.line_chart(df, x="Year", y="Hdi_index", color="Country")
+    st.line_chart(filtered_df, x="Year", y="Hdi_index", color="Country")
 
 with col2:
     st.subheader('CO2 Consumption')
-    st.line_chart(df, x="Year", y="Co2_consump", color="Country")
-with col2:
+    st.line_chart(filtered_df, x="Year", y="Co2_consump", color="Country")
+
     st.subheader('GDP')
-    st.line_chart(df, x="Year", y="Gdp", color="Country")
+    st.line_chart(filtered_df, x="Year", y="Gdp", color="Country")
+
 
 
 def run_predictions():
