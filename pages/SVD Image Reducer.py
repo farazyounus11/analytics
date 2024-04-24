@@ -14,7 +14,7 @@ if uploaded_file is not None:
     image = Image.open(uploaded_file)
     st.image(image, caption='Original Image', use_column_width=True)
 
-    image_resized = image.resize((200, 200))
+    image_resized = image.resize((int(image.width * 0.2), int(image.height * 0.2)))
     A = np.array(image_resized)
     X = np.mean(A, -1)
 
