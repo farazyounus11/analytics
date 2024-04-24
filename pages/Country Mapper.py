@@ -4,8 +4,7 @@ import streamlit_pandas as sp
 import plotly.express as px
 
 st.markdown("# Country Mapper Created by Faraz")
-st.markdown("## Use the side bar to filter and use the dropdown menu to contrast")
-
+st.header('Use the Sidebar to filter; Use the Dropdown Menu to Select Heatmap Variable', divider='red')
 
 
 @st.cache_data
