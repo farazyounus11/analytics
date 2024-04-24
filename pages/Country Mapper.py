@@ -60,6 +60,9 @@ fig = px.choropleth(df,
 )
 st.plotly_chart(fig)
 
+
+st.header('Use the Drop-Down Menu to Select the Countries for Line Chart', divider='red')
+
 @st.cache
 def load_data():
     df = pd.read_csv("gdpdata.csv")
