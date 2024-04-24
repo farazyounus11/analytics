@@ -4,8 +4,7 @@ import streamlit_pandas as sp
 import plotly.express as px
 
 st.markdown("# Country Mapper Created by Faraz")
-st.header('Use the Sidebar to filter; Use the Dropdown Menu to Select Heatmap Variable', divider='red')
-
+st.header('Select Heatmap Variable Below', divider='red')
 
 @st.cache_data
 def load_data():
@@ -21,7 +20,7 @@ def load_data():
     df1 = df1.fillna(df1.mean())
 
     # Round floats to one decimal place
-    df1 = df1.round(1)
+    df1 = df1.round(3)
 
     return df1
 
@@ -60,7 +59,7 @@ fig = px.choropleth(df,
 st.plotly_chart(fig)
 
 
-st.header('Use the Drop-Down Menu to Select the Countries for Line Chart', divider='red')
+st.header('Select the Countries for Line Chart', divider='red')
 
 @st.cache
 def load_data():
