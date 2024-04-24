@@ -34,7 +34,7 @@ df1.columns = df1.columns.str.capitalize()
 # Create widgets
 create_data = {"Country": "multiselect"}
 
-all_widgets = sp.create_widgets(df1, create_data)
+all_widgets = sp.create_widgets(df1, create_data, ignore_columns=["Latitude", "Longitude"])
 
 # Filter DataFrame
 df = sp.filter_df(df1, all_widgets)
