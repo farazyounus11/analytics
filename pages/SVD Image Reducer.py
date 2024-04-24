@@ -29,10 +29,5 @@ if uploaded_file is not None:
         ax[i // 2, i % 2].axis('off')
         ax[i // 2, i % 2].set_title('r = ' + str(r))
 
-        buffer = io.BytesIO()
-        plt.imsave(buffer, 256 - Xapprox, cmap='gray', format='png')
-        buffer.seek(0)
-        st.download_button(label=f"Download r={r}", data=buffer, file_name=f"svd_image_r_{r}.png")
-
     plt.tight_layout()
     st.pyplot(fig)
