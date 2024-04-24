@@ -10,6 +10,21 @@ nltk.download('stopwords')
 current_directory = os.path.dirname(os.path.abspath(__file__))
 os.chdir(current_directory)
 
+
+
+label_to_category = {
+    1: "World",
+    2: "Sports",
+    3: "Business",
+    4: "Sci/Tech"
+}
+
+selcat = st.radio("Select a category", list(label_to_category.values()))
+
+# Print the selected category
+st.write("Selected category:", selcat)
+
+
 porter_stemmer = PorterStemmer()
 stop_words = set(stopwords.words('english'))
 
