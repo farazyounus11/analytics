@@ -7,6 +7,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import classification_report, confusion_matrix
 import matplotlib.pyplot as plt
 import numpy as np
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
 st.set_page_config(layout="wide")
 df = pd.read_csv('creditcard.csv')
@@ -29,33 +30,37 @@ with col2:
 X = df.drop(columns=['Class'])
 y = df['Class']
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+# Function to train the model and generate confusion matrix
+def train_and_plot_confusion_matrix(X, y):
+    # Split the data into training and testing sets
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y)
 
-scaler = StandardScaler()
-X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled = scaler.transform(X_test)
+    # Scale the features
+    scaler = StandardScaler()
+    X_train_scaled = scaler.fit_transform(X_train)
+    X_test_scaled = scaler.transform(X_test)
 
-model = LogisticRegression(class_weight='balanced')
-model.fit(X_train_scaled, y_train)
+    # Train the logistic regression model
+    model = LogisticRegression(class_weight='balanced')
+    model.fit(X_train_scaled, y_train)
 
-y_pred = model.predict(X_test_scaled)
+    # Predict the target labels
+    y_pred = model.predict(X_test_scaled)
 
+    # Display the results and confusion matrix
+    st.header("I was able to reduce false negatives (scammers who got away) from 35 to 8!")
+    st.markdown("---")
+    st.write("Confusion Matrix:")
+    cm = confusion_matrix(y_test, y_pred)
+    disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=model.classes_)
+    disp.plot(cmap=plt.cm.Blues)
+    plt.xlabel('Predicted')
+    plt.ylabel('True')
+    plt.title('Confusion Matrix')
+    st.pyplot()
 
-st.header("I was able to reduce false negatives(scammers who got away) from 35 to 7!", divider = "red")
-cm = confusion_matrix(y_test, y_pred)
-fig, ax = plt.subplots()
-
-plt.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
-plt.title('Confusion Matrix')
-plt.colorbar()
-plt.xlabel('Predicted')
-plt.ylabel('True')
-plt.xticks(ticks=[0, 1], labels=['Class 0', 'Class 1'])
-plt.yticks(ticks=[0, 1], labels=['Class 0', 'Class 1'])
-
-for i in range(cm.shape[0]):
-    for j in range(cm.shape[1]):
-        plt.text(j, i, format(cm[i, j], 'd'),
-                 horizontalalignment="center",
-                 color="white" if cm[i, j] > cm.max() / 2 else "black")
-st.pyplot(fig)
+# Main Streamlit code
+st.title("Run the Model")
+if st.button("Run"):
+    # Assuming X and y are your feature matrix and target vector
+    train_and_plot_confusion_matrix(X, y)
