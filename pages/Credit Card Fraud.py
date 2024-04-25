@@ -53,6 +53,7 @@ def train_and_plot_confusion_matrix(X, y):
     ax.set_title('Confusion Matrix')
     st.pyplot(fig)
 
-st.sidebar.title("Run or Rerun the Model")
-if st.sidebar.button("Run"):
+
+st.title("Run or Rerun the Model")
+if st.button("Run"):
     train_and_plot_confusion_matrix(X, y)
