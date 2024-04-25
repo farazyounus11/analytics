@@ -62,7 +62,7 @@ for i in range(cm.shape[0]):
 # Display the plot in Streamlit
 st.pyplot(fig)
 
-X_subset_test = X_test[:, [2, 3]]  # Assuming petal length and petal width are the features
+X_subset_test = X_test.iloc[:, [2, 3]]
 
 fig = plt.figure(figsize=(10, 5))
 plot_decision_regions(X_subset_test, y_test, clf=model)
