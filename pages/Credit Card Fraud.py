@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+from mlxtend.plotting import plot_decision_regions
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
@@ -60,5 +61,14 @@ for i in range(cm.shape[0]):
 
 # Display the plot in Streamlit
 st.pyplot(fig)
+
+X_subset_test = X_test[:, [2, 3]]  # Assuming petal length and petal width are the features
+
+fig = plt.figure(figsize=(10, 5))
+plot_decision_regions(X_subset_test, y_test, clf=model)
+plt.xlabel('petal length')
+plt.ylabel('petal width')
+plt.title('Decision Regions for Binary Logistic Regression with Balanced Class Weight (Test Data)')
+plt.show()
 
 
