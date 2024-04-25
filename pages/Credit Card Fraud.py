@@ -74,11 +74,13 @@ df_equal_sampling = pd.concat(equal_samples)
 NewX = df_equal_sampling.drop(columns=['Class'])
 newy = df_equal_sampling.Class
 selected_columns = NewX.iloc[:, [0, 1]]
+X_subset_np = selected_columns.values
+y_np = newy.values
 
 # Plot decision regions
 fig = plt.figure(figsize=(10, 5))
-plot_decision_regions(selected_columns, newy, clf=model)
-plt.xlabel('petal length')
-plt.ylabel('petal width')
-plt.title('Decision Regions for Binary Logistic Regression with Balanced Class Weight (Test Data)')
+plot_decision_regions(X_subset_np, y_np, clf=model)
+plt.xlabel('Feature 1')  # Replace with appropriate feature name
+plt.ylabel('Feature 2')  # Replace with appropriate feature name
+plt.title('Decision Regions for Binary Logistic Regression with Balanced Class Weight')
 plt.show()
