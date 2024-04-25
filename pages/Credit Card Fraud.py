@@ -14,7 +14,7 @@ df = pd.read_csv('creditcard.csv')
 st.header("The original credit card fraud data set can be found on Kaggle")
 st.header("The original dataset has 31 features. I did simple feature selection and reduced the feature count 5 ", divider = "red")
 
-st.markdown("## You can in in the pairplots that the yellow and blue labels are linearly separable!")
+st.markdown("## You can see in the pairplots that the yellow and blue labels are linearly separable!")
 
 col1, col2 = st.columns([1, 1])
 with col1:
