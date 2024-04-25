@@ -47,13 +47,12 @@ def train_and_plot_confusion_matrix(X, y):
     y_pred = model.predict(X_test_scaled)
 
     # Display the results and confusion matrix
-    # Display the results and confusion matrix
-    st.header("I was able to reduce false negatives (scammers who got away) from 40s to 10!")
+    st.header("I was able to reduce false negatives (scammers who got away) from 35 to 8!")
     st.markdown("---")
     st.write("Confusion Matrix:")
     cm = confusion_matrix(y_test, y_pred)
     disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=model.classes_)
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(8, 6))  # Adjust the figsize as needed
     disp.plot(cmap=plt.cm.Blues, ax=ax)
     ax.set_xlabel('Predicted')
     ax.set_ylabel('True')
@@ -61,7 +60,7 @@ def train_and_plot_confusion_matrix(X, y):
     st.pyplot(fig)
 
 # Main Streamlit code
-st.title("Run the Model")
+st.title("Run or Rerun the Model")
 if st.button("Run"):
     # Assuming X and y are your feature matrix and target vector
     train_and_plot_confusion_matrix(X, y)
