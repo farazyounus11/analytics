@@ -71,8 +71,12 @@ for label in class_labels:
 dfsam = pd.concat(equal_samples)
 
 st.write(dfsam)
-concatenated_matrix = np.concatenate((dfsam.V4, dfsam.V11), axis=1)
 
+column1 = dfsam['V4'].values.reshape(-1, 1)
+column2 = dfsam['V11'].values.reshape(-1, 1)
+
+# Concatenate the two columns into a single matrix
+concatenated_matrix = np.concatenate((column1, column2), axis=1)
 # Plot decision regions
 fig = plt.figure(figsize=(10, 5))
 plot_decision_regions(concatenated_matrix, dfsam.Class, clf=model)
