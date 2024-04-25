@@ -68,25 +68,14 @@ equal_samples = []
 for label in class_labels:
     class_subset = df[df['Class'] == label].sample(min_samples, replace=False)
     equal_samples.append(class_subset)
-df_equal_sampling = pd.concat(equal_samples)
+dfsam = pd.concat(equal_samples)
 
-
-NewX = df_equal_sampling.drop(columns=['Class'])
-newy = df_equal_sampling.Class
-selected_columns = NewX.iloc[:, [0, 1]]
-X_subset_np = selected_columns.values
-y_np = newy.values
-
-# Ensure that X_subset_np has the correct shape
-if X_subset_np.ndim == 1:
-    X_subset_np = X_subset_np.reshape(-1, 1)  # Reshape to a single feature array if needed
-
-# Ensure that y_np is a 1D array
-y_np = np.ravel(y_np)
+st.write(dfsam)
+concatenated_matrix = np.concatenate((dfsam.V4, df.sam.V11), axis=1)
 
 # Plot decision regions
 fig = plt.figure(figsize=(10, 5))
-plot_decision_regions(X_subset_np, y_np, clf=model)
+plot_decision_regions(concatenated_matrix, dfsam.Class, clf=model)
 plt.xlabel('Feature 1')  # Replace with appropriate feature name
 plt.ylabel('Feature 2')  # Replace with appropriate feature name
 plt.title('Decision Regions for Binary Logistic Regression with Balanced Class Weight')
