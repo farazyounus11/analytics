@@ -30,7 +30,6 @@ with col2:
 X = df.drop(columns=['Class'])
 y = df['Class']
 
-# Function to train the model and generate confusion matrix
 def train_and_plot_confusion_matrix(X, y):
     # Split the data into training and testing sets
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y)
@@ -53,11 +52,12 @@ def train_and_plot_confusion_matrix(X, y):
     st.write("Confusion Matrix:")
     cm = confusion_matrix(y_test, y_pred)
     disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=model.classes_)
-    disp.plot(cmap=plt.cm.Blues)
-    plt.xlabel('Predicted')
-    plt.ylabel('True')
-    plt.title('Confusion Matrix')
-    st.pyplot()
+    fig, ax = plt.subplots()
+    disp.plot(cmap=plt.cm.Blues, ax=ax)
+    ax.set_xlabel('Predicted')
+    ax.set_ylabel('True')
+    ax.set_title('Confusion Matrix')
+    st.pyplot(fig)
 
 # Main Streamlit code
 st.title("Run the Model")
