@@ -13,7 +13,7 @@ st.set_page_config(layout="wide")
 df = pd.read_csv('creditcard.csv')
 
 st.header("The original credit card fraud data set can be found on Kaggle")
-st.header("The original dataset has 31 features. I did simple feature selection and reduced the feature count 5 ", divider = "red")
+st.header("The original dataset has 31 features. I did simple feature selection and reduced the feature count to 5 ", divider = "red")
 
 st.markdown("## You can see in the pairplots that the yellow and blue labels are linearly separable!")
 
@@ -31,22 +31,17 @@ X = df.drop(columns=['Class'])
 y = df['Class']
 
 def train_and_plot_confusion_matrix(X, y):
-    # Split the data into training and testing sets
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y)
 
-    # Scale the features
     scaler = StandardScaler()
     X_train_scaled = scaler.fit_transform(X_train)
     X_test_scaled = scaler.transform(X_test)
 
-    # Train the logistic regression model
     model = LogisticRegression(class_weight='balanced')
     model.fit(X_train_scaled, y_train)
 
-    # Predict the target labels
     y_pred = model.predict(X_test_scaled)
 
-    # Display the results and confusion matrix
     st.header("I was able to reduce false negatives (scammers who got away) from 35 to 8!")
     st.markdown("---")
     cm = confusion_matrix(y_test, y_pred)
@@ -58,8 +53,6 @@ def train_and_plot_confusion_matrix(X, y):
     ax.set_title('Confusion Matrix')
     st.pyplot(fig)
 
-# Main Streamlit code
 st.title("Run or Rerun the Model")
 if st.button("Run"):
-    # Assuming X and y are your feature matrix and target vector
     train_and_plot_confusion_matrix(X, y)
