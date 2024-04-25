@@ -11,7 +11,9 @@ st.set_page_config(layout="wide")
 df = pd.read_csv('creditcard.csv')
 
 st.header("The original credit card fraud data set can be found on Kaggle")
-st.header("The original dataset has 31 features. I did simple feature selection and reduced the count to 5 feature", divider = "red")
+st.header("The original dataset has 31 features. I did simple feature selection and reduced the feature count 5 ", divider = "red")
+
+st.mardown("## You can in in the pairplots that the yellow and blue labels are linearly seperably!")
 
 ## Show data frame 
 import streamlit as st
