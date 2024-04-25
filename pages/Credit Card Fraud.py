@@ -40,7 +40,7 @@ model.fit(X_train_scaled, y_train)
 y_pred = model.predict(X_test_scaled)
 
 
-st.header("I was able to reduce false negatives(scammers who got away) from 35 to 8!", divider = "red")
+st.header("I was able to reduce false negatives(scammers who got away) from 35 to 7!", divider = "red")
 cm = confusion_matrix(y_test, y_pred)
 fig, ax = plt.subplots()
 
