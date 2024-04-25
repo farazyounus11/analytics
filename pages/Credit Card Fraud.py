@@ -58,32 +58,4 @@ for i in range(cm.shape[0]):
         plt.text(j, i, format(cm[i, j], 'd'),
                  horizontalalignment="center",
                  color="white" if cm[i, j] > cm.max() / 2 else "black")
-
-# Display the plot in Streamlit
 st.pyplot(fig)
-
-class_labels = df['Class'].unique()
-min_samples = df['Class'].value_counts().min()
-equal_samples = []
-for label in class_labels:
-    class_subset = df[df['Class'] == label].sample(min_samples, replace=False)
-    equal_samples.append(class_subset)
-dfsam = pd.concat(equal_samples)
-
-st.write(dfsam)
-column1 = dfsam['V4'].values.reshape(-1, 1)
-column2 = dfsam['V11'].values.reshape(-1, 1)
-
-# Concatenate the two columns into a single matrix
-concatenated_matrix = np.concatenate((column1, column2), axis=1)
-
-# Ensure that dfsam.Class is a NumPy array
-y_np = dfsam['Class'].values
-
-# Plot decision regions
-fig = plt.figure(figsize=(10, 5))
-plot_decision_regions(concatenated_matrix, y_np, clf=model)
-plt.xlabel('Feature 1')  # Replace with appropriate feature name
-plt.ylabel('Feature 2')  # Replace with appropriate feature name
-plt.title('Decision Regions for Binary Logistic Regression with Balanced Class Weight')
-plt.show()
