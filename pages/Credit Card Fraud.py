@@ -7,7 +7,7 @@ from sklearn.metrics import classification_report, confusion_matrix
 import matplotlib.pyplot as plt
 import numpy as np
 
-
+st.set_page_config(layout="wide")
 df = pd.read_csv('creditcard.csv')
 
 st.header("The original credit card fraud data set can be found on Kaggle")
@@ -43,6 +43,7 @@ y_pred = model.predict(X_test_scaled)
 
 st.header("I was able to reduce false negatives(scammers who got away) from 35 to 8!", divider = "red")
 cm = confusion_matrix(y_test, y_pred)
+fig, ax = plt.subplots()
 
 plt.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
 plt.title('Confusion Matrix')
@@ -59,6 +60,6 @@ for i in range(cm.shape[0]):
                  color="white" if cm[i, j] > cm.max() / 2 else "black")
 
 # Display the plot in Streamlit
-st.pyplot()
+st.pyplot(fig)
 
 
