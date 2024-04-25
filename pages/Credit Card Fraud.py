@@ -4,10 +4,9 @@ from mlxtend.plotting import plot_decision_regions
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.metrics import classification_report, confusion_matrix, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 import numpy as np
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
 st.set_page_config(layout="wide")
 df = pd.read_csv('creditcard.csv')
@@ -41,8 +40,22 @@ def train_and_plot_confusion_matrix(X, y):
     model.fit(X_train_scaled, y_train)
 
     y_pred = model.predict(X_test_scaled)
+    col1, col2 = st.columns(2)
+    
+    # Top Left: Non-scammers correctly classified
+    with col1:
+        st.header("Top Left: Non-Scammers Correctly Classified")
+    with col2:
+        st.header("Top Right: Non-Scammers Who Had to Verify a Purchase")
+    # Bottom Left: Scammers who got away
+    with col1:
+        st.header("Bottom Left: Scammers Who Got Away")
+    # Bottom Right: Scammers who got caught
+    with col2:
+        st.header("Bottom Right: Scammers Who Got Caught")
 
-    st.header("I was able to reduce false negatives (scammers who got away) from 35 to 8!")
+    st.header("I was able to reduce successful scammers from 38 to 10 by undersampliing!")
+    
     st.markdown("---")
     cm = confusion_matrix(y_test, y_pred)
     disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=model.classes_)
