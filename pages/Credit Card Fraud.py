@@ -77,6 +77,13 @@ selected_columns = NewX.iloc[:, [0, 1]]
 X_subset_np = selected_columns.values
 y_np = newy.values
 
+# Ensure that X_subset_np has the correct shape
+if X_subset_np.ndim == 1:
+    X_subset_np = X_subset_np.reshape(-1, 1)  # Reshape to a single feature array if needed
+
+# Ensure that y_np is a 1D array
+y_np = np.ravel(y_np)
+
 # Plot decision regions
 fig = plt.figure(figsize=(10, 5))
 plot_decision_regions(X_subset_np, y_np, clf=model)
