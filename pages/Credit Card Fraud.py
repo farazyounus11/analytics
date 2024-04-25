@@ -71,15 +71,18 @@ for label in class_labels:
 dfsam = pd.concat(equal_samples)
 
 st.write(dfsam)
-
 column1 = dfsam['V4'].values.reshape(-1, 1)
 column2 = dfsam['V11'].values.reshape(-1, 1)
 
 # Concatenate the two columns into a single matrix
 concatenated_matrix = np.concatenate((column1, column2), axis=1)
+
+# Ensure that dfsam.Class is a NumPy array
+y_np = dfsam['Class'].values
+
 # Plot decision regions
 fig = plt.figure(figsize=(10, 5))
-plot_decision_regions(concatenated_matrix, dfsam.Class, clf=model)
+plot_decision_regions(concatenated_matrix, y_np, clf=model)
 plt.xlabel('Feature 1')  # Replace with appropriate feature name
 plt.ylabel('Feature 2')  # Replace with appropriate feature name
 plt.title('Decision Regions for Binary Logistic Regression with Balanced Class Weight')
