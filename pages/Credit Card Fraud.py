@@ -13,7 +13,7 @@ st.set_page_config(layout="wide")
 df = pd.read_csv('creditcard.csv')
 
 st.header("The original credit card fraud data set can be found on Kaggle")
-st.header("The original dataset has 31 features. I did simple feature selection and reduced the feature count to 5 ", divider = "red")
+st.header("The original dataset has 31 variables. I did simple variables selection and reduced the variables count to 5 ", divider = "red")
 
 st.markdown("## You can see in the pairplots that the yellow and blue labels are linearly separable!")
 
