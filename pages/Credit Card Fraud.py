@@ -63,12 +63,13 @@ for i in range(cm.shape[0]):
 st.pyplot(fig)
 
 X_subset_test = X_test.iloc[:, [2, 3]]
+X_subset_test = X_subset_test.values
+y_test = y_test.values
 
+# Plot decision regions
 fig = plt.figure(figsize=(10, 5))
 plot_decision_regions(X_subset_test, y_test, clf=model)
 plt.xlabel('petal length')
 plt.ylabel('petal width')
 plt.title('Decision Regions for Binary Logistic Regression with Balanced Class Weight (Test Data)')
 plt.show()
-
-
