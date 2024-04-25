@@ -13,22 +13,10 @@ df = pd.read_csv('creditcard.csv')
 st.header("The original credit card fraud data set can be found on Kaggle")
 st.header("The original dataset has 31 features. I did simple feature selection and reduced the count to 5 feature", divider = "red")
 
-
-
-
-## Sampling from df 
-sample_class_1 = df[df['Class'] == 1].sample(492, random_state=42)
-sample_class_0 = df[df['Class'] == 0].sample(500, random_state=42)
-sampled_df = pd.concat([sample_class_1, sample_class_0], axis=0)
-sampled_df = sampled_df.sample(frac=1, random_state=42).reset_index(drop=True)
-
 ## Show data frame 
 import streamlit as st
 
-# Define layout using columns
 col1, col2 = st.columns([1, 1])
-
-# Display DataFrame in the first column
 with col1:
     st.write("## DataFrame")
     st.write(df)
@@ -55,14 +43,20 @@ y_pred = model.predict(X_test_scaled)
 
 st.header("I was able to reduce false negatives(scammers who got away) from 35 to 8!", divider = "red")
 
+plt.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
+plt.title('Confusion Matrix')
+plt.colorbar()
+plt.xlabel('Predicted')
+plt.ylabel('True')
+plt.xticks(ticks=[0, 1], labels=['Class 0', 'Class 1'])
+plt.yticks(ticks=[0, 1], labels=['Class 0', 'Class 1'])
 
-cm = confusion_matrix(y_test, y_pred)
-fig, ax = plt.subplots()
-sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", ax=ax)
-ax.set_xlabel('Predicted')
-ax.set_ylabel('True')
-ax.set_title('Confusion Matrix')
-st.pyplot(fig)
+for i in range(cm.shape[0]):
+    for j in range(cm.shape[1]):
+        plt.text(j, i, format(cm[i, j], 'd'),
+                 horizontalalignment="center",
+                 color="white" if cm[i, j] > cm.max() / 2 else "black")
 
+plt.show()
 
 
