@@ -62,13 +62,22 @@ for i in range(cm.shape[0]):
 # Display the plot in Streamlit
 st.pyplot(fig)
 
-X_subset_test = X_test.iloc[:, [2, 3]]
-X_subset_test = X_subset_test.values
-y_test = y_test.values
+class_labels = df['Class'].unique()
+min_samples = df['Class'].value_counts().min()
+equal_samples = []
+for label in class_labels:
+    class_subset = df[df['Class'] == label].sample(min_samples, replace=False)
+    equal_samples.append(class_subset)
+df_equal_sampling = pd.concat(equal_samples)
+
+
+NewX = df_equal_sampling.drop(columns=['Class'])
+newy = df_equal_sampling.Class
+selected_columns = NewX.iloc[:, [0, 1]]
 
 # Plot decision regions
 fig = plt.figure(figsize=(10, 5))
-plot_decision_regions(X_subset_test, y_test, clf=model)
+plot_decision_regions(selected_columns, newy, clf=model)
 plt.xlabel('petal length')
 plt.ylabel('petal width')
 plt.title('Decision Regions for Binary Logistic Regression with Balanced Class Weight (Test Data)')
