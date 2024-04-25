@@ -48,7 +48,7 @@ def train_and_plot_confusion_matrix(X, y):
 
     # Display the results and confusion matrix
     # Display the results and confusion matrix
-    st.header("I was able to reduce false negatives (scammers who got away) from 35 to 8!")
+    st.header("I was able to reduce false negatives (scammers who got away) from 40s to 10!")
     st.markdown("---")
     st.write("Confusion Matrix:")
     cm = confusion_matrix(y_test, y_pred)
