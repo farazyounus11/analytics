@@ -42,7 +42,7 @@ y_pred = model.predict(X_test_scaled)
 
 
 st.header("I was able to reduce false negatives(scammers who got away) from 35 to 8!", divider = "red")
-
+cm = confusion_matrix(y_test, y_pred)
 plt.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
 plt.title('Confusion Matrix')
 plt.colorbar()
