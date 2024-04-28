@@ -25,7 +25,7 @@ def load_dataframe(file_path):
     df = pd.read_csv(file_path)
     df['Date'] = pd.to_datetime(df['Date'])
     
-    bin_size = 0.0001  # For example, 0.0001 degrees
+    bin_size = 0.001  # For example, 0.0001 degrees
     df['lat'], df['lon'] = bin_lat_long(df['lat'], df['lon'], bin_size)
     return df
 
