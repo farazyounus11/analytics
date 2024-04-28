@@ -15,18 +15,12 @@ file_path = current_directory
 
 st.title("NYC/Chicago Crime Visualization By Faraz")
 st.markdown("## Use the Sidebar to Select City!!")
-def bin_lat_long(lat, long, bin_size):
-    lat_bins = np.floor(lat / bin_size) * bin_size
-    long_bins = np.floor(long / bin_size) * bin_size
-    return lat_bins, long_bins
+
 
 @st.cache_data
 def load_dataframe(file_path):
     df = pd.read_csv(file_path)
     df['Date'] = pd.to_datetime(df['Date'])
-    
-    bin_size = 0.004  # For example, 0.0001 degrees
-    df['lat'], df['lon'] = bin_lat_long(df['lat'], df['lon'], bin_size)
     return df
 
 dataframe_paths = {
