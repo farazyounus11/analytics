@@ -1,6 +1,5 @@
 import pandas as pd
 import streamlit as st
-from mlxtend.plotting import plot_decision_regions
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
