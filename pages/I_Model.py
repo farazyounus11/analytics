@@ -18,6 +18,8 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
+st.markdown("# This app helps users in classificaiton tasks. Afte User uploads CSV, Picks target and two independent variablle. The app creates visual boundaries based on each algorithm")
+st.markdown("## Afte User uploads CSV, Picks target variable and two independent variable. The app creates visual boundaries based on each classification algorithm")
 
 # Set page configuration
 st.set_page_config(layout="wide")
