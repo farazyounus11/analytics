@@ -21,7 +21,7 @@ from sklearn.tree import DecisionTreeClassifier
 
 # Set page configuration
 st.set_page_config(layout="wide")
-st.markdown("## Afte User uploads CSV, Picks target variable and two independent variable. The app creates visual boundaries based on each classification algorithm")
+st.markdown("## First, user has to upload CSV, then the user has to select target variable and two independent variables. Then, the app creates visual boundaries based on each classification algorithm")
 
 # Classifier names and instances
 names = [
