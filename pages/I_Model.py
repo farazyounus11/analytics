@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from matplotlib.colors import ListedColormap
-
 from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 from sklearn.ensemble import AdaBoostClassifier, RandomForestClassifier
 from sklearn.gaussian_process import GaussianProcessClassifier
@@ -73,8 +72,11 @@ if uploaded_file is not None:
         # Create a figure for plotting
         figure, axes = plt.subplots(2, 6, figsize=(27, 12))
         axes = axes.flatten()
+        
+        # Create a colormap with more colors
+        colors = plt.cm.get_cmap('tab20', len(np.unique(y)))  # Using 'tab20' which has 20 distinct colors
         cm = plt.cm.RdBu
-        cm_bright = ListedColormap(["#FF0000", "#0000FF"])
+        cm_bright = ListedColormap(colors(np.arange(len(np.unique(y)))))
 
         # Split the dataset into training and testing parts
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
