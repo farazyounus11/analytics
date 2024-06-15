@@ -39,6 +39,7 @@ def train_and_plot_confusion_matrix(X, y):
     model.fit(X_train_scaled, y_train)
 
     y_pred = model.predict(X_test_scaled)
+    st.markdown("---")
     col1, col2 = st.columns(2)
     
     # Top Left: Non-scammers correctly classified
