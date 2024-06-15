@@ -53,10 +53,10 @@ def train_and_plot_confusion_matrix(X, y):
     # Bottom Right: Scammers who got caught
     with col2:
         st.header("Bottom Right: Scammers Who Got Caught")
+    st.markdown("---")
 
     st.header("I was able to reduce successful scammers from 38 to 10 by undersampliing!")
     
-    st.markdown("---")
     cm = confusion_matrix(y_test, y_pred)
     disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=model.classes_)
     fig, ax = plt.subplots(figsize=(8, 6))  # Adjust the figsize as needed
