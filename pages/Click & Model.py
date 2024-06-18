@@ -17,7 +17,7 @@ st.set_page_config(layout="wide")
 
 def list_csv_files():
     files = os.listdir()
-    return [file for file in files if file.endswith('.csv')]
+    return [file for file in files if file.endswith('_Classification.csv')]
 
 # Streamlit app
 def main():
