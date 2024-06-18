@@ -15,7 +15,7 @@ def read_csv(filename):
     return df1
 
 def main():
-    st.markdown("## Use Sidebar to Select Month of Analysis and Then Filter!")
+    st.markdown("## Use Sidebar to Filter Each Month")
 
     current_directory = os.getcwd()
     # st.write("Current Directory:", current_directory)
