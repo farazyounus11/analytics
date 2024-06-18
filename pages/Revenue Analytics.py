@@ -21,7 +21,7 @@ def main():
     # st.write("Current Directory:", current_directory)
 
     file_list = [f for f in os.listdir() if os.path.isfile(f) and f.endswith("_2019.csv")]
-    selected_file = st.sidebar.selectbox("Select Which Month You Want to View", file_list)
+    selected_file = st.selectbox("Select Which Month You Want to View", file_list)
     if selected_file:
         df1 = read_csv(selected_file)
         df1 = df1.dropna()
