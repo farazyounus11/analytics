@@ -9,7 +9,7 @@ st.set_page_config(
 st.title("Hi I'm Faraz.")
 st.title("I am a Masters Data Science Student!")
 st.write("## The side bar has some of the apps I created!")
-st.write("## Check out my projects below!")
+st.write("## Check out my projects below")
 st.image("stats.png", caption='Different Statistical Models doing Classification!')
 st.sidebar.success("Select a page above.")
 
