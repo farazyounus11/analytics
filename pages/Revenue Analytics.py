@@ -162,15 +162,15 @@ avgmsales = res.groupby(by="MONTH")['SALES'].sum()
 st.title("Sales Analysis")
 
 # Create two columns
-col1l, col2l = st.columns(2)
+col1, col2 = st.columns(2)
 
 # Column 1: Average Yearly Sales
-with col1l:
+with col1:
     st.header("Average Yearly Sales")
     st.line_chart(data=avgysales, x='YEAR', y='SALES')
 
 # Column 2: Average Monthly Sales
-with col2l:
+with col2:
     st.header("Average Monthly Sales")
     st.line_chart(data=avgmsales, x='MONTH', y='SALES')
 
