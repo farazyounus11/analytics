@@ -155,22 +155,22 @@ with col4:
 
 
 
-avgysales = res.groupby(by="YEAR")['SALES'].sum().reset_index()
-avgmsales = res.groupby(by="MONTH")['SALES'].sum().reset_index()
+avgysales = res.groupby(by="YEAR")['SALES'].sum()
+avgmsales = res.groupby(by="MONTH")['SALES'].sum()
 
 # Streamlit app
 st.title("Sales Analysis")
 
 # Create two columns
-col1, col2 = st.columns(2)
+col1l, col2l = st.columns(2)
 
 # Column 1: Average Yearly Sales
-with col1:
+with col1l:
     st.header("Average Yearly Sales")
     st.line_chart(data=avgysales, x='YEAR', y='SALES')
 
 # Column 2: Average Monthly Sales
-with col2:
+with col2l:
     st.header("Average Monthly Sales")
     st.line_chart(data=avgmsales, x='MONTH', y='SALES')
 
