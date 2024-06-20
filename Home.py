@@ -2,7 +2,7 @@ import os
 import streamlit as st
 from streamlit_pdf_viewer import pdf_viewer
 
-
+!pip install --upgrade numpy pandas
 st.set_page_config(
     page_title="Home",layout="wide")
 
