@@ -4,147 +4,194 @@ import pandas as pd
 import streamlit_pandas as sp
 from itertools import combinations
 from collections import Counter
+import matplotlib.pyplot as plt
+from matplotlib.ticker import FuncFormatter  # Import FuncFormatter for formatting ticks
+
+
+
 
 
 st.set_page_config(layout="wide")
-st.title('Revenue Analytics App by Faraz')
-
 @st.cache_data
-def read_csv(filename):
-    df1 = pd.read_csv(filename)
-    return df1
+def load_data():
+    file_path = "sales_data.csv"  # Update with the correct path to your CSV file
+    df = pd.read_csv(file_path, encoding='latin1')  # Specify the encoding here
+    df['ORDER_DATE'] = pd.to_datetime(df['ORDER_DATE'], errors='coerce')  # Convert to datetime
+    return df
 
-def main():
-    st.markdown("## Use Sidebar to Filter Each Month")
+df = load_data()
 
-    current_directory = os.getcwd()
-    # st.write("Current Directory:", current_directory)
+# Create month and year columns for grouping
+df['MONTH'] = df['ORDER_DATE'].dt.to_period('M')
 
-    file_list = [f for f in os.listdir() if os.path.isfile(f) and f.endswith("_2019.csv")]
-    selected_file = st.selectbox("Select Which Month You Want to View", file_list)
+# Calculate total monthly sales
+monthly_sales = df.groupby('MONTH')['SALES'].sum().reset_index()
 
+create_data = {
+    "PRICE_EACH": "multiselect",
+    "STATUS": "multiselect",
+    "PRODUCTLINE": "multiselect",
+    "PRODUCTCODE": "multiselect",
+    "CUSTOMER_NAME": "text",
+    "PHONE": "multiselect",
+    "ADDRESSLINE1": "text",
+    "CITY": "multiselect",
+    "COUNTRY": "multiselect",
+    "CONTACTLASTNAME": "text",
+    "CONTACTFIRSTNAME": "text",
+    "DEALSIZE": "multiselect",
+    "POSTALCODE": "multiselect"
+
+
+
+}
+
+all_widgets = sp.create_widgets(df, create_data)
+res = sp.filter_df(df, all_widgets)
+
+
+st.header("This is the Data After Sidebar Filtering")
+st.write(res)
+
+# Line chart for total monthly sales using st.line_chart
+
+st.header("Important Tables")
+
+
+res['MonthYear'] = res['ORDER_DATE'].dt.to_period('M')
+
+
+
+sales_by_monthyear = res.groupby('MonthYear')['SALES'].sum()
+top_10_months = sales_by_monthyear.nlargest(10)
+# Display the top 10 months and their sales using Streamlit
+
+
+
+sales_by_CUSTOMER_NAME = res.groupby('CUSTOMER_NAME')['SALES'].sum()
+sales_by_CUSTOMER_NAME_10_months = sales_by_CUSTOMER_NAME.nlargest(10)
+# Display the top 10 months and their sales using Streamlit
+
+
+# Group by 'CITY' and sum 'SALES'
+sales_by_city = res.groupby('CITY')['SALES'].sum()
+top_10_cities = sales_by_city.nlargest(10)
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.write("Top 10 Months by Total Sales:")
+    st.write(top_10_months)
+
+with col2:
+    st.write("Top 10 Customers by Total Sales:")
+    st.write(sales_by_CUSTOMER_NAME_10_months)
+
+with col3:
+    st.write("Top 10 Cities by Total Sales:")
+    st.write(top_10_cities)
+
+
+
+sales_by_delay = res.groupby('STATUS')['SALES'].count()
+sales_by_delaytop5 = sales_by_delay.nlargest(10)
+
+
+sales_by_postal = res.groupby('POSTALCODE')['SALES'].sum()
+sales_by_postaltop = sales_by_postal.nlargest(10)
+
+
+sales_by_prodd = res.groupby('PRODUCTLINE')['SALES'].sum()
+sales_by_prodtop10 = sales_by_prodd.nlargest(10)
+
+
+
+
+def get_top_ten_common_pairs(df):
+    pairs_counter = Counter()
     
-    if selected_file:
-        df1 = read_csv(selected_file)
-        df1 = df1.dropna()
+    # Group by ORDER_NUMBER and find pairs
+    grouped = df.groupby('ORDER_NUMBER')['PRODUCTLINE'].apply(list)
+    
+    for products in grouped:
+        pairs = combinations(products, 2)
+        pairs_counter.update(pairs)
+    
+    # Get the top ten most common pairs
+    top_ten_pairs = pairs_counter.most_common(20)
+    return top_ten_pairs
 
-        # Convert columns to float
-        columns_to_convert = ["Quantity Ordered", "Price Each"]
-        for col in columns_to_convert:
-            df1[col] = pd.to_numeric(df1[col], errors='coerce')
+# Get the top ten most common pairs
+top_ten_pairs = get_top_ten_common_pairs(res)
 
-        # Convert Order Date to datetime and create Day and Hour columns
-        try:
-            df1['Order Date'] = pd.to_datetime(df1['Order Date'], format='%m/%d/%y %H:%M', errors='coerce')
-            df1['Day'] = df1['Order Date'].dt.day
-            df1['Hour'] = df1['Order Date'].dt.hour
-            df1 = df1.drop(columns=['Order Date'])
-
-        except pd.errors.ParserError:
-            st.error('Error: Unknown date format detected in the "Order Date" column.')
-
-        # Create 'Total' column
-        df1['Total'] = df1['Quantity Ordered'] * df1['Price Each']
-        
-        # Reorder columns
-        df1 = df1[['Order ID', 'Product', 'Quantity Ordered', 'Price Each', 'Total', 'Day', 'Hour', 'Purchase Address']]
-
-        return df1
+# Create a DataFrame for the top ten pairs
+comdf = pd.DataFrame(top_ten_pairs, columns=['Most common pair', 'Counts'])
+comdf['Most common pair'] = comdf['Most common pair'].apply(lambda x: f"{x[0]} & {x[1]}")
 
 
 
-# Run the app
-if __name__ == '__main__':
-    df1 = main()
 
-create_data = {"Order ID": "text",
-               "Product": "multiselect",
-               "Purchase Address": "text",
-               "Order Date": "slider"}
-all_widgets = sp.create_widgets(df1, create_data)
 
-# Filter DataFrame
-df = sp.filter_df(df1, all_widgets)
 
-st.header("This is Filtered Data")
-st.write(df)
 
-grouped_data_address = df.groupby('Purchase Address')['Total'].sum()
-top_15_address = grouped_data_address.nlargest(15)
-top_15_address_df = top_15_address.reset_index()
-top_15_address_df['Total'] = top_15_address_df['Total'].round()
-
-# Group by 'Product' and sum 'Total'
-grouped_data_product = df.groupby('Product')['Total'].sum()
-top_15_product = grouped_data_product.nlargest(15)
-top_15_product_df = top_15_product.reset_index()
-top_15_product_df['Total'] = top_15_product_df['Total'].round()
-
-# Group by 'Product' and sum 'Quantity Ordered'
-grouped_data_quantity = df.groupby('Product')['Quantity Ordered'].sum()
-top_15_quantity = grouped_data_quantity.nlargest(15)
-top_15_quantity_df = top_15_quantity.reset_index()
-top_15_quantity_df['Quantity Ordered'] = top_15_quantity_df['Quantity Ordered'].round()
-col1, col2, col3 = st.columns(3)
+col1, col2, col3 , col4 = st.columns(4)
 
 with col1:
-    st.markdown('## Top 15 Purchase Addresses')
-    st.write(top_15_address_df)
+
+    st.write("Transportation Progress:")
+    st.write(sales_by_delaytop5)
 
 with col2:
-    st.markdown('## Top 15 Products by Total Purchase')
-    st.write(top_15_product_df)
+    st.write("Top 10 Zip Codes by Total Sales:")
+    st.write(sales_by_postaltop)
 
 with col3:
-    st.markdown('## Top 15 Products by Quantity Ordered')
-    st.write(top_15_quantity_df)
+    st.write("Top 10 Products by Total Sales:")
+    st.write(sales_by_prodtop10)
 
+with col4:
+    st.write("Most common pairs of items bought:")
+    st.dataframe(comdf)
 
+avgsales = df.groupby(by="YEAR")['SALES'].sum()
+stdsales = df.groupby(by="YEAR")['SALES'].std()
 
-grouped_data_hour = df.groupby('Hour')['Total'].sum()
-grouped_data_day = df.groupby('Day')['Total'].sum()
+# Get the three most recent years and their average sales and standard deviations
+recent_years = avgsales.index[-3:]
+recent_avg_sales = avgsales[-3:]
+recent_std_sales = stdsales[-3:]
 
-
-col1, col2 = st.columns(2)
-
-with col1:
-    st.markdown('## Total Purchase Amount by Day')
-    st.line_chart(grouped_data_day)
-
-with col2:
-    st.markdown('## Total Purchase Amount by Hour')  # You can add another chart here if needed
-    st.line_chart(grouped_data_hour)
-
-
-grouped_data_order = df.groupby('Order ID')['Product'].agg(list)
-pair_counter = Counter()
-
-for products in grouped_data_order:
-    product_pairs = combinations(products, 2)
-    pair_counter.update(product_pairs)
-
-top_pairs = pair_counter.most_common(15)
-top_pairs_df = pd.DataFrame(top_pairs, columns=['Product Pair', 'Count'])
-
-# Separate products bought before and after 12:00 PM
-products_before_12 = df[df['Hour'] < 12]['Product']
-products_after_12 = df[df['Hour'] >= 12]['Product']
-
-# Count occurrences of each product
-top_10_before_12 = products_before_12.value_counts().head(10)
-top_10_after_12 = products_after_12.value_counts().head(10)
-
-# Display results in three columns using Streamlit
+# Optionally, you can format this in a more structured layout
 col1, col2, col3 = st.columns(3)
+col1.metric(label=f"Year {recent_years[0]}", 
+            value=f"${recent_avg_sales[recent_years[0]]:.2f}", 
+            delta=f"Std Dev: ${recent_std_sales[recent_years[0]]:.1f}")
+col2.metric(label=f"Year {recent_years[1]}", 
+            value=f"${recent_avg_sales[recent_years[1]]:.2f}", 
+            delta=f"Std Dev: ${recent_std_sales[recent_years[1]]:.1f}")
+col3.metric(label=f"Year {recent_years[2]}", 
+            value=f"${recent_avg_sales[recent_years[2]]:.2f}", 
+            delta=f"Std Dev: ${recent_std_sales[recent_years[2]]:.1f}")
 
-with col1:
-    st.markdown('### Top 10 Bought Before 12:00')
-    st.write(top_10_before_12)
 
-with col2:
-    st.markdown('### Top 10 Bought After 12:00')
-    st.write(top_10_after_12)
 
-with col3:
-    st.markdown('### Top 15 Products Bought Together')
-    st.write(top_pairs_df)
+
+
+
+
+
+
+st.header("Total Monthly Sales - Line Chart")
+
+
+# Plotting with Matplotlib
+plt.figure(figsize=(12, 6))
+plt.plot(sales_by_monthyear.index.astype(str), sales_by_monthyear.values, marker='o', linestyle='-')
+plt.title('Total Sales Over Time (Monthly)')
+plt.xlabel('Month-Year')
+plt.ylabel('Total Sales')
+plt.grid(True)
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.gca().get_yaxis().set_major_formatter(FuncFormatter(lambda x, _: '{:,.0f}'.format(x)))
+st.pyplot(plt)
