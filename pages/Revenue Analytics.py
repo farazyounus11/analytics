@@ -69,16 +69,25 @@ recent_avg_sales = avgsales[-3:]
 recent_std_sales = stdsales[-3:]
 
 # Optionally, you can format this in a more structured layout
+# Assuming recent_years, recent_avg_sales, and recent_std_sales are already defined
 col1, col2, col3 = st.columns(3)
-col1.metric(label=f"Year {recent_years[0]}", 
-            value=f"${recent_avg_sales[recent_years[0]]:.2f}", 
-            delta=f"Std Dev: ${recent_std_sales[recent_years[0]]:.1f}")
-col2.metric(label=f"Year {recent_years[1]}", 
-            value=f"${recent_avg_sales[recent_years[1]]:.2f}", 
-            delta=f"Std Dev: ${recent_std_sales[recent_years[1]]:.1f}")
-col3.metric(label=f"Year {recent_years[2]}", 
-            value=f"${recent_avg_sales[recent_years[2]]:.2f}", 
-            delta=f"Std Dev: ${recent_std_sales[recent_years[2]]:.1f}")
+
+# Check the length of recent_years and display metrics accordingly
+if len(recent_years) > 0:
+    col1.metric(label=f"Year {recent_years[0]}", 
+                value=f"${recent_avg_sales[recent_years[0]]:.2f}", 
+                delta=f"Std Dev: ${recent_std_sales[recent_years[0]]:.1f}")
+if len(recent_years) > 1:
+    col2.metric(label=f"Year {recent_years[1]}", 
+                value=f"${recent_avg_sales[recent_years[1]]:.2f}", 
+                delta=f"Std Dev: ${recent_std_sales[recent_years[1]]:.1f}")
+if len(recent_years) > 2:
+    col3.metric(label=f"Year {recent_years[2]}", 
+                value=f"${recent_avg_sales[recent_years[2]]:.2f}", 
+                delta=f"Std Dev: ${recent_std_sales[recent_years[2]]:.1f}")
+else:
+    col3.metric(label="Year N/A", value="N/A", delta="N/A")
+
 
 
 
