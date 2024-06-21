@@ -156,8 +156,8 @@ with col4:
     st.write("Most common pairs of items bought:")
     st.dataframe(comdf)
 
-avgsales = df.groupby(by="YEAR")['SALES'].sum()
-stdsales = df.groupby(by="YEAR")['SALES'].std()
+avgsales = res.groupby(by="YEAR")['SALES'].sum()
+stdsales = res.groupby(by="YEAR")['SALES'].std()
 
 # Get the three most recent years and their average sales and standard deviations
 recent_years = avgsales.index[-3:]
