@@ -50,13 +50,16 @@ all_widgets = sp.create_widgets(df, create_data)
 res = sp.filter_df(df, all_widgets)
 
 
+
+st.markdown("## My name is Faraz. I can create data apps like these. In this interactive app, you can use the sidebar to filter. The data will change as you filter for certain attributes")
+
+
 st.header("This is the Data After Sidebar Filtering")
 st.write(res)
 
 # Line chart for total monthly sales using st.line_chart
 
 st.header("Important Tables")
-
 
 res['MonthYear'] = res['ORDER_DATE'].dt.to_period('M')
 
