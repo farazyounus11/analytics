@@ -164,25 +164,17 @@ comdf = pd.DataFrame(top_ten_pairs, columns=['Most common pair', 'Counts'])
 comdf['Most common pair'] = comdf['Most common pair'].apply(lambda x: f"{x[0]} & {x[1]}")
 
 
+avgysales = res.groupby(by="YEAR")['SALES'].sum()
+avgmsales = res.groupby(by="MONTH")['SALES'].sum()
 
-avgysales = res.groupby(by="YEAR")['SALES'].sum().reset_index()
-avgmsales = res.groupby(by="MONTH")['SALES'].sum().reset_index()
-
-# Streamlit app
-st.title("Sales Analysis")
-
-# Create two columns
 col1, col2 = st.columns(2)
 
-# Column 1: Average Yearly Sales
 with col1:
     st.header("Average Yearly Sales")
-    st.line_chart(data=avgysales, x='YEAR', y='SALES')
-
-# Column 2: Average Monthly Sales
+    st.line_chart(data=avgysales)
 with col2:
     st.header("Average Monthly Sales")
-    st.line_chart(data=avgmsales, x='MONTH', y='SALES')
+    st.line_chart(data=avgmsales)
 
 
 
