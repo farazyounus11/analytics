@@ -49,6 +49,26 @@ create_data = {
 all_widgets = sp.create_widgets(df, create_data)
 res = sp.filter_df(df, all_widgets)
 
+avgsales = res.groupby(by="YEAR")['SALES'].sum()
+stdsales = res.groupby(by="YEAR")['SALES'].std()
+
+# Get the three most recent years and their average sales and standard deviations
+recent_years = avgsales.index[-3:]
+recent_avg_sales = avgsales[-3:]
+recent_std_sales = stdsales[-3:]
+
+# Optionally, you can format this in a more structured layout
+col1, col2, col3 = st.columns(3)
+col1.metric(label=f"Year {recent_years[0]}", 
+            value=f"${recent_avg_sales[recent_years[0]]:.2f}", 
+            delta=f"Std Dev: ${recent_std_sales[recent_years[0]]:.1f}")
+col2.metric(label=f"Year {recent_years[1]}", 
+            value=f"${recent_avg_sales[recent_years[1]]:.2f}", 
+            delta=f"Std Dev: ${recent_std_sales[recent_years[1]]:.1f}")
+col3.metric(label=f"Year {recent_years[2]}", 
+            value=f"${recent_avg_sales[recent_years[2]]:.2f}", 
+            delta=f"Std Dev: ${recent_std_sales[recent_years[2]]:.1f}")
+
 
 
 st.markdown("## My name is Faraz. I can create data apps like these. In this interactive app, you can use the sidebar to filter. The data will change as you filter for certain attributes")
@@ -156,25 +176,7 @@ with col4:
     st.write("Most common pairs of items bought:")
     st.dataframe(comdf)
 
-avgsales = res.groupby(by="YEAR")['SALES'].sum()
-stdsales = res.groupby(by="YEAR")['SALES'].std()
 
-# Get the three most recent years and their average sales and standard deviations
-recent_years = avgsales.index[-3:]
-recent_avg_sales = avgsales[-3:]
-recent_std_sales = stdsales[-3:]
-
-# Optionally, you can format this in a more structured layout
-col1, col2, col3 = st.columns(3)
-col1.metric(label=f"Year {recent_years[0]}", 
-            value=f"${recent_avg_sales[recent_years[0]]:.2f}", 
-            delta=f"Std Dev: ${recent_std_sales[recent_years[0]]:.1f}")
-col2.metric(label=f"Year {recent_years[1]}", 
-            value=f"${recent_avg_sales[recent_years[1]]:.2f}", 
-            delta=f"Std Dev: ${recent_std_sales[recent_years[1]]:.1f}")
-col3.metric(label=f"Year {recent_years[2]}", 
-            value=f"${recent_avg_sales[recent_years[2]]:.2f}", 
-            delta=f"Std Dev: ${recent_std_sales[recent_years[2]]:.1f}")
 
 
 
@@ -185,8 +187,6 @@ col3.metric(label=f"Year {recent_years[2]}",
 
 
 st.header("Total Monthly Sales - Line Chart")
-
-
 # Plotting with Matplotlib
 plt.figure(figsize=(12, 6))
 plt.plot(sales_by_monthyear.index.astype(str), sales_by_monthyear.values, marker='o', linestyle='-')
