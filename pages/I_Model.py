@@ -49,18 +49,11 @@ def main():
 
         # Feature selection in sidebar
         st.sidebar.subheader('Select Features for Analysis')
-        all_columns = df.columns.tolist()
-        feature1 = random.choice(all_columns)
-        
-        # Removing the first selected column from the list to ensure feature2 is different
-        remaining_columns = [col for col in all_columns if col != feature1]
-        
-        # Selecting the second random column from the remaining columns
-        feature2 = random.choice(remaining_columns)
-        
-        # Using the selected features in selectbox widgets
-        feature1 = st.sidebar.selectbox('Select first feature', [feature1])
-        feature2 = st.sidebar.selectbox('Select second feature', [feature2])
+
+        all_columns = [col for col in df.columns if col not in ['Y', 'Id']]
+
+        feature1 = st.sidebar.selectbox('Select first feature', all_columns)
+        feature2 = st.sidebar.selectbox('Select second feature', all_columns)
 
         # Display selected features in main area
         st.write(f'You selected: {feature1} and {feature2}')
