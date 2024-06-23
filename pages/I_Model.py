@@ -51,7 +51,8 @@ def main():
         all_columns = df.columns.tolist()
 
         feature1 = st.sidebar.selectbox('Select first feature', all_columns)
-        feature2 = st.sidebar.selectbox('Select second feature', all_columns)
+        feature2 = st.sidebar.selectbox('Select second feature', all_columns - feature1)
+
 
         # Display selected features in main area
         st.write(f'You selected: {feature1} and {feature2}')
