@@ -57,8 +57,10 @@ def load_models():
 
 
 st.title('News Classification App')
-st.markdown("### This Model predicts news category such as Business, Sports, World, Tech/Science")
-st.markdown("### Paste a random news article to see predicted label")
+
+st.markdown("### This simple model can help companies identify Business, Sports, World, Tech/Science articles")
+
+st.markdown("### Paste a random news article to see what model classifies the text")
 
 # Text input
 text_input = st.text_area('Enter text here:', '')
