@@ -48,9 +48,8 @@ def main():
             st.dataframe(df.head())
 
         # Feature selection in sidebar
-        st.sidebar.subheader('Select Features for Analysis')
 
-        all_columns = [col for col in df.columns if col not in ['Y', 'Id']]
+        all_columns = [col for col in df.columns if col not in ['Y', 'Id']].tolist()
 
         feature1 = st.sidebar.selectbox('Select first feature', all_columns)
         feature2 = st.sidebar.selectbox('Select second feature', all_columns)
