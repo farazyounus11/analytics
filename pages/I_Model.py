@@ -37,7 +37,8 @@ def main():
         df = pd.read_csv(selected_file)
 
         # Define y as df["Y"]
-        y = df["Y"]
+        y = df.pop('Y')
+
 
         # Use LabelEncoder to encode categorical target variable
         encoder = LabelEncoder()
@@ -47,9 +48,7 @@ def main():
         if st.sidebar.checkbox('Show raw data'):
             st.dataframe(df.head())
 
-        # Feature selection in sidebar
-
-        all_columns = [col for col in df.columns if col not in ['Y', 'Id']].tolist()
+        all_columns = df.columns.tolist()
 
         feature1 = st.sidebar.selectbox('Select first feature', all_columns)
         feature2 = st.sidebar.selectbox('Select second feature', all_columns)
