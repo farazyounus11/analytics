@@ -77,12 +77,12 @@ def main():
         classifiers = [
             ("Logistic Regression", LogisticRegression()),
             ("K-Nearest Neighbors", KNeighborsClassifier(n_neighbors=3)),
-            ("Support Vector Machine", SVC(kernel="linear", C=0.025, random_state=42, probability=True)),
-            ("Decision Tree", DecisionTreeClassifier(max_depth=5, random_state=42)),
-            ("Random Forest", RandomForestClassifier(max_depth=5, random_state=42)),
-            ("AdaBoost", AdaBoostClassifier(n_estimators=100)),
-            ("Gradient Boosting", GradientBoostingClassifier(n_estimators=100)),
-            ("Neural Network", MLPClassifier(alpha=1, max_iter=600, random_state=42))
+            ("Support Vector Machine", SVC(kernel="linear", C=0.025, probability=True)),
+            ("Decision Tree", DecisionTreeClassifier(max_depth=5)),
+            ("Random Forest", RandomForestClassifier(max_depth=5)),
+            ("AdaBoost", AdaBoostClassifier(n_estimators=25)),
+            ("Gradient Boosting", GradientBoostingClassifier(n_estimators=25)),
+            ("Neural Network", MLPClassifier(alpha=1, max_iter=300, random_state=42))
         ]
 
         # List of color maps to use
