@@ -89,8 +89,8 @@ if selected_column2:
     col2.pyplot(fig2)
 
 def get_top_20_names(df, column_name):
-    top_20_names = df.nlargest(20, column_name)['Name']
-    return top_20_names
+    top_20_data = df.nlargest(20, column_name)[['Name', column_name]]
+    return top_20_data
 
 # Main Streamlit app code
 st.title('Top Companies Analysis')
