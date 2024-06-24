@@ -47,7 +47,7 @@ create_data = {
 
 }
 
-all_widgets = sp.create_widgets(df, create_data)
+all_widgets = sp.create_widgets(df, create_data, ignore_columns=["Contactlastname", "Contactfirstname"])
 res = sp.filter_df(df, all_widgets)
 
 
