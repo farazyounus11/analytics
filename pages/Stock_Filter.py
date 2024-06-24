@@ -43,25 +43,6 @@ all_widgets = sp.create_widgets(df, create_data, ignore_columns=["Name", "Long_B
 res = sp.filter_df(df, all_widgets)
 
 
-"""
-percentage = round((res.shape[0] / df.shape[0]) * 100, 1)
-
-
-col1, col2 = st.columns(2)
-
-# Metric 1: Percentage
-with col1:
-    st.markdown("#### Percentage of Companies That Meet Requirements")
-    st.metric("", f"{percentage:.2f}%")
-
-# Metric 2: Number of Companies that meet Requirements
-with col2:
-    st.markdown("#### Number of Companies That Meet Requirements")
-    st.metric("", res.shape[0])
-
-st.write('---')
-"""
-
 
 st.markdown('### Top 15 Companies Sorted by Metrics')
 
