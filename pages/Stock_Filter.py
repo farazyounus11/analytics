@@ -9,9 +9,8 @@ from matplotlib.ticker import FuncFormatter
 import os
 
 
-st.markdown("### Sidebar lets users filter for financial requirements in a company. There are many things you can filter for. For example, if you increase Full_Time_Employees, you will only see Amazon & Walmart because they employ the most")
-st.markdown("### If you increase Free cashflow Requirements, You will only see FAANG because those are money making machines")
-st.markdown("### If you select ")
+st.markdown("### Sidebar lets users filter for financial requirements in a company. There are many things you can filter for. For example, if you increase ~Full_Time_Employees~ widget, you will only see Amazon & Walmart because they employ the most")
+st.markdown("### If you increase Free Cashflow requirements, You will only see FAANG because those are money making machines")
 
 
 
