@@ -9,9 +9,9 @@ st.title("Hi I'm Faraz.")
 st.title("I am a Data Science Enthusiast")
 
 st.write("## The side bar has some of the apps I created!")
-st.write("## Check out my projects below")
 
 st.sidebar.success("Select a page above.")
+
 
 def get_pdf_files(directory):
     pdf_files = []
@@ -19,16 +19,10 @@ def get_pdf_files(directory):
         if filename.endswith(".pdf"):
             pdf_files.append(filename)
     return pdf_files
-
-# Main Streamlit app code
 def main():
-    st.title("Faraz Younus Data Science Projects in PDF Format")
     current_directory = os.getcwd()
     pdf_files = get_pdf_files(current_directory)
-
     selected_file = st.selectbox("Click the Dropdown Menu to Select a Project!", pdf_files)
-
-    # Display the selected PDF file
     if selected_file:
         pdf_path = os.path.join(current_directory, selected_file)
         pdf_viewer(pdf_path)
