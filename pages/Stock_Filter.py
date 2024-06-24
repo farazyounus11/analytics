@@ -12,12 +12,18 @@ def load_data():
     return df
 
 
-st.header("Sidebar lets users Filter for Certain Financial Requirements in a Company")
+st.markdown("### Sidebar lets users filter for financial requirements in a company. There are many things you can filter for. For example, if you increase Full_Time_Employees, you will only see Amazon & Walmart because they employ the most")
+st.markdown("### If you increase Free cashflow Requirements, You will only see FAANG because those are money making machines")
+st.markdown("### If you select ")
 
-file = "stock.csv"
+
+
+file = "stock2.csv"
 df = load_data()
 
 df = df.fillna(df.median())
+
+st.write('---')
 
 
 
@@ -26,30 +32,188 @@ create_data = {
                 "Industry": "multiselect",
                 "Sector": "multiselect",
                 "Name": "multiselect",
-                "RecommendationKey": "multiselect"}
+                "Recommendation_Key": "multiselect"}
 
 
-all_widgets = sp.create_widgets(df, create_data, ignore_columns=["Ticker", "Name","RecommendationMean" , "City", "State"])
+all_widgets = sp.create_widgets(df, create_data, ignore_columns=["Ticker", "Name","Recommendation_Mean","Long_Business_Summary","ZIP"])
 res = sp.filter_df(df, all_widgets)
 
 
 
-st.markdown("### The percentage of companies meet your conditions:")
-
 percentage = round((res.shape[0] / df.shape[0]) * 100, 1)
 
-# Use Streamlit to display the metric
-st.metric(label="Percentage", value=f"{percentage}%")
+
+col1, col2 = st.columns(2)
+
+# Metric 1: Percentage
+with col1:
+    st.markdown("#### Percentage of Companies That Meet Requirements")
+    st.metric("", f"{percentage:.2f}%")
+
+# Metric 2: Number of Companies that meet Requirements
+with col2:
+    st.markdown("#### Number of Companies That Meet Requirements")
+    st.metric("", res.shape[0])
+
+st.write('---')
 
 
-st.write(res['Name'])
+
+st.markdown('### Top 15 Companies Sorted by Metrics')
+
+sorted_by_earnings_growth = res.sort_values(by='Earnings_Quarterly_Growth', ascending=False).head(15)[['Name', 'Earnings_Quarterly_Growth']].rename(columns={'Earnings_Quarterly_Growth': 'Quarterly_Growth'})
+
+sorted_by_profit_margins = res.sort_values(by='Profit_Margins', ascending=False).head(15)
+sorted_by_profit_margins['Profit_Margins'] = (sorted_by_profit_margins['Profit_Margins'] * 100).round(1)
+sorted_by_profit_margins = sorted_by_profit_margins[['Name', 'Profit_Margins']] 
+
+sorted_by_free_cash_flow = res.sort_values(by='Free_Cash_Flow', ascending=False).head(15)[['Name', 'Free_Cash_Flow']]
+
+# Custom CSS for adjusting column width
+st.write("""
+    <style>
+        table {
+            width: 100%;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        .stDataFrame th:first-child,
+        .stDataFrame td:first-child {
+            width: 30%; /* Adjust the width of the first column (Name) */
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+# Display in three columns using st.table()
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.write('#### Top Quarterly Earnings Growth')
+    st.table(sorted_by_earnings_growth.set_index('Name').style.format({'Quarterly_Growth': '{:.1f}%'}))
+
+with col2:
+    st.write('### Sorted by Profit Margins')
+    # Formatting Profit_Margins to show one decimal place
+    st.table(sorted_by_profit_margins.set_index('Name').style.format({'Profit_Margins': '{:.1f}%'}))
+
+with col3:
+    st.write('### Sorted by Free Cash Flow')
+    st.table(sorted_by_free_cash_flow.set_index('Name'))
+
+
+
+
+sorted_by_total_cash = res.sort_values(by='Total_Cash', ascending=False).head(15)[['Name', 'Total_Cash']].round({'Total_Cash': 1})
+sorted_by_forward_eps = res.sort_values(by='Forward_EPS', ascending=False).head(15)[['Name', 'Forward_EPS']].round({'Forward_EPS': 1})
+sorted_by_net_income = res.sort_values(by='Net_Income_To_Common', ascending=False).head(15)[['Name', 'Net_Income_To_Common']].round({'Net_Income_To_Common': 1})
+
+
+
+
+col4, col5, col6 = st.columns(3)
+
+with col4:
+    st.markdown('### Sorted by Total Cash')
+    st.write(sorted_by_total_cash)
+
+with col5:
+    st.markdown('#### Sorted by Forward EPS')
+    st.write(sorted_by_forward_eps)
+
+with col6:
+    st.markdown('### Sorted by Net Income to Common')
+    st.write(sorted_by_net_income)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+st.title('Company Information Search')
+search_query = st.text_input('Enter company name:', '')
+
+# Filter the DataFrame based on the search query
+filtered_df = df[df['Name'].str.contains(search_query, case=False, na=False)]
+
+if not search_query:
+    st.write('Enter a search query above.')
+elif filtered_df.empty:
+    st.write('No results found.')
+else:
+    for index, row in filtered_df.iterrows():
+        st.write(f"### {row['Name']}")
+        col1, col2, col3 = st.columns(3)
+        
+        with col1:
+            st.write(f"**Industry:** {row['Industry']}")
+            st.write(f"**EBITDA_Margins:** {row['EBITDA_Margins']}")
+            st.write(f"**Free Cash Flow (in Mil):** {round(row['Free_Cash_Flow'] / 1000000, 2)} Mil")
+        
+        with col2:
+            st.write(f"**Sector:** {row['Sector']}")
+            st.write(f"**Revenue_Per_Share:** {row['Revenue_Per_Share']}")
+            st.write(f"**Return On Equity:** {row['Return_On_Equity'] * 100:.2f}%")
+        
+        with col3:
+            st.write(f"**Trailing PE:** {round(row['Trailing_PE'], 2)}")
+            st.write(f"**Forward PE:** {round(row['Forward_PE'], 2)}")
+            st.write(f"**Total Debt (in Mil):** {round(row['Total_Debt'] / 1000000, 2)} Mil")
+            
+            # Compare performance and calculate percentage difference
+        performance_difference = (row['Fifty_Two_Week_Change'] - row['S&P_Fifty_Two_Week_Change']) / row['S&P_Fifty_Two_Week_Change'] * 100
+
+        # Determine color based on performance difference
+        color = 'green' if performance_difference > 0 else 'red' if performance_difference < 0 else 'black'
+
+        # Display whether the company beat or did not beat the S&P 500 and by what percentage, with larger and colored text
+        if performance_difference > 0:
+            st.write(f'<p style="font-size:24px;">{row["Name"]} Outperformed S&P 500 by <span style="color:{color};">{performance_difference:.2f}%</span></p>', unsafe_allow_html=True)
+        elif performance_difference < 0:
+            st.write(f'<p style="font-size:24px;">{row["Name"]} Underperformed S&P 500 by <span style="color:{color};">{abs(performance_difference):.2f}%</span></p>', unsafe_allow_html=True)
+        else:
+            st.write(f'<p style="font-size:24px;">{row["Name"]} performed exactly in line with the S&P 500.</p>')
+
+        st.markdown('<p style="font-size:24px;">Business Summary</p>', unsafe_allow_html=True)
+        st.write(f"**Summary:** {row['Long_Business_Summary']}")
+        st.write('---')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 numerical_columns = df.select_dtypes(include=['number']).columns
 
 
-# Streamlit app
-st.title("Where Does Your Company Rank")
+st.markdown("## Where Does Your Company Rank Amongst All Companies")
 
 # Select a row based on the Name column
 selected_name = st.selectbox("Select a Company", df['Name'])
@@ -88,59 +252,12 @@ if selected_column2:
     ax2.legend()
     col2.pyplot(fig2)
 
-def get_top_20_names(df, column_name):
-    top_20_data = df.nlargest(20, column_name)[['Name', column_name]]
-    return top_20_data
 
-# Main Streamlit app code
-st.title('Top Companies Analysis')
-
-# Layout in columns
-col1, col2, col3 = st.columns(3)
-
-# Column 1: Top 20 Companies by Net Income to Common Shareholders
-with col1:
-    st.markdown('#### Top 20 Companies by Net Income to Common Shareholders')
-    top_20_net_income = get_top_20_names(df, 'NetIncomeToCommon')
-    st.write(top_20_net_income)
-
-# Column 2: Top 20 Companies by Earnings Quarterly Growth
-with col2:
-    st.markdown('#### Top 20 Companies by Earnings Quarterly Growth')
-    top_20_earnings_growth = get_top_20_names(df, 'EarningsQuarterlyGrowth')
-    st.write(top_20_earnings_growth)
-
-# Column 3: Top 20 Companies by Forward PE
-with col3:
-    st.markdown('#### Top 20 Companies by Forward EPS')
-    top_20_forward_pe = get_top_20_names(df, 'ForwardEps')
-    st.write(top_20_forward_pe)
+def format_with_commas(number):
+    return '{:,}'.format(number) if isinstance(number, int) else number
 
 
-def get_top_20_data(df, column_name):
-    top_20_data = df.nlargest(20, column_name)[['Name', column_name]]
-    return top_20_data
 
-# Main Streamlit app code
-st.title('Top Companies Analysis')
 
-# Layout in columns
-col1, col2, col3 = st.columns(3)
 
-# Column 1: Top 20 Companies by Held Percent Institutions
-with col1:
-    st.markdown('### Top 20 Companies by Held Percent Institutions')
-    top_20_held_percent = get_top_20_data(df, 'HeldPercentInstitutions')
-    st.write(top_20_held_percent)
 
-# Column 2: Top 20 Companies by Short Ratio
-with col2:
-    st.markdown('### Top 20 Companies by Short Ratio')
-    top_20_short_ratio = get_top_20_data(df, 'ShortRatio')
-    st.write(top_20_short_ratio)
-
-# Column 3: Top 20 Companies by Profit Margins
-with col3:
-    st.markdown('### Top 20 Companies by Profit Margins')
-    top_20_profit_margins = get_top_20_data(df, 'ProfitMargins')
-    st.write(top_20_profit_margins)
