@@ -24,8 +24,18 @@ df = load_data()
 # Create month and year columns for grouping
 df['MONTH'] = df['ORDER_DATE'].dt.to_period('M')
 
+
 # Calculate total monthly sales
 monthly_sales = df.groupby('MONTH')['SALES'].sum().reset_index()
+
+column_to_move = df.pop("PRODUCTLINE")
+df.insert(0, "PRODUCTLINE", column_to_move)
+
+column_to_move = df.pop("CUSTOMER_NAME")
+df.insert(0, "CUSTOMER_NAME", column_to_move)
+
+
+
 
 create_data = {
     "ORDER_NUMBER": "multiselect",
