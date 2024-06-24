@@ -101,7 +101,7 @@ def main():
             ("Random Forest", RandomForestClassifier(max_depth=5)),
             ("AdaBoost", AdaBoostClassifier(n_estimators=20)),
             ("Gradient Boosting", GradientBoostingClassifier(n_estimators=20)),
-            ("Neural Network", MLPClassifier(alpha=1, max_iter=100))
+            ("Neural Network", MLPClassifier(alpha=1, max_iter=300))
         ]
 
         # List of color maps to use
