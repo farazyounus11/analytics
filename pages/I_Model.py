@@ -54,7 +54,7 @@ def main():
             model7 = LogisticRegression()
         
             # Fit the model on the training data
-            model7.fit(X_trainX, y_trainX.values.ravel())  # Ensure y_train is a 1d array
+            model7.fit(X_trainX, y_trainX)  # Ensure y_trainX is a 1d array
         
             # Predict on the testing data
             y_predX = model7.predict(X_testX)
