@@ -15,7 +15,7 @@ col1, col2 = st.columns(2)
 with col1:
     st.title("I am Faraz. This is a Side Project.")
 with col2:
-    st.markdown("### Data was retrieved from Yahoo Finance API")
+    st.markdown("## Data API: Yahoo")
 
 
 
