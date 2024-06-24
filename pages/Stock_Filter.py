@@ -13,8 +13,7 @@ col1, col2 = st.columns(2)
 
 # Content for col1
 with col1:
-    st.title("I am Faraz.")
-    st.title("This is a Side Project")
+    st.markdown("# I am Faraz. This is a Side Project")
 with col2:
     st.markdown("## Data API: Yahoo fin")
     
