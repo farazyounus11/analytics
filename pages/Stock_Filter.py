@@ -1,12 +1,22 @@
 import streamlit as st
 
-# Set page configuration
 st.set_page_config(layout="wide")
+
 import pandas as pd
 import streamlit_pandas as sp
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
 import os
+
+# Create two columns using st.columns
+col1, col2 = st.columns(2)
+
+# Content for col1
+with col1:
+    st.title("I am Faraz. This is a Side Project.")
+with col2:
+    st.markdown("### Data was retrieved from Yahoo Finance API")
+
 
 
 st.markdown("### Sidebar lets users filter for financial requirements in a company. There are many things you can filter for. For example, if you increase ~Full_Time_Employees widget, you will only see Amazon & Walmart in the tables. That is because they employ the most")
