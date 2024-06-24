@@ -125,7 +125,7 @@ with col6:
 
 
 
-st.title('Company Information Search')
+st.title('Search Company Information')
 search_query = st.text_input('Enter company name:', '')
 
 # Filter the DataFrame based on the search query
@@ -198,7 +198,7 @@ else:
 numerical_columns = df.select_dtypes(include=['number']).columns
 
 
-st.markdown("## Where Does Your Company Rank Amongst All Companies")
+st.markdown("## Where Does Select Company Rank Amongst All Companies")
 
 # Select a row based on the Name column
 selected_name = st.selectbox("Select a Company", df['Name'])
