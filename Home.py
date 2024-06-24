@@ -10,6 +10,7 @@ st.title("I am a Data Science Enthusiast")
 
 st.write("## The side bar has some of the apps I created!")
 st.write("## Check out my projects below")
+
 st.sidebar.success("Select a page above.")
 
 def get_pdf_files(directory):
