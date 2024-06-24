@@ -65,7 +65,7 @@ res = sp.filter_df(df, all_widgets)
 
 
 st.markdown("## I am Faraz. This is a side project. In this interactive app, can use the sidebar to filter for customers or transactions. The data will change as you filter for certain things")
-st.markdown("## You can type search for things like Order_number, Customer_Name, Productcode etc")
+st.markdown("## You can type search for things like Customer_Name, Order_number, Productcode etc")
 
 
 
