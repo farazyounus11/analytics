@@ -60,9 +60,13 @@ def main():
             y_predX = model7.predict(X_testX)
             accuracyX = accuracy_score(y_testX, y_predX)
             accuracy_dict[column] = accuracyX
+        
+        accuracy_df = pd.DataFrame(list(accuracy_dict.items()), columns=['Feature', 'Accuracy'])
+        st.write(accuracy_df)
 
 
-        st.write(accuracy_dict)
+
+        
         
         
         if st.sidebar.checkbox('Show raw data'):
