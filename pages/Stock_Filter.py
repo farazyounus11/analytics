@@ -88,17 +88,26 @@ if selected_column2:
     ax2.legend()
     col2.pyplot(fig2)
 
-top_20_names = df.nlargest(20, 'NetIncomeToCommon')['Name']
-st.markdown('### Top 20 Companies by Net Income to Common Shareholders')
-st.write(top_20_names)
 
+st.title('Top Companies Analysis')
 
-top_20_earning = df.nlargest(20, 'EarningsQuarterlyGrowth')['Name']
-st.markdown('### Top 20 Companies by Earnings Quarterly Growth')
-st.write(top_20_earning)
+# Layout in columns
+col1, col2, col3 = st.columns(3)
 
+# Column 1: Top 20 Companies by Net Income to Common Shareholders
+with col1:
+    st.markdown('### Top 20 Companies by Net Income to Common Shareholders')
+    top_20_net_income = get_top_20_names(df, 'NetIncomeToCommon')
+    st.write(top_20_net_income)
 
-top_20_fpe = df.nlargest(20, 'ForwardEps')['Name']
-st.markdown('### Top 20 Companies by Forward PE')
-st.write(top_20_fpe)
+# Column 2: Top 20 Companies by Earnings Quarterly Growth
+with col2:
+    st.markdown('### Top 20 Companies by Earnings Quarterly Growth')
+    top_20_earnings_growth = get_top_20_names(df, 'EarningsQuarterlyGrowth')
+    st.write(top_20_earnings_growth)
 
+# Column 3: Top 20 Companies by Forward PE
+with col3:
+    st.markdown('### Top 20 Companies by Forward PE')
+    top_20_forward_pe = get_top_20_names(df, 'ForwardEps')
+    st.write(top_20_forward_pe)
