@@ -28,7 +28,7 @@ df['MONTH'] = df['ORDER_DATE'].dt.to_period('M')
 monthly_sales = df.groupby('MONTH')['SALES'].sum().reset_index()
 
 create_data = {
-    "Order_Number": "multiselect",
+    "ORDER_NUMBER": "multiselect",
     "PRICE_EACH": "multiselect",
     "STATUS": "multiselect",
     "PRODUCTLINE": "multiselect",
@@ -47,7 +47,7 @@ create_data = {
 
 }
 
-all_widgets = sp.create_widgets(df, create_data, ignore_columns=["Contactlastname", "Contactfirstname"])
+all_widgets = sp.create_widgets(df, create_data, ignore_columns=["CONTACTLASTNAME", "CONTACTFIRSTNAME"])
 res = sp.filter_df(df, all_widgets)
 
 
