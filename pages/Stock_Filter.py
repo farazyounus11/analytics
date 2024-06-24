@@ -22,15 +22,14 @@ df = df.fillna(df.median())
 
 
 create_data = {
-                "City": "multiselect",
-                "State": "multiselect",
+
                 "Industry": "multiselect",
                 "Sector": "multiselect",
                 "Name": "multiselect",
                 "RecommendationKey": "multiselect"}
 
 
-all_widgets = sp.create_widgets(df, create_data, ignore_columns=["Ticker", "Name","RecommendationMean"])
+all_widgets = sp.create_widgets(df, create_data, ignore_columns=["Ticker", "Name","RecommendationMean" , "City", "State"])
 res = sp.filter_df(df, all_widgets)
 
 
