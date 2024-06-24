@@ -100,18 +100,18 @@ col1, col2, col3 = st.columns(3)
 
 # Column 1: Top 20 Companies by Net Income to Common Shareholders
 with col1:
-    st.markdown('### Top 20 Companies by Net Income to Common Shareholders')
+    st.markdown('#### Top 20 Companies by Net Income to Common Shareholders')
     top_20_net_income = get_top_20_names(df, 'NetIncomeToCommon')
     st.write(top_20_net_income)
 
 # Column 2: Top 20 Companies by Earnings Quarterly Growth
 with col2:
-    st.markdown('### Top 20 Companies by Earnings Quarterly Growth')
+    st.markdown('#### Top 20 Companies by Earnings Quarterly Growth')
     top_20_earnings_growth = get_top_20_names(df, 'EarningsQuarterlyGrowth')
     st.write(top_20_earnings_growth)
 
 # Column 3: Top 20 Companies by Forward PE
 with col3:
-    st.markdown('### Top 20 Companies by Forward PE')
+    st.markdown('#### Top 20 Companies by Forward PE')
     top_20_forward_pe = get_top_20_names(df, 'ForwardEps')
     st.write(top_20_forward_pe)
