@@ -170,15 +170,7 @@ avgysales = res.groupby(by="YEAR")['SALES'].sum()
 col1, col2 = st.columns(2)
 
 with col1:
-    st.header("Average Yearly Sales")
-    plt.figure(figsize=(10, 6))
-    plt.bar(avgysales.index.astype(str), avgysales.values, color='blue')
-    plt.title('Average Yearly Sales')
-    plt.xlabel('Year')
-    plt.ylabel('Total Sales')
-    plt.xticks(rotation=45)
-    plt.gca().yaxis.set_major_formatter(FuncFormatter(lambda x, _: '{:,.0f}'.format(x)))
-    st.pyplot(plt)
+    st.bar_chart(avgysales)
 
 with col2:
     st.header("Total Monthly Sales - Line Chart")
