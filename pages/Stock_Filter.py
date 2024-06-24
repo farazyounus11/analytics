@@ -89,10 +89,16 @@ if selected_column2:
     col2.pyplot(fig2)
 
 top_20_names = df.nlargest(20, 'NetIncomeToCommon')['Name']
-st.title('Top 20 Companies by Net Income to Common Shareholders')
+st.markdown('### Top 20 Companies by Net Income to Common Shareholders')
 st.write(top_20_names)
 
 
+top_20_earning = df.nlargest(20, 'EarningsQuarterlyGrowth')['Name']
+st.markdown('### Top 20 Companies by Earnings Quarterly Growth')
+st.write(top_20_earning)
 
 
+top_20_fpe = df.nlargest(20, 'ForwardEps')['Name']
+st.markdown('### Top 20 Companies by Forward PE')
+st.write(top_20_fpe)
 
