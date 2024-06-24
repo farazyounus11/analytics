@@ -62,6 +62,9 @@ def main():
             accuracy_dict[column] = accuracyX
         
         accuracy_df = pd.DataFrame(list(accuracy_dict.items()), columns=['Feature', 'Accuracy'])
+        accuracy_df = accuracy_df.sort_values(by='Accuracy', ascending=False).reset_index(drop=True)
+
+        # Display the DataFrame using st.write
         st.write(accuracy_df)
 
 
