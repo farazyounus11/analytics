@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import os
-import random
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
@@ -38,7 +37,6 @@ def main():
 
         # Define y as df["Y"]
         y = df.pop('Y')
-
 
         # Use LabelEncoder to encode categorical target variable
         encoder = LabelEncoder()
@@ -77,39 +75,30 @@ def main():
             ("Neural Network", MLPClassifier(alpha=1, max_iter=200, random_state=42))
         ]
 
-        # List of color maps to use
-        color_maps = [plt.cm.summer]
+        # Display results one by one
+        for name, clf in classifiers:
+            st.subheader(f"{name} (Test)")
 
-        # Create grid for test plots
-        fig_test, axes_test = plt.subplots(nrows=2, ncols=4, figsize=(20, 10))
-        axes_test = axes_test.flatten()  # Flatten the 2D array of axes for easy indexing
-
-        # Plot decision boundaries for each classifier and calculate F1 score and accuracy
-        for i, (name, clf) in enumerate(classifiers):
             clf.fit(X_train, y_train)
             y_pred = clf.predict(X_test)
             accuracy = accuracy_score(y_test, y_pred)
             f1 = f1_score(y_test, y_pred, average='weighted')
 
             # Plot decision boundary and scatter plot for testing data
-            ax_test = axes_test[i]
-            cmap = color_maps[i % len(color_maps)]
+            fig, ax = plt.subplots(figsize=(8, 6))
             display_test = DecisionBoundaryDisplay.from_estimator(
                 clf,
                 X_test,
-                response_method="auto",  # Changed to 'auto'
-                ax=ax_test,
-                cmap=cmap,
+                response_method="auto",
+                ax=ax,
+                cmap=plt.cm.summer,
                 xlabel=feature1,
                 ylabel=feature2
             )
-            ax_test.scatter(X_test[:, 0], X_test[:, 1], c=y_test, cmap=cmap, edgecolor='k', s=30, label='Test')
-            ax_test.set_title(f"{name} (Test)\nAccuracy: {accuracy:.2f} | F1: {f1:.2f}")
+            ax.scatter(X_test[:, 0], X_test[:, 1], c=y_test, cmap=plt.cm.summer, edgecolor='k', s=30, label='Test')
+            ax.set_title(f"{name} (Test)\nAccuracy: {accuracy:.2f} | F1: {f1:.2f}")
 
-        # Adjust layout and display
-        fig_test.tight_layout()
-
-        st.pyplot(fig_test)
+            st.pyplot(fig)
 
 # Run the app
 if __name__ == '__main__':
