@@ -117,9 +117,14 @@ with col3:
     st.write(top_20_forward_pe)
 
 
+def get_top_20_data(df, column_name):
+    top_20_data = df.nlargest(20, column_name)[['Name', column_name]]
+    return top_20_data
 
+# Main Streamlit app code
+st.title('Top Companies Analysis')
 
-
+# Layout in columns
 col1, col2, col3 = st.columns(3)
 
 # Column 1: Top 20 Companies by Held Percent Institutions
