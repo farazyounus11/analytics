@@ -26,7 +26,7 @@ def main():
 
     # List all CSV files in the current directory
     csv_files = list_csv_files()
-    st.subheader("Classification Modelign is used to identify things like credit card fraud, cancer, diabetes, and plants and more!")
+    st.subheader("Classification modeling helps identify things like credit card fraud, cancer, diabetes, and plants and more!")
 
     st.subheader("Select two unique variables using sidebar")
 
