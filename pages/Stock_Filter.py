@@ -88,7 +88,9 @@ if selected_column2:
     ax2.legend()
     col2.pyplot(fig2)
 
-
+top_20_names = df.nlargest(20, 'NetIncomeToCommon')['Name'].tolist()
+st.title('Top 20 Companies by Net Income to Common Shareholders')
+st.write(top_20_names)
 
 
 
