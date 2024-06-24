@@ -39,13 +39,32 @@ def main():
 
         # Define y as df["Y"]
         y = df.pop('Y')
-
-
-        # Use LabelEncoder to encode categorical target variable
         encoder = LabelEncoder()
         y = encoder.fit_transform(y)
+        accuracy_dict = {}
 
-        # Checkbox to show raw data in sidebar
+        for column in df.columns:  # Exclude the target variable 'Y'
+            # Define X as the current column
+            X_single = df[[column]]
+        
+            # Split the data into training and testing sets
+            X_train, X_test, y_train, y_test = train_test_split(X_single, y, test_size=0.2)
+        
+            # Initialize the logistic regression model
+            model = LogisticRegression()
+        
+            # Fit the model on the training data
+            model.fit(X_train, y_train.values.ravel())  # Ensure y_train is a 1d array
+        
+            # Predict on the testing data
+            y_pred = model.predict(X_test)
+            accuracy = accuracy_score(y_test, y_pred)
+            accuracy_dict[column] = accuracy
+
+
+        st.write(accuracy_dict)
+        
+        
         if st.sidebar.checkbox('Show raw data'):
             st.dataframe(df.head())
 
