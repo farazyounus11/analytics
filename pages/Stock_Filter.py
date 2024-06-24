@@ -17,7 +17,7 @@ with col1:
 with col2:
     st.markdown("### Data API: Yahoo fin")
 st.write('---')
-st.markdown("### Sidebar lets users filter for financial requirements in a company. There are many things you can filter for. For example, if you increase ~Full_Time_Employees widget, you will only see Amazon & Walmart in the tables. That is because they employ the most")
+st.markdown("### The Red sidebar widgets lets users filter for financial requirements in a company. There are many metrics you can filter for. For example, if you increase ~Full_Time_Employees widget, you will only see Amazon & Walmart in the tables. That is because they employ the most")
 
 
 @st.cache_data
@@ -45,7 +45,7 @@ create_data = {
                 "Recommendation_Key": "multiselect"}
 
 
-all_widgets = sp.create_widgets(df, create_data, ignore_columns=["Name", "Long_Business_Summary","Shareholder_Rights_Risk","Compensation_Risk", "Open","Fifty_Two_Week_Low", "Fifty_Two_Week_High"])
+all_widgets = sp.create_widgets(df, create_data, ignore_columns=["Name", "Long_Business_Summary","Shareholder_Rights_Risk","Compensation_Risk", "Open","Fifty_Two_Week_Low", "Fifty_Two_Week_High","Previous_Close","Payout_Ratio","Regular_Market_Volume"])
 res = sp.filter_df(df, all_widgets)
 
 
