@@ -5,12 +5,7 @@ from streamlit_pdf_viewer import pdf_viewer
 st.set_page_config(
     page_title="Home",layout="wide")
 
-st.markdown("## Hi I'm Faraz.")
-st.markdown("### I am a Data Science Enthusiast")
-
 col1, col2 = st.columns([1, 2])
-
-# Add content to the first column
 with col1:
     st.markdown("### I'm Faraz, a data science enthusiast")
 with col2:
