@@ -88,7 +88,11 @@ if selected_column2:
     ax2.legend()
     col2.pyplot(fig2)
 
+def get_top_20_names(df, column_name):
+    top_20_names = df.nlargest(20, column_name)['Name'].tolist()
+    return top_20_names
 
+# Main Streamlit app code
 st.title('Top Companies Analysis')
 
 # Layout in columns
