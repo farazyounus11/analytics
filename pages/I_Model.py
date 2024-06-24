@@ -51,7 +51,7 @@ def main():
             X_trainX, X_testX, y_trainX, y_testX = train_test_split(X_single, y, test_size=0.2)
         
             # Initialize the logistic regression model
-            model7 = LogisticRegression()
+            model7 = LogisticRegression(class_weight='balanced')
         
             # Fit the model on the training data
             model7.fit(X_trainX, y_trainX)  # Ensure y_trainX is a 1d array
