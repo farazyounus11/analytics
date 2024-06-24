@@ -8,7 +8,7 @@ import os
 current_directory = os.getcwd()
 st.write(f"Current Directory: {current_directory}")
 
-
+st.set_page_config(layout="wide")
 
 
 
