@@ -115,3 +115,27 @@ with col3:
     st.markdown('#### Top 20 Companies by Forward EPS')
     top_20_forward_pe = get_top_20_names(df, 'ForwardEps')
     st.write(top_20_forward_pe)
+
+
+
+
+
+col1, col2, col3 = st.columns(3)
+
+# Column 1: Top 20 Companies by Held Percent Institutions
+with col1:
+    st.markdown('### Top 20 Companies by Held Percent Institutions')
+    top_20_held_percent = get_top_20_data(df, 'HeldPercentInstitutions')
+    st.write(top_20_held_percent)
+
+# Column 2: Top 20 Companies by Short Ratio
+with col2:
+    st.markdown('### Top 20 Companies by Short Ratio')
+    top_20_short_ratio = get_top_20_data(df, 'ShortRatio')
+    st.write(top_20_short_ratio)
+
+# Column 3: Top 20 Companies by Profit Margins
+with col3:
+    st.markdown('### Top 20 Companies by Profit Margins')
+    top_20_profit_margins = get_top_20_data(df, 'ProfitMargins')
+    st.write(top_20_profit_margins)
