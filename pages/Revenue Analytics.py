@@ -53,7 +53,7 @@ res = sp.filter_df(df, all_widgets)
 
 
 
-st.markdown("## My name is Faraz. I can create data apps like these. In this interactive app, you can use the sidebar to filter. The data will change as you filter for certain attributes")
+st.markdown("## I am Faraz. This is a side project. In this interactive app, can use the sidebar to filter for customers or transactions. The data will change as you filter for certain things")
 
 
 st.header("This is the Data After Sidebar Filtering")
