@@ -40,7 +40,7 @@ create_data = {
                 "Recommendation_Key": "multiselect"}
 
 
-all_widgets = sp.create_widgets(df, create_data, ignore_columns=["Ticker", "Name","Recommendation_Mean","Long_Business_Summary"])
+all_widgets = sp.create_widgets(df, create_data)
 res = sp.filter_df(df, all_widgets)
 
 
