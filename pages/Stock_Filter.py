@@ -16,7 +16,8 @@ with col1:
     st.title("I am Faraz. This is a Side Project.")
 with col2:
     st.markdown("## Data API: Yahoo")
-
+    
+st.write('---')
 
 
 st.markdown("### Sidebar lets users filter for financial requirements in a company. There are many things you can filter for. For example, if you increase ~Full_Time_Employees widget, you will only see Amazon & Walmart in the tables. That is because they employ the most")
