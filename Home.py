@@ -5,7 +5,7 @@ from streamlit_pdf_viewer import pdf_viewer
 st.set_page_config(
     page_title="Home",layout="wide")
 
-col1, col2 = st.columns([1, 2])
+col1, col2 = st.columns([1, 1])
 with col1:
     st.markdown("### I'm Faraz. I am a data science enthusiast. I first heard about statistics in high school. Ever since, I've always wanted to use models to do cool things like prediction, optimization.")
 with col2:
