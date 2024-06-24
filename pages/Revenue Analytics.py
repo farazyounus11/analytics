@@ -170,11 +170,11 @@ avgysales = res.groupby(by="YEAR")['SALES'].sum()
 col1, col2 = st.columns(2)
 
 with col1:
+    st.header("Total Yearly Sales")
     st.bar_chart(avgysales)
 
 with col2:
-    st.header("Total Monthly Sales - Line Chart")
-# Plotting with Matplotlib
+    st.header("Total Monthly Sales")
     plt.figure(figsize=(12, 6))
     plt.plot(sales_by_monthyear.index.astype(str), sales_by_monthyear.values, marker='o', linestyle='-')
     plt.title('Total Sales Over Time (Monthly)')
