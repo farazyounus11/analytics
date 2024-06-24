@@ -33,7 +33,7 @@ create_data = {
     "STATUS": "multiselect",
     "PRODUCTLINE": "multiselect",
     "PRODUCTCODE": "multiselect",
-    "CUSTOMER_NAME": "text",
+    "CUSTOMER_NAME": "multiselect",
     "PHONE": "multiselect",
     "ADDRESSLINE1": "text",
     "CITY": "multiselect",
