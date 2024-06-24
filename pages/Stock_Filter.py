@@ -112,6 +112,6 @@ with col2:
 
 # Column 3: Top 20 Companies by Forward PE
 with col3:
-    st.markdown('#### Top 20 Companies by Forward PE')
+    st.markdown('#### Top 20 Companies by Forward EPS')
     top_20_forward_pe = get_top_20_names(df, 'ForwardEps')
     st.write(top_20_forward_pe)
