@@ -7,7 +7,7 @@ st.set_page_config(
 
 col1, col2 = st.columns([1, 2])
 with col1:
-    st.markdown("### I'm Faraz, a data science enthusiast")
+    st.markdown("### I'm Faraz. I am a data science enthusiast. I first heard about statistics in high school. Ever since, I've always wanted to use models to do cool things like prediction, optimization.")
 with col2:
     st.image('stats.png', caption='models')
 
