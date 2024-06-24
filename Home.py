@@ -5,11 +5,20 @@ from streamlit_pdf_viewer import pdf_viewer
 st.set_page_config(
     page_title="Home",layout="wide")
 
-st.title("Hi I'm Faraz.")
-st.title("I am a Data Science Enthusiast")
+st.markdown("## Hi I'm Faraz.")
+st.markdown("### I am a Data Science Enthusiast")
 
-st.write("## The side bar has some of the apps I created!")
+col1, col2 = st.columns([1, 2])
 
+# Add content to the first column
+with col1:
+    st.markdown("### I'm Faraz, a data science enthusiast")
+with col2:
+    st.image('stats.png', caption='models')
+
+
+
+st.write("### The side bar has some of the apps I created!")
 st.sidebar.success("Select a page above.")
 
 
