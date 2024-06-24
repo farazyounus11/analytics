@@ -33,14 +33,6 @@ df = load_data()
 
 df = df.fillna(df.median())
 
-column_to_move = df.pop("Forward_Eps")
-df.insert(0, "Forward_Eps", column_to_move)
-
-column_to_move = df.pop("Ebitda")
-df.insert(0, "Ebitda", column_to_move)
-
-column_to_move = df.pop("Free_Cash_Flow")
-df.insert(0, "Free_Cash_Flow", column_to_move)
 
 
 
