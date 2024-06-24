@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import os
+import random
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
@@ -38,6 +39,7 @@ def main():
         # Define y as df["Y"]
         y = df.pop('Y')
 
+
         # Use LabelEncoder to encode categorical target variable
         encoder = LabelEncoder()
         y = encoder.fit_transform(y)
@@ -61,7 +63,7 @@ def main():
         X = df[[feature1, feature2]].values
 
         # Split the dataset into training and testing sets
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+        X_train, X_test, y_train, y_test = train_test_split(X,  y,  test_size=0.2)
 
         # List of classifiers to visualize
         classifiers = [
@@ -72,33 +74,42 @@ def main():
             ("Random Forest", RandomForestClassifier(max_depth=2)),
             ("AdaBoost", AdaBoostClassifier(n_estimators=25)),
             ("Gradient Boosting", GradientBoostingClassifier(n_estimators=25)),
-            ("Neural Network", MLPClassifier(alpha=1, max_iter=200, random_state=42))
+            ("Neural Network", MLPClassifier(alpha=1, max_iter=200))
         ]
 
-        # Display results one by one
-        for name, clf in classifiers:
-            st.subheader(f"{name} (Test)")
+        # List of color maps to use
+        color_maps = [plt.cm.summer]
 
+        # Create grid for test plots
+        fig_test, axes_test = plt.subplots(nrows=2, ncols=4, figsize=(20, 10))
+        axes_test = axes_test.flatten()  # Flatten the 2D array of axes for easy indexing
+
+        # Plot decision boundaries for each classifier and calculate F1 score and accuracy
+        for i, (name, clf) in enumerate(classifiers):
             clf.fit(X_train, y_train)
             y_pred = clf.predict(X_test)
             accuracy = accuracy_score(y_test, y_pred)
             f1 = f1_score(y_test, y_pred, average='weighted')
 
             # Plot decision boundary and scatter plot for testing data
-            fig, ax = plt.subplots(figsize=(8, 6))
+            ax_test = axes_test[i]
+            cmap = color_maps[i % len(color_maps)]
             display_test = DecisionBoundaryDisplay.from_estimator(
                 clf,
                 X_test,
-                response_method="auto",
-                ax=ax,
-                cmap=plt.cm.summer,
+                response_method="auto",  # Changed to 'auto'
+                ax=ax_test,
+                cmap=cmap,
                 xlabel=feature1,
                 ylabel=feature2
             )
-            ax.scatter(X_test[:, 0], X_test[:, 1], c=y_test, cmap=plt.cm.summer, edgecolor='k', s=30, label='Test')
-            ax.set_title(f"{name} (Test)\nAccuracy: {accuracy:.2f} | F1: {f1:.2f}")
+            ax_test.scatter(X_test[:, 0], X_test[:, 1], c=y_test, cmap=cmap, edgecolor='k', s=30, label='Test')
+            ax_test.set_title(f"{name} (Test)\nAccuracy: {accuracy:.2f} | F1: {f1:.2f}")
 
-            st.pyplot(fig)
+        # Adjust layout and display
+        fig_test.tight_layout()
+
+        st.pyplot(fig_test)
 
 # Run the app
 if __name__ == '__main__':
