@@ -48,18 +48,18 @@ def main():
             X_single = df[[column]]
         
             # Split the data into training and testing sets
-            X_train, X_test, y_train, y_test = train_test_split(X_single, y, test_size=0.2)
+            X_trainX, X_testX, y_trainX, y_testX = train_test_split(X_single, y, test_size=0.2)
         
             # Initialize the logistic regression model
-            model = LogisticRegression()
+            model7 = LogisticRegression()
         
             # Fit the model on the training data
-            model.fit(X_train, y_train.values.ravel())  # Ensure y_train is a 1d array
+            model7.fit(X_trainX, y_trainX.values.ravel())  # Ensure y_train is a 1d array
         
             # Predict on the testing data
-            y_pred = model.predict(X_test)
-            accuracy = accuracy_score(y_test, y_pred)
-            accuracy_dict[column] = accuracy
+            y_predX = model7.predict(X_testX)
+            accuracyX = accuracy_score(y_testX, y_predX)
+            accuracy_dict[column] = accuracyX
 
 
         st.write(accuracy_dict)
