@@ -1,27 +1,25 @@
 import streamlit as st
+
+# Set page configuration
+st.set_page_config(layout="wide")
 import pandas as pd
 import streamlit_pandas as sp
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
 import os
 
-current_directory = os.getcwd()
-st.write(f"Current Directory: {current_directory}")
 
-st.set_page_config(layout="wide")
+st.markdown("### Sidebar lets users filter for financial requirements in a company. There are many things you can filter for. For example, if you increase Full_Time_Employees, you will only see Amazon & Walmart because they employ the most")
+st.markdown("### If you increase Free cashflow Requirements, You will only see FAANG because those are money making machines")
+st.markdown("### If you select ")
 
 
 
-st.set_page_config(layout="wide")
 @st.cache_data
 def load_data():
     df = pd.read_csv(file)
     return df
 
-
-st.markdown("### Sidebar lets users filter for financial requirements in a company. There are many things you can filter for. For example, if you increase Full_Time_Employees, you will only see Amazon & Walmart because they employ the most")
-st.markdown("### If you increase Free cashflow Requirements, You will only see FAANG because those are money making machines")
-st.markdown("### If you select ")
 
 
 
