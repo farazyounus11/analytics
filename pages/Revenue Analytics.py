@@ -28,6 +28,7 @@ df['MONTH'] = df['ORDER_DATE'].dt.to_period('M')
 monthly_sales = df.groupby('MONTH')['SALES'].sum().reset_index()
 
 create_data = {
+    "Order_Number": "multiselect",
     "PRICE_EACH": "multiselect",
     "STATUS": "multiselect",
     "PRODUCTLINE": "multiselect",
