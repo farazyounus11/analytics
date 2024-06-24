@@ -3,6 +3,13 @@ import pandas as pd
 import streamlit_pandas as sp
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
+import os
+
+current_directory = os.getcwd()
+st.write(f"Current Directory: {current_directory}")
+
+
+
 
 
 st.set_page_config(layout="wide")
