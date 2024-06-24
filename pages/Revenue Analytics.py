@@ -69,10 +69,6 @@ st.markdown("## You can type search for things like Customer_Name, Order_number,
 
 
 
-st.header("This is the Data After Sidebar Filtering")
-st.write(res)
-
-
 avgsales = res.groupby(by="YEAR")['SALES'].sum()
 stdsales = res.groupby(by="YEAR")['SALES'].std()
 
