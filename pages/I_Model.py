@@ -64,6 +64,7 @@ def main():
         accuracy_df = accuracy_df.sort_values(by='Accuracy', ascending=False).reset_index(drop=True)
 
         # Display the DataFrame using st.write
+        st.write(accuracy_df)
 
 
 
