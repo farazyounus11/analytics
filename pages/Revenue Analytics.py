@@ -147,7 +147,7 @@ fig = px.choropleth(countryresult,
                     hover_name='COUNTRY',
                     title='Total Sales by Country(Hoverable)',  # Corrected title
                     color_continuous_scale=color_scale,
-                    width=800,  # Adjust width as needed
+                    width=700,  # Adjust width as needed
                     height=450   # Adjust height as needed
 )
 
@@ -159,8 +159,18 @@ fig.update_layout(
     )
 )
 # Assuming `st` refers to Streamlit
-st.plotly_chart(fig)
 
+st.header("Total Monthly Sales")
+plt.figure(figsize=(12, 6))
+plt.plot(sales_by_monthyear.index.astype(str), sales_by_monthyear.values, marker='o', linestyle='-')
+plt.title('Total Sales Over Time (Monthly)')
+plt.xlabel('Month-Year')
+plt.ylabel('Total Sales')
+plt.grid(True)
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.gca().get_yaxis().set_major_formatter(FuncFormatter(lambda x, _: '{:,.0f}'.format(x)))
+st.pyplot(plt)
 
 
 
@@ -190,23 +200,14 @@ comdf['Most common pair'] = comdf['Most common pair'].apply(lambda x: f"{x[0]} &
 avgysales = res.groupby(by="YEAR")['SALES'].sum()
 
 col1, col2 = st.columns(2)
-
 with col1:
-    st.header("Total Yearly Sales")
+    st.makrdown("### Total Yearly Sales")
     st.bar_chart(avgysales)
 
 with col2:
-    st.header("Total Monthly Sales")
-    plt.figure(figsize=(12, 6))
-    plt.plot(sales_by_monthyear.index.astype(str), sales_by_monthyear.values, marker='o', linestyle='-')
-    plt.title('Total Sales Over Time (Monthly)')
-    plt.xlabel('Month-Year')
-    plt.ylabel('Total Sales')
-    plt.grid(True)
-    plt.xticks(rotation=45)
-    plt.tight_layout()
-    plt.gca().get_yaxis().set_major_formatter(FuncFormatter(lambda x, _: '{:,.0f}'.format(x)))
-    st.pyplot(plt)
+
+    st.plotly_chart(fig)
+
 
 
 
