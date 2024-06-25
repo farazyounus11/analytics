@@ -151,16 +151,18 @@ sales_by_prodtop10 = sales_by_prodd.nlargest(10)
 
 
 fig = px.choropleth(res, 
-                    locations='Country',  
+                    locations='COUNTRY',  
                     locationmode='country names',  
                     color="SALES",
-                    hover_name='Country',
+                    hover_name='COUNTRY',
                     projection='natural earth',  
-                    title=f'{""Sales.replace("_", " ").title()} by Country',
+                    title='Sales by Country',  # Corrected title
                     color_continuous_scale=color_scale,
                     width=1000,  # Adjust width as needed
                     height=600   # Adjust height as needed
 )
+
+# Assuming `st` refers to Streamlit
 st.plotly_chart(fig)
 
 
