@@ -154,7 +154,7 @@ fig = px.choropleth(countryresult,
 fig.update_layout(
     geo=dict(
         scope='world',  # Focus on the world map
-        projection_scale=3,  # Adjust projection scale for zoom (1 is default, >1 zooms in, <1 zooms out)
+        projection_scale=2,  # Adjust projection scale for zoom (1 is default, >1 zooms in, <1 zooms out)
         center=dict(lat=28.675, lon=-40.70)  # Center of the map (lat and lon can be adjusted as needed)
     )
 )
