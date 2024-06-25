@@ -18,7 +18,6 @@ with col2:
     st.markdown("### Data API: Yahoo fin")
 st.write('---')
 st.markdown("### The Red sidebar widgets lets users filter for financial requirements in a company. There are many metrics you can filter for. For example, if you increase ~Full_Time_Employees widget, you will only see Amazon & Walmart in the tables. That is because they employ the most")
-st.markdown('### Top 15 Companies Sorted by Metrics')
 
 
 @st.cache_data
@@ -37,10 +36,6 @@ df = df.fillna(df.median())
 
 
 
-st.write('---')
-
-
-
 create_data = {
 
                 "Industry": "multiselect",
@@ -53,6 +48,7 @@ all_widgets = sp.create_widgets(df, create_data, ignore_columns=["Name", "Long_B
 res = sp.filter_df(df, all_widgets)
 
 
+st.markdown('#### Top 15 Companies Sorted by Metrics')
 
 
 sorted_by_earnings_growth = res.sort_values(by='Earnings_Quarterly_Growth', ascending=False).head(15)[['Name', 'Earnings_Quarterly_Growth']].rename(columns={'Earnings_Quarterly_Growth': 'Quarterly_Growth'})
