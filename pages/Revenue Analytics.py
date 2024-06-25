@@ -8,7 +8,8 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter  # Import FuncFormatter for formatting ticks
 import plotly.express as px
 
-
+[theme]
+base="dark"
 
 
 st.set_page_config(layout="wide")
