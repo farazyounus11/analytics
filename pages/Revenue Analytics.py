@@ -51,17 +51,10 @@ create_data = {
     "CONTACTLASTNAME": "text",
     "CONTACTFIRSTNAME": "text",
     "DEALSIZE": "multiselect",
-    "POSTALCODE": "multiselect"
-
-
-
-}
+    "POSTALCODE": "multiselect"}
 
 all_widgets = sp.create_widgets(df, create_data, ignore_columns=["CONTACTLASTNAME", "CONTACTFIRSTNAME"])
 res = sp.filter_df(df, all_widgets)
-
-
-
 
 
 st.markdown("## I am Faraz. This is a side project. In this interactive app, you can use the sidebar to filter for customers or transactions. The data will change as you filter for certain things")
@@ -77,8 +70,6 @@ recent_years = avgsales.index[-3:]
 recent_avg_sales = avgsales[-3:]
 recent_std_sales = stdsales[-3:]
 
-# Optionally, you can format this in a more structured layout
-# Assuming recent_years, recent_avg_sales, and recent_std_sales are already defined
 col1, col2, col3 = st.columns(3)
 
 # Check the length of recent_years and display metrics accordingly
@@ -104,12 +95,9 @@ else:
 st.header("Important Tables")
 res['MonthYear'] = res['ORDER_DATE'].dt.to_period('M')
 
-
-
 sales_by_monthyear = res.groupby('MonthYear')['SALES'].sum()
 top_10_months = sales_by_monthyear.nlargest(10)
 # Display the top 10 months and their sales using Streamlit
-
 
 
 sales_by_CUSTOMER_NAME = res.groupby('CUSTOMER_NAME')['SALES'].sum()
@@ -163,6 +151,13 @@ fig = px.choropleth(countryresult,
                     height=450   # Adjust height as needed
 )
 
+fig.update_layout(
+    geo=dict(
+        scope='world',  # Focus on the world map
+        projection_scale=3,  # Adjust projection scale for zoom (1 is default, >1 zooms in, <1 zooms out)
+        center=dict(lat=14.59, lon=28.6731)  # Center of the map (lat and lon can be adjusted as needed)
+    )
+)
 # Assuming `st` refers to Streamlit
 st.plotly_chart(fig)
 
