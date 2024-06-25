@@ -73,7 +73,6 @@ for city in selected_cities:
     ]
 
     if not filtered_df.empty:
-        st.write(filtered_df)
         st.header('Stats')
         st.metric(label="Number of Arrests", value=len(filtered_df))
         crime_counts_by_date = filtered_df.groupby(['Date', 'Primary Type']).size().unstack(fill_value=0)
