@@ -139,7 +139,7 @@ fig = px.choropleth(countryresult,
                     title='Interactive Map of Sales by Country',  # Corrected title
                     color_continuous_scale=color_scale,
                     width=600,  # Adjust width as needed
-                    height=400   # Adjust height as needed)
+                    height=400 )
 
 fig.update_layout(
     geo=dict(
