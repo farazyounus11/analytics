@@ -46,7 +46,7 @@ create_data = {
 
 all_widgets = sp.create_widgets(df, create_data, ignore_columns=["Name", "Long_Business_Summary", "Number_Of_Analyst_Opinions","Shareholder_Rights_Risk","Compensation_Risk", "Open","Fifty_Two_Week_Low", "Current_Price","Fifty_Two_Week_High","Previous_Close","Payout_Ratio","Regular_Market_Volume"])
 res = sp.filter_df(df, all_widgets)
-
+st.write('---')
 
 st.markdown('#### Top 15 Companies Sorted by Metrics')
 
