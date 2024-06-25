@@ -72,23 +72,20 @@ sorted_by_total_cash = res.sort_values(by='Total_Cash', ascending=False).head(15
 sorted_by_forward_eps = res.sort_values(by='Forward_EPS', ascending=False).head(15)[['Name', 'Forward_EPS']].round({'Forward_EPS': 1})
 sorted_by_net_income = res.sort_values(by='Net_Income_To_Common', ascending=False).head(15)[['Name', 'Net_Income_To_Common']].round({'Net_Income_To_Common': 1})
 
-
-
-
-col4, col5, col6 = st.columns(3)
-
+# Display in Streamlit using HTML
+col1, col2, col3 = st.columns(3)
 
 with col1:
     st.markdown('### Sorted by Total Cash')
-    st.dataframe(sorted_by_total_cash, index=False)  # Don't display index column
+    st.write(sorted_by_total_cash.to_html(index=False, justify='left'), unsafe_allow_html=True)
 
 with col2:
     st.markdown('### Sorted by Forward EPS')
-    st.dataframe(sorted_by_forward_eps, index=False)  # Don't display index column
+    st.write(sorted_by_forward_eps.to_html(index=False, justify='left'), unsafe_allow_html=True)
 
 with col3:
     st.markdown('### Sorted by Net Income to Common')
-    st.dataframe(sorted_by_net_income, index=False)  # Don't display index column
+    st.write(sorted_by_net_income.to_html(index=False, justify='left'), unsafe_allow_html=True)
 
 
 
