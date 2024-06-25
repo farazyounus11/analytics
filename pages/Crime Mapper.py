@@ -104,8 +104,8 @@ for city in selected_cities:
                 ),
             ],
         ))
+        st.line_chart(crime_counts_by_date)
+
     else:
         st.warning("Select a Crime Type Using the Sidebar")
-
-    st.line_chart(crime_counts_by_date)
 
