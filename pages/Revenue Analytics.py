@@ -158,7 +158,7 @@ fig.update_layout(
 # Assuming `st` refers to Streamlit
 
 st.header("Total Monthly Sales")
-plt.figure(figsize=(12, 8))
+plt.figure(figsize=(12, 10))
 plt.plot(sales_by_monthyear.index.astype(str), sales_by_monthyear.values, marker='o', linestyle='-')
 plt.title('Total Sales Over Time (Monthly)')
 plt.xlabel('Month-Year')
