@@ -6,7 +6,7 @@ from itertools import combinations
 from collections import Counter
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter  # Import FuncFormatter for formatting ticks
-
+import plotly.express as px
 
 
 
@@ -147,6 +147,22 @@ sales_by_postaltop = sales_by_postal.nlargest(10)
 
 sales_by_prodd = res.groupby('PRODUCTLINE')['SALES'].sum()
 sales_by_prodtop10 = sales_by_prodd.nlargest(10)
+
+
+
+fig = px.choropleth(res, 
+                    locations='Country',  
+                    locationmode='country names',  
+                    color="SALES",
+                    hover_name='Country',
+                    projection='natural earth',  
+                    title=f'{selected_variable.replace("_", " ").title()} by Country',
+                    color_continuous_scale=color_scale,
+                    width=1000,  # Adjust width as needed
+                    height=600   # Adjust height as needed
+)
+st.plotly_chart(fig)
+
 
 
 
