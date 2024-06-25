@@ -77,12 +77,12 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
     st.write('#### Top Quarterly Earnings Growth')
-    st.table(sorted_by_earnings_growth.set_index('Name').style.format({'Quarterly_Growth': '{:.1f}%'}))
+    st.table(sorted_by_earnings_growth.set_index('Name').style.format({'Quarterly_Growth': '{:.2f}%'}))
 
 with col2:
     st.write('### Sorted by Profit Margins')
     # Formatting Profit_Margins to show one decimal place
-    st.table(sorted_by_profit_margins.set_index('Name').style.format({'Profit_Margins': '{:.1f}%'}))
+    st.table(sorted_by_profit_margins.set_index('Name').style.format({'Profit_Margins': '{:.2f}%'}))
 
 with col3:
     st.write('### Sorted by Free Cash Flow')
