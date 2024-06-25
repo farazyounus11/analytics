@@ -134,28 +134,29 @@ with col2:
 with col3:
     st.write("Top 10 Cities by Total Sales:")
     st.write(top_10_cities)
-
-
-
 sales_by_delay = res.groupby('STATUS')['SALES'].count()
 sales_by_delaytop5 = sales_by_delay.nlargest(10)
-
-
 sales_by_postal = res.groupby('POSTALCODE')['SALES'].sum()
 sales_by_postaltop = sales_by_postal.nlargest(10)
-
-
 sales_by_prodd = res.groupby('PRODUCTLINE')['SALES'].sum()
 sales_by_prodtop10 = sales_by_prodd.nlargest(10)
 
+
+
+
+
+
+
+countryresult = res.groupby('COUNTRY')['SALES'].sum().reset_index()
+
+
 ## Ploting Heat map
 color_scale = px.colors.sequential.Viridis
-fig = px.choropleth(res, 
+fig = px.choropleth(countryresult, 
                     locations='COUNTRY',  
                     locationmode='country names',  
                     color="SALES",
                     hover_name='COUNTRY',
-                    projection='natural earth',  
                     title='Sales by Country',  # Corrected title
                     color_continuous_scale=color_scale,
                     width=1000,  # Adjust width as needed
