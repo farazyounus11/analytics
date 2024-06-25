@@ -21,7 +21,7 @@ def load_data():
     df = pd.read_csv(file)
     return df
 
-pd.set_option('display.max_colwidth', 5)
+pd.set_option('display.max_colwidth', 20)
 file = "stock2.csv"
 df = load_data()
 
