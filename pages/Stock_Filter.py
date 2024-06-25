@@ -44,49 +44,28 @@ all_widgets = sp.create_widgets(df, create_data, ignore_columns=["Name", "Long_B
 res = sp.filter_df(df, all_widgets)
 st.write('---')
 
-st.markdown('#### Top 15 Companies Sorted by Metrics')
+st.markdown('#### Top 10 Companies Sorted by Metrics')
 
 
-sorted_by_earnings_growth = res.sort_values(by='Earnings_Quarterly_Growth', ascending=False).head(15)[['Name', 'Earnings_Quarterly_Growth']].rename(columns={'Earnings_Quarterly_Growth': 'Quarterly_Growth'})
+sorted_by_earnings_growth = res.sort_values(by='Earnings_Quarterly_Growth', ascending=False).head(10)[['Name', 'Earnings_Quarterly_Growth']].rename(columns={'Earnings_Quarterly_Growth': 'Quarterly_Growth'})
+sorted_by_profit_margins = res.sort_values(by='Profit_Margins', ascending=False).head(10)
+sorted_by_free_cash_flow = res.sort_values(by='Free_Cash_Flow', ascending=False).head(10)
 
-sorted_by_profit_margins = res.sort_values(by='Profit_Margins', ascending=False).head(15)
-sorted_by_profit_margins['Profit_Margins'] = (sorted_by_profit_margins['Profit_Margins'] * 100).round(1)
-sorted_by_profit_margins = sorted_by_profit_margins[['Name', 'Profit_Margins']] 
 
-sorted_by_free_cash_flow = res.sort_values(by='Free_Cash_Flow', ascending=False).head(15)[['Name', 'Free_Cash_Flow']]
-
-# Custom CSS for adjusting column width
-st.write("""
-    <style>
-        table {
-            width: 100%;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-        }
-        .stDataFrame th:first-child,
-        .stDataFrame td:first-child {
-            width: 30%; /* Adjust the width of the first column (Name) */
-        }
-    </style>
-""", unsafe_allow_html=True)
-
-# Display in three columns using st.table()
 col1, col2, col3 = st.columns(3)
 
 with col1:
     st.write('#### Top Quarterly Earnings Growth')
-    st.table(sorted_by_earnings_growth.set_index('Name').style.format({'Quarterly_Growth': '{:.2f}%'}))
+    st.write(sorted_by_earnings_growth)
 
 with col2:
     st.write('### Sorted by Profit Margins')
     # Formatting Profit_Margins to show one decimal place
-    st.table(sorted_by_profit_margins.set_index('Name').style.format({'Profit_Margins': '{:.2f}%'}))
+    st.write(sorted_by_profit_margins)
 
 with col3:
     st.write('### Sorted by Free Cash Flow')
-    st.table(sorted_by_free_cash_flow.set_index('Name'))
+    st.write(sorted_by_free_cash_flow)
 
 
 
