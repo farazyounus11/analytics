@@ -13,11 +13,10 @@ col1, col2 = st.columns(2)
 
 # Content for col1
 with col1:
-    st.markdown("### I am Faraz. This is a Side Project")
+    st.markdown("### The Red sidebar widgets lets users filter for financial requirements in a company. There are many metrics you can filter for. For example, if you increase ~Full_Time_Employees widget, you will only see Amazon & Walmart in the tables. That is because they employ the most")
 with col2:
     st.markdown("### Data API: Yahoo fin")
 st.write('---')
-st.markdown("### The Red sidebar widgets lets users filter for financial requirements in a company. There are many metrics you can filter for. For example, if you increase ~Full_Time_Employees widget, you will only see Amazon & Walmart in the tables. That is because they employ the most")
 
 
 @st.cache_data
