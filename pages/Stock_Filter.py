@@ -11,9 +11,9 @@ import os
 # Create two columns using st.columns
 col1, col2 = st.columns(2)
 with col1:
-    st.markdown("### * The red sidebar widgets lets users filter for financial requirements in a company. There are many metrics you can filter for. the data come from Yahoo finance ")
+    st.markdown("### The red sidebar widgets lets users filter for financial requirements in a company. There are many metrics you can filter for. the data come from Yahoo finance ")
 with col2:
-    st.markdown("### * This app also helps users search up information about a companies. This app also lets users see where a company lies in earnings distribution")
+    st.markdown("### This app also helps users search up information about a companies. This app also lets users see where a company lies in earnings distribution")
 
 
 st.write('---')
