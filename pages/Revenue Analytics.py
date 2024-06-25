@@ -59,9 +59,6 @@ res = sp.filter_df(df, all_widgets)
 
 st.markdown("## I am Faraz. This is a side project. In this interactive app, you can use the sidebar to filter for customers or transactions. The data will change as you filter for certain things")
 st.markdown("## You can type search for things like Customer_Name, Order_number, Productcode etc")
-
-
-
 avgsales = res.groupby(by="YEAR")['SALES'].sum()
 stdsales = res.groupby(by="YEAR")['SALES'].std()
 
@@ -201,7 +198,7 @@ avgysales = res.groupby(by="YEAR")['SALES'].sum()
 
 col1, col2 = st.columns(2)
 with col1:
-    st.makrdown("#### Total Yearly Sales")
+    st.markdown("### Total Yearly Sales")
     st.bar_chart(avgysales)
 
 with col2:
