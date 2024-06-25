@@ -147,8 +147,8 @@ fig = px.choropleth(countryresult,
                     hover_name='COUNTRY',
                     title='Total Sales by Country(Hoverable)',  # Corrected title
                     color_continuous_scale=color_scale,
-                    width=700,  # Adjust width as needed
-                    height=450   # Adjust height as needed
+                    width=600,  # Adjust width as needed
+                    height=400   # Adjust height as needed
 )
 
 fig.update_layout(
@@ -201,11 +201,10 @@ avgysales = res.groupby(by="YEAR")['SALES'].sum()
 
 col1, col2 = st.columns(2)
 with col1:
-    st.makrdown("### Total Yearly Sales")
+    st.makrdown("#### Total Yearly Sales")
     st.bar_chart(avgysales)
 
 with col2:
-
     st.plotly_chart(fig)
 
 
