@@ -159,8 +159,8 @@ fig = px.choropleth(countryresult,
                     hover_name='COUNTRY',
                     title='Sales by Country',  # Corrected title
                     color_continuous_scale=color_scale,
-                    width=1000,  # Adjust width as needed
-                    height=600   # Adjust height as needed
+                    width=800,  # Adjust width as needed
+                    height=450   # Adjust height as needed
 )
 
 # Assuming `st` refers to Streamlit
