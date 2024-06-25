@@ -13,8 +13,8 @@ os.chdir(current_directory)
 
 file_path = current_directory
 
-st.title("NYC/Chicago Crime Visualization By Faraz")
-st.markdown("## Use the Sidebar to Select City!!")
+st.markdown("##NYC/Chicago Crime Visualization By Faraz")
+st.markdown("### Use the Sidebar to Select City and Crime type")
 
 
 @st.cache_data
