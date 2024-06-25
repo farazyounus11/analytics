@@ -155,7 +155,7 @@ fig.update_layout(
     geo=dict(
         scope='world',  # Focus on the world map
         projection_scale=3,  # Adjust projection scale for zoom (1 is default, >1 zooms in, <1 zooms out)
-        center=dict(lat=14.59, lon=28.6731)  # Center of the map (lat and lon can be adjusted as needed)
+        center=dict(lat=28.675, lon=-40.70)  # Center of the map (lat and lon can be adjusted as needed)
     )
 )
 # Assuming `st` refers to Streamlit
