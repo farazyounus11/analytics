@@ -158,7 +158,7 @@ fig.update_layout(
 # Assuming `st` refers to Streamlit
 
 st.header("Total Monthly Sales")
-plt.figure(figsize=(12, 6))
+plt.figure(figsize=(9, 5))
 plt.plot(sales_by_monthyear.index.astype(str), sales_by_monthyear.values, marker='o', linestyle='-')
 plt.title('Total Sales Over Time (Monthly)')
 plt.xlabel('Month-Year')
@@ -196,9 +196,9 @@ comdf['Most common pair'] = comdf['Most common pair'].apply(lambda x: f"{x[0]} &
 
 avgysales = res.groupby(by="YEAR")['SALES'].sum()
 
-col1, col2 = st.columns(2)
+col1, col2 = st.columns([1, 2])
 with col1:
-    st.markdown("### Total Yearly Sales")
+    st.markdown("#### Yearly Sales")
     st.bar_chart(avgysales)
 
 with col2:
