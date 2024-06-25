@@ -34,9 +34,6 @@ df.insert(0, "PRODUCTLINE", column_to_move)
 column_to_move = df.pop("CUSTOMER_NAME")
 df.insert(0, "CUSTOMER_NAME", column_to_move)
 
-
-
-
 create_data = {
     "ORDER_NUMBER": "multiselect",
     "PRICE_EACH": "multiselect",
@@ -119,17 +116,14 @@ with col2:
 with col3:
     st.write("Top 10 Cities by Total Sales:")
     st.write(top_10_cities)
+
+
 sales_by_delay = res.groupby('STATUS')['SALES'].count()
 sales_by_delaytop5 = sales_by_delay.nlargest(10)
 sales_by_postal = res.groupby('POSTALCODE')['SALES'].sum()
 sales_by_postaltop = sales_by_postal.nlargest(10)
 sales_by_prodd = res.groupby('PRODUCTLINE')['SALES'].sum()
 sales_by_prodtop10 = sales_by_prodd.nlargest(10)
-
-
-
-
-
 
 
 countryresult = res.groupby('COUNTRY')['SALES'].sum().reset_index()
@@ -158,7 +152,7 @@ fig.update_layout(
 # Assuming `st` refers to Streamlit
 
 st.header("Total Monthly Sales")
-plt.figure(figsize=(12, 10))
+plt.figure(figsize=(12, 8))
 plt.plot(sales_by_monthyear.index.astype(str), sales_by_monthyear.values, marker='o', linestyle='-')
 plt.title('Total Sales Over Time (Monthly)')
 plt.xlabel('Month-Year')
