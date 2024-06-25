@@ -46,9 +46,8 @@ st.markdown('#### Top 10 Companies Sorted by Metrics')
 
 
 sorted_by_earnings_growth = res.sort_values(by='Earnings_Quarterly_Growth', ascending=False).head(10)[['Name', 'Earnings_Quarterly_Growth']].rename(columns={'Earnings_Quarterly_Growth': 'Quarterly_Growth'})
-sorted_by_profit_margins = res.sort_values(by='Profit_Margins', ascending=False).head(10)[['Name', 'Profit_Margins']]
-sorted_by_free_cash_flow = res.sort_values(by='Free_Cash_Flow', ascending=False).head(10)[['Name', 'Free_Cash_Flow']]
-
+sorted_by_profit_margins = res.sort_values(by='Profit_Margins', ascending=False).head(10).set_index('Name')[['Profit_Margins']]
+sorted_by_free_cash_flow = res.sort_values(by='Free_Cash_Flow', ascending=False).head(10).set_index('Name')[['Free_Cash_Flow']]
 
 col1, col2, col3 = st.columns(3)
 
@@ -58,7 +57,6 @@ with col1:
 
 with col2:
     st.write('### Sorted by Profit Margins')
-    # Formatting Profit_Margins to show one decimal place
     st.write(sorted_by_profit_margins)
 
 with col3:
