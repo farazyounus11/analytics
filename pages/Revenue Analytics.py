@@ -136,11 +136,10 @@ fig = px.choropleth(countryresult,
                     locationmode='country names',  
                     color="SALES",
                     hover_name='COUNTRY',
-                    title='Total Sales by Country(Hoverable)',  # Corrected title
+                    title='Interactive Map of Sales by Country',  # Corrected title
                     color_continuous_scale=color_scale,
                     width=600,  # Adjust width as needed
-                    height=400   # Adjust height as needed
-)
+                    height=400   # Adjust height as needed)
 
 fig.update_layout(
     geo=dict(
@@ -152,7 +151,7 @@ fig.update_layout(
 # Assuming `st` refers to Streamlit
 
 st.header("Total Monthly Sales")
-plt.figure(figsize=(12, 5))
+plt.figure(figsize=(12, 4))
 plt.plot(sales_by_monthyear.index.astype(str), sales_by_monthyear.values, marker='o', linestyle='-')
 plt.title('Total Sales Over Time (Monthly)')
 plt.xlabel('Month-Year')
