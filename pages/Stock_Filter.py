@@ -71,8 +71,11 @@ with col3:
 sorted_by_total_cash = res.sort_values(by='Total_Cash', ascending=False).head(15)[['Name', 'Total_Cash']].round({'Total_Cash': 1})
 sorted_by_forward_eps = res.sort_values(by='Forward_EPS', ascending=False).head(15)[['Name', 'Forward_EPS']].round({'Forward_EPS': 1})
 sorted_by_net_income = res.sort_values(by='Net_Income_To_Common', ascending=False).head(15)[['Name', 'Net_Income_To_Common']].round({'Net_Income_To_Common': 1})
+sorted_by_total_cash['Name'] = sorted_by_total_cash['Name'].apply(lambda x: x[:20])
+sorted_by_forward_eps['Name'] = sorted_by_forward_eps['Name'].apply(lambda x: x[:20])
+sorted_by_net_income['Name'] = sorted_by_net_income['Name'].apply(lambda x: x[:20])
 
-# Display in Streamlit
+
 col1, col2, col3 = st.columns(3)
 
 with col1:
