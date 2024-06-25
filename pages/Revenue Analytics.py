@@ -148,8 +148,8 @@ sales_by_postaltop = sales_by_postal.nlargest(10)
 sales_by_prodd = res.groupby('PRODUCTLINE')['SALES'].sum()
 sales_by_prodtop10 = sales_by_prodd.nlargest(10)
 
-
-
+## Ploting Heat map
+color_scale = px.colors.sequential.Viridis
 fig = px.choropleth(res, 
                     locations='COUNTRY',  
                     locationmode='country names',  
