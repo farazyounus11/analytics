@@ -22,7 +22,7 @@ def load_data():
     return df
 
 
-
+pd.set_option('auto_truncate_string_exceeding_this_length', 35)
 
 file = "stock2.csv"
 df = load_data()
