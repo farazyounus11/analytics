@@ -172,8 +172,9 @@ else:
 
 
 
-
 st.title("Company Analysis")
+
+# Selectbox for company selection
 compnames = df['Name'].unique()
 selected_name = st.selectbox("Select a Company", compnames)
 
@@ -199,7 +200,21 @@ def create_histogram(column_name, selected_row):
         x='value:Q'
     )
 
-    return hist + rule
+    text = alt.Chart(pd.DataFrame({
+        'value': [selected_row[column_name]],
+        'text': [f"{selected_row[column_name]}"]
+    })).mark_text(
+        align='left',
+        baseline='middle',
+        dx=7,
+        dy=-7,
+        color='red'
+    ).encode(
+        x='value:Q',
+        text='text:O'
+    )
+
+    return hist + rule + text
 
 # Create columns for the 2x2 grid
 col1, col2 = st.columns(2)
@@ -209,29 +224,18 @@ col3, col4 = st.columns(2)
 with col1:
     chart1 = create_histogram(column_options[0], selected_row)
     st.altair_chart(chart1, use_container_width=True)
-    st.write(f"Selected Company's {column_options[0]}: {selected_row[column_options[0]]}")
 
 with col2:
     chart2 = create_histogram(column_options[1], selected_row)
     st.altair_chart(chart2, use_container_width=True)
-    st.write(f"Selected Company's {column_options[1]}: {selected_row[column_options[1]]}")
 
 with col3:
     chart3 = create_histogram(column_options[2], selected_row)
     st.altair_chart(chart3, use_container_width=True)
-    st.write(f"Selected Company's {column_options[2]}: {selected_row[column_options[2]]}")
 
 with col4:
     chart4 = create_histogram(column_options[3], selected_row)
     st.altair_chart(chart4, use_container_width=True)
-    st.write(f"Selected Company's {column_options[3]}: {selected_row[column_options[3]]}")
-
-
-
-def format_with_commas(number):
-    return '{:,}'.format(number) if isinstance(number, int) else number
-
-
 
 
 
