@@ -172,7 +172,10 @@ else:
 
 
 
-st.title("Is Your Company an Outlier?")
+st.markdown("## Is Your Company an Outlier?")
+st.markdown("#### These four plots show where your company ranks in PEG_Ratio, Free_Cash_Flow, Revenue_Growth, & EBITDA_Margins ")
+
+
 
 # Selectbox for company selection
 compnames = df['Name'].unique()
