@@ -172,7 +172,7 @@ else:
 
 
 
-st.title("Company Analysis")
+st.title("Is Your Company an Outlier")
 
 # Selectbox for company selection
 compnames = df['Name'].unique()
