@@ -182,18 +182,15 @@ st.markdown("## Where Does Select Company Rank Amongst All Companies")
 
 # Select a row based on the Name column
 selected_name = st.selectbox("Select a Company", df['Name'])
-
-# Extract the row corresponding to the selected company
 selected_row = df[df['Name'] == selected_name].squeeze()
 
-# Create two columns
 col1, col2 = st.columns(2)
 
 # Dropdown menu for selecting numerical columns in each column
-selected_column1 = col1.selectbox("Select a Metric for Ranking", numerical_columns, key='col1')
-selected_column2 = col2.selectbox("Select a Metric for Ranking", numerical_columns, key='col2')
+selected_column1 = df["PEG_Ratio"]
+selected_column2 = df["Free_Cash_Flow"]
 
-# Plot histogram in the first column
+
 if selected_column1:
     col1.write(f"Histogram of {selected_column1}")
     fig1, ax1 = plt.subplots()
@@ -204,8 +201,6 @@ if selected_column1:
     ax1.set_ylabel('Frequency')
     ax1.legend()
     col1.pyplot(fig1)
-
-# Plot histogram in the second column
 if selected_column2:
     col2.write(f"Histogram of {selected_column2}")
     fig2, ax2 = plt.subplots()
