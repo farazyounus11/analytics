@@ -7,6 +7,7 @@ import streamlit_pandas as sp
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
 import os
+import altair as alt
 
 # Create two columns using st.columns
 col1, col2 = st.columns(2)
@@ -175,42 +176,43 @@ else:
 
 
 
-numerical_columns = df.select_dtypes(include=['number']).columns
-
-
-st.markdown("## Where Does Select Company Rank Amongst All Companies")
-
-# Select a row based on the Name column
 selected_name = st.selectbox("Select a Company", df['Name'])
+
+# Extract the selected row
 selected_row = df[df['Name'] == selected_name].squeeze()
 
-col1, col2 = st.columns(2)
+# Choose the column to display
+column_options = ["PEG_Ratio", "Free_Cash_Flow"]
+selected_column = st.selectbox("Select a column to visualize", column_options)
 
-# Dropdown menu for selecting numerical columns in each column
-selected_column1 = df["PEG_Ratio"]
-selected_column2 = df["Free_Cash_Flow"]
+# Data for the histogram
+hist_data = df[selected_column]
 
+# Create the histogram using Altair
+hist = alt.Chart(df).mark_bar().encode(
+    alt.X(selected_column, bin=alt.Bin(maxbins=30)),
+    y='count()'
+).properties(
+    width=600,
+    height=400
+)
 
-if selected_column1:
-    col1.write(f"Histogram of {selected_column1}")
-    fig1, ax1 = plt.subplots()
-    ax1.hist(df[selected_column1], bins=30, edgecolor='black')
-    company_value1 = selected_row[selected_column1]
-    ax1.axvline(company_value1, color='red', linestyle='dashed', linewidth=2, label=f'{selected_name} value: {company_value1}')
-    ax1.set_xlabel(selected_column1)
-    ax1.set_ylabel('Frequency')
-    ax1.legend()
-    col1.pyplot(fig1)
-if selected_column2:
-    col2.write(f"Histogram of {selected_column2}")
-    fig2, ax2 = plt.subplots()
-    ax2.hist(df[selected_column2], bins=30, edgecolor='black')
-    company_value2 = selected_row[selected_column2]
-    ax2.axvline(company_value2, color='red', linestyle='dashed', linewidth=2, label=f'{selected_name} value: {company_value2}')
-    ax2.set_xlabel(selected_column2)
-    ax2.set_ylabel('Frequency')
-    ax2.legend()
-    col2.pyplot(fig2)
+# Add a rule to mark the selected company's value
+rule = alt.Chart(pd.DataFrame({
+    'value': [selected_row[selected_column]]
+})).mark_rule(color='red').encode(
+    x='value:Q'
+)
+
+# Combine the histogram and the rule
+chart = hist + rule
+
+# Display the chart
+st.altair_chart(chart, use_container_width=True)
+
+# Display the selected company's value
+st.write(f"Selected Company's {selected_column}: {selected_row[selected_column]}")
+
 
 
 def format_with_commas(number):
