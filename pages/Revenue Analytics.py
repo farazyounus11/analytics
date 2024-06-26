@@ -52,11 +52,17 @@ all_widgets = sp.create_widgets(df, create_data, ignore_columns=["CONTACTLASTNAM
 
 try:
     res = sp.filter_df(df, all_widgets)
+
+    
 except KeyError as e:
+    # Handle the KeyError, e.g., column does not exist in DataFrame
     st.error(f"An error occurred: {e}. Please check your input and try again.")
+    st.stop()  # Stop further execution of the script
 
 except Exception as e:
+    # Handle any other unexpected exceptions
     st.error(f"An unexpected error occurred: {e}. Please try again later.")
+    st.stop()  # Stop further execution of the script
 
 
 
