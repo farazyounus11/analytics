@@ -62,7 +62,7 @@ def main():
         
         accuracy_df = pd.DataFrame(list(accuracy_dict.items()), columns=['Feature', 'Accuracy'])
         accuracy_df = accuracy_df.sort_values(by='Accuracy', ascending=False).reset_index(drop=True)
-        st.write(accuracy_df)
+        st.write(accuracy_df.head())
 
 
 
