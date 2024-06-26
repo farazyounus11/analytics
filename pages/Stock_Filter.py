@@ -184,10 +184,9 @@ selected_row = df[df['Name'] == selected_name].squeeze()
 # Columns to display
 column_options = ["PEG_Ratio", "Free_Cash_Flow", "Revenue_Growth", "EBITDA_Margins"]
 
-# Create a function to generate the histogram and rule chart
 def create_histogram(column_name, selected_row):
     hist = alt.Chart(df).mark_bar().encode(
-        alt.X(column_name, bin=alt.Bin(maxbins=30)),
+        alt.X(column_name, bin=alt.Bin(maxbins=50)),
         y='count()'
     ).properties(
         width=300,
@@ -219,8 +218,6 @@ def create_histogram(column_name, selected_row):
 # Create columns for the 2x2 grid
 col1, col2 = st.columns(2)
 col3, col4 = st.columns(2)
-
-# Display histograms in a 2x2 grid
 with col1:
     chart1 = create_histogram(column_options[0], selected_row)
     st.altair_chart(chart1, use_container_width=True)
