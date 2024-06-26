@@ -49,7 +49,23 @@ create_data = {
     "POSTALCODE": "multiselect"}
 
 all_widgets = sp.create_widgets(df, create_data, ignore_columns=["CONTACTLASTNAME", "CONTACTFIRSTNAME"])
-res = sp.filter_df(df, all_widgets)
+
+try:
+    res = sp.filter_df(df, all_widgets)
+except KeyError as e:
+    st.error(f"An error occurred: {e}. Please check your input and try again.")
+
+except Exception as e:
+    st.error(f"An unexpected error occurred: {e}. Please try again later.")
+
+
+
+
+
+
+
+
+
 
 
 st.markdown("## This is a side project. In this interactive app, you can use the sidebar to filter for customers or transactions. The data will change as you filter for certain things")
