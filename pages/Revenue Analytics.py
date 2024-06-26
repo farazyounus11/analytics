@@ -52,7 +52,7 @@ all_widgets = sp.create_widgets(df, create_data, ignore_columns=["CONTACTLASTNAM
 res = sp.filter_df(df, all_widgets)
 
 
-st.markdown("## I am Faraz. This is a side project. In this interactive app, you can use the sidebar to filter for customers or transactions. The data will change as you filter for certain things")
+st.markdown("## This is a side project. In this interactive app, you can use the sidebar to filter for customers or transactions. The data will change as you filter for certain things")
 st.markdown("## You can type search for things like Customer_Name, Order_number, Productcode etc")
 avgsales = res.groupby(by="YEAR")['SALES'].sum()
 stdsales = res.groupby(by="YEAR")['SALES'].std()
