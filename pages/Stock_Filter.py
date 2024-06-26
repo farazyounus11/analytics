@@ -173,45 +173,58 @@ else:
 
 
 
-
-
-
-selected_name = st.selectbox("Select a Company", df['Name'])
+st.title("Company Analysis")
+compnames = df['Name'].unique()
+selected_name = st.selectbox("Select a Company", compnames)
 
 # Extract the selected row
 selected_row = df[df['Name'] == selected_name].squeeze()
 
-# Choose the column to display
-column_options = ["PEG_Ratio", "Free_Cash_Flow"]
-selected_column = st.selectbox("Select a column to visualize", column_options)
+# Columns to display
+column_options = ["PEG_Ratio", "Free_Cash_Flow", "Revenue_Growth", "EBITDA_Margins"]
 
-# Data for the histogram
-hist_data = df[selected_column]
+# Create a function to generate the histogram and rule chart
+def create_histogram(column_name, selected_row):
+    hist = alt.Chart(df).mark_bar().encode(
+        alt.X(column_name, bin=alt.Bin(maxbins=30)),
+        y='count()'
+    ).properties(
+        width=300,
+        height=300
+    )
 
-# Create the histogram using Altair
-hist = alt.Chart(df).mark_bar().encode(
-    alt.X(selected_column, bin=alt.Bin(maxbins=30)),
-    y='count()'
-).properties(
-    width=600,
-    height=400
-)
+    rule = alt.Chart(pd.DataFrame({
+        'value': [selected_row[column_name]]
+    })).mark_rule(color='red').encode(
+        x='value:Q'
+    )
 
-# Add a rule to mark the selected company's value
-rule = alt.Chart(pd.DataFrame({
-    'value': [selected_row[selected_column]]
-})).mark_rule(color='red').encode(
-    x='value:Q'
-)
+    return hist + rule
 
-# Combine the histogram and the rule
-chart = hist + rule
+# Create columns for the 2x2 grid
+col1, col2 = st.columns(2)
+col3, col4 = st.columns(2)
 
-# Display the chart
-st.altair_chart(chart, use_container_width=True)
+# Display histograms in a 2x2 grid
+with col1:
+    chart1 = create_histogram(column_options[0], selected_row)
+    st.altair_chart(chart1, use_container_width=True)
+    st.write(f"Selected Company's {column_options[0]}: {selected_row[column_options[0]]}")
 
-# Display the selected company's value
-st.write(f"Selected Company's {selected_column}: {selected_row[selected_column]}")
+with col2:
+    chart2 = create_histogram(column_options[1], selected_row)
+    st.altair_chart(chart2, use_container_width=True)
+    st.write(f"Selected Company's {column_options[1]}: {selected_row[column_options[1]]}")
+
+with col3:
+    chart3 = create_histogram(column_options[2], selected_row)
+    st.altair_chart(chart3, use_container_width=True)
+    st.write(f"Selected Company's {column_options[2]}: {selected_row[column_options[2]]}")
+
+with col4:
+    chart4 = create_histogram(column_options[3], selected_row)
+    st.altair_chart(chart4, use_container_width=True)
+    st.write(f"Selected Company's {column_options[3]}: {selected_row[column_options[3]]}")
 
 
 
