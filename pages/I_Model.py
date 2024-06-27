@@ -33,7 +33,6 @@ def main():
 
 
 
-    st.markdown("#### Below are some suggested variables")
 
     # Selectbox for file selection in sidebar
     selected_file = st.sidebar.selectbox('Select a Classification Dataset!', csv_files)
@@ -68,7 +67,16 @@ def main():
         
         accuracy_df = pd.DataFrame(list(accuracy_dict.items()), columns=['Feature', 'Accuracy'])
         accuracy_df = accuracy_df.sort_values(by='Accuracy', ascending=False).reset_index(drop=True)
-        st.write(accuracy_df.head())
+
+        
+        col11, col22 = st.columns(2)
+        
+        with col11:
+            st.write(accuracy_df.head())
+        
+        with col22:
+            st.markdown("#### On the left are some suggested variables")
+
 
 
 
