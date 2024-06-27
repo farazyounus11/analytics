@@ -9,8 +9,6 @@ from matplotlib.ticker import FuncFormatter  # Import FuncFormatter for formatti
 import plotly.express as px
 import altair as alt
 
-current_directory = os.getcwd()
-st.write("Current working directory:", current_directory)
 
 st.set_page_config(layout="wide")
 @st.cache_data
