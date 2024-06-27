@@ -112,14 +112,6 @@ st.metric(label="Numer of Transactions", value=res.shape[0])
 
 
 
-def show_dataframe():
-    st.dataframe(res)  # Display the DataFrame
-
-st.markdown('### Display Filtered DataFrame')
-if st.button('Show DataFrame'):
-    show_dataframe()
-
-
 # Line chart for total monthly sales using st.line_chart
 st.header("Important Tables")
 res['MonthYear'] = res['ORDER_DATE'].dt.to_period('M')
