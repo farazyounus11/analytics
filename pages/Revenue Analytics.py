@@ -262,4 +262,14 @@ highlight = alt.Chart(pd.DataFrame({'SALES': [selected_customer_sales]})).mark_r
     x='SALES:Q')
 
 chart = base + highlight
-st.altair_chart(chart, use_container_width=True)
+
+
+col1l, col2l = st.columns([2, 1])
+
+with col1l:
+    st.write('### Customer Details')
+    st.write(sales_by_CUSTOMER_NAME[sales_by_CUSTOMER_NAME['CUSTOMER_NAME'] == selected_customer])
+
+with col2l:
+    st.altair_chart(chart, use_container_width=True)
+
