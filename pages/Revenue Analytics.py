@@ -108,18 +108,16 @@ if len(recent_years) > 2:
 else:
     col3.metric(label="Year N/A", value="N/A", delta="N/A")
 
-
-
 st.metric(label="Numer of Transactions", value=res.shape[0])
 
 
 
 def show_dataframe():
     st.dataframe(res)  # Display the DataFrame
-def main():
-    st.markdown('Display Filtered DataFrame')
-    if st.button('Show DataFrame'):
-        show_dataframe()
+
+st.markdown('### Display Filtered DataFrame')
+if st.button('Show DataFrame'):
+    show_dataframe()
 
 
 # Line chart for total monthly sales using st.line_chart
