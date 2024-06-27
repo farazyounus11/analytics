@@ -29,9 +29,6 @@ def main():
     st.markdown("### Classification modeling helps identify things like credit card fraud, cancer, diabetes, and species classification, buyer engagement etc!")
     st.markdown("### Select two unique variables using sidebar to see if they're good at classifying a selected dataset")
 
-    st.write('---')
-
-
 
 
     # Selectbox for file selection in sidebar
