@@ -146,7 +146,7 @@ with col3:
 
 
 st.markdown('### Customer Importance')
-sales_by_CUSTOMER_NAME = res.groupby('CUSTOMER_NAME')['SALES'].sum().reset_index()
+sales_by_CUSTOMER_NAME = df.groupby('CUSTOMER_NAME')['SALES'].sum().reset_index()
 customer_names = sales_by_CUSTOMER_NAME['CUSTOMER_NAME'].tolist()
 selected_customer = st.selectbox('Select Customer Name', customer_names)
 
@@ -157,8 +157,7 @@ base = alt.Chart(sales_by_CUSTOMER_NAME).mark_bar().encode(
     y=alt.Y('count()', title='Number of Customers')
 )
 highlight = alt.Chart(pd.DataFrame({'SALES': [selected_customer_sales]})).mark_rule(color='red').encode(
-    x='SALES:Q'
-)
+    x='SALES:Q')
 
 chart = base + highlight
 st.altair_chart(chart, use_container_width=True)
