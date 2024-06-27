@@ -80,6 +80,9 @@ except Exception as e:
 
 st.markdown("### This is a side project. In this interactive app, you can use the sidebar to filter for customers or transactions. The data will change as you filter for certain things")
 st.markdown("### You can type search for things like Customer_Name, Order_number, Productcode etc")
+
+
+
 avgsales = res.groupby(by="YEAR")['SALES'].sum()
 stdsales = res.groupby(by="YEAR")['SALES'].std()
 
@@ -160,13 +163,6 @@ chart = base + highlight
 st.altair_chart(chart, use_container_width=True)
 
 
-
-
-
-
-
-
-
 sales_by_delay = res.groupby('STATUS')['SALES'].count()
 sales_by_delaytop5 = sales_by_delay.nlargest(10)
 sales_by_postal = res.groupby('POSTALCODE')['SALES'].sum()
@@ -212,8 +208,6 @@ plt.gca().get_yaxis().set_major_formatter(FuncFormatter(lambda x, _: '{:,.0f}'.f
 st.pyplot(plt)
 
 
-
-
 def get_top_ten_common_pairs(df):
     pairs_counter = Counter()
     
@@ -245,10 +239,6 @@ with col1:
 
 with col2:
     st.plotly_chart(fig)
-
-
-
-
 
 col1, col2, col3 , col4 = st.columns(4)
 
