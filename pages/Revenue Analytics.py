@@ -109,6 +109,9 @@ else:
     col3.metric(label="Year N/A", value="N/A", delta="N/A")
 
 
+st.markdown("#### Numer of Transactions:")
+st.write(res.shape[0])
+
 
 
 # Line chart for total monthly sales using st.line_chart
