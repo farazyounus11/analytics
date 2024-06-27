@@ -20,6 +20,9 @@ def load_data():
 
 df = load_data()
 
+
+st.write(df.shape[0])
+
 # Create month and year columns for grouping
 df['MONTH'] = df['ORDER_DATE'].dt.to_period('M')
 
