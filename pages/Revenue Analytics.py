@@ -10,7 +10,7 @@ import plotly.express as px
 import altair as alt
 
 current_directory = os.getcwd()
-print("Current working directory:", current_directory)
+st.write("Current working directory:", current_directory)
 
 st.set_page_config(layout="wide")
 @st.cache_data
