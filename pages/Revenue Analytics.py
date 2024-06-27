@@ -7,7 +7,7 @@ from collections import Counter
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter  # Import FuncFormatter for formatting ticks
 import plotly.express as px
-
+import altair as alt
 
 st.set_page_config(layout="wide")
 @st.cache_data
@@ -114,17 +114,15 @@ top_10_months = sales_by_monthyear.nlargest(10)
 # Display the top 10 months and their sales using Streamlit
 
 
-sales_by_CUSTOMER_NAME = res.groupby('CUSTOMER_NAME')['SALES'].sum()
+sales_by_CUSTOMER_NAME = res.groupby('CUSTOMER_NAME')['SALES'].sum().reset_index()
 sales_by_CUSTOMER_NAME_10_months = sales_by_CUSTOMER_NAME.nlargest(10)
 # Display the top 10 months and their sales using Streamlit
 
-
-# Group by 'CITY' and sum 'SALES'
 sales_by_city = res.groupby('CITY')['SALES'].sum()
 top_10_cities = sales_by_city.nlargest(10)
 
-col1, col2, col3 = st.columns(3)
 
+col1, col2, col3 = st.columns(3)
 with col1:
     st.write("Top 10 Months by Total Sales:")
     st.write(top_10_months)
@@ -136,6 +134,34 @@ with col2:
 with col3:
     st.write("Top 10 Cities by Total Sales:")
     st.write(top_10_cities)
+
+
+
+st.title('Customer Importance')
+customer_names = sales_by_CUSTOMER_NAME['CUSTOMER_NAME'].tolist()
+selected_customer = st.selectbox('Select Customer Name', customer_names)
+
+selected_customer_sales = sales_by_CUSTOMER_NAME[sales_by_CUSTOMER_NAME['CUSTOMER_NAME'] == selected_customer]['SALES'].values[0]
+
+base = alt.Chart(sales_by_CUSTOMER_NAME).mark_bar().encode(
+    x=alt.X('SALES:Q', bin=True, title='Sales'),
+    y=alt.Y('count()', title='Number of Customers')
+)
+
+highlight = alt.Chart(pd.DataFrame({'SALES': [selected_customer_sales]})).mark_rule(color='red').encode(
+    x='SALES:Q'
+)
+
+chart = base + highlight
+
+st.altair_chart(chart, use_container_width=True)
+
+
+
+
+
+
+
 
 
 sales_by_delay = res.groupby('STATUS')['SALES'].count()
