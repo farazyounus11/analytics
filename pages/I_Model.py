@@ -26,8 +26,12 @@ def main():
 
     # List all CSV files in the current directory
     csv_files = list_csv_files()
-    st.subheader("Classification modeling helps identify things like credit card fraud, cancer, diabetes, and plants, buyer engagement etc!")
-    st.subheader("Select two unique variables using sidebar")
+    st.subheader("Classification modeling helps identify things like credit card fraud, cancer, diabetes, and species classification, buyer engagement etc!")
+    st.subheader("Select two unique variables using sidebar to see if they're good at classifying a selected dataset")
+
+
+
+    st.markdown("#### Below are some suggested variables")
 
     # Selectbox for file selection in sidebar
     selected_file = st.sidebar.selectbox('Select a Classification Dataset!', csv_files)
