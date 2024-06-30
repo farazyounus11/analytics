@@ -253,7 +253,7 @@ with col4:
 
 
 st.markdown('### Where does select customer rank?')
-sales_by_CUSTOMER_NAME = df.groupby('CUSTOMER_NAME')['SALES'].sum().reset_index()
+sales_by_CUSTOMER_NAME = df.groupby('CUSTOMER_NAME')['SALES'].sum()
 customer_names = sales_by_CUSTOMER_NAME['CUSTOMER_NAME'].tolist()
 selected_customer = st.selectbox('Select Customer Name', customer_names)
 
