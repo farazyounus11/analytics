@@ -111,6 +111,10 @@ else:
 st.metric(label="Numer of Transactions", value=res.shape[0])
 
 
+if st.checkbox("Show DataFrame"):
+    st.dataframe(res)
+
+
 
 # Line chart for total monthly sales using st.line_chart
 st.header("Important Tables")
