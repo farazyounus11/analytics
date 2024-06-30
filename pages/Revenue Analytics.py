@@ -111,7 +111,7 @@ else:
 st.metric(label="Numer of Transactions", value=res.shape[0])
 
 
-if st.checkbox("Show DataFrame"):
+if st.checkbox("Show filtered table"):
     st.dataframe(res)
 
 
