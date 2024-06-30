@@ -78,7 +78,7 @@ except Exception as e:
 
 
 st.markdown("### This is a side project on excel data! In this interactive app, you can use the sidebar to filter for customer or transaction attributes. The visualizations will change as you filter for certain things")
-st.markdown("### In this app, you can You can type search for things like Customer_Name, Order_number, Productcode etc")
+st.markdown("### In this app, you can type search for things like Customer_Name, Order_number, Productcode etc")
 
 
 
