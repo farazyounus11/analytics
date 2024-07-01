@@ -95,16 +95,16 @@ col1, col2, col3 = st.columns(3)
 # Check the length of recent_years and display metrics accordingly
 if len(recent_years) > 0:
     col1.metric(label=f"Year {recent_years[0]}", 
-                value=f"${recent_avg_sales[recent_years[0]]}", 
-                delta=f"Std Dev: ${recent_std_sales[recent_years[0]]}")
+                value=f"${round(recent_avg_sales[recent_years[0]])}", 
+                delta=f"Std Dev: ${round(recent_std_sales[recent_years[0]])}")
 if len(recent_years) > 1:
     col2.metric(label=f"Year {recent_years[1]}", 
-                value=f"${recent_avg_sales[recent_years[1]]}", 
-                delta=f"Std Dev: ${recent_std_sales[recent_years[1]]}")
+                value=f"${round(recent_avg_sales[recent_years[1]])}", 
+                delta=f"Std Dev: ${round(recent_std_sales[recent_years[1]])}")
 if len(recent_years) > 2:
     col3.metric(label=f"Year {recent_years[2]}", 
-                value=f"${recent_avg_sales[recent_years[2]]}", 
-                delta=f"Std Dev: ${recent_std_sales[recent_years[2]]}")
+                value=f"${round(recent_avg_sales[recent_years[2]])}", 
+                delta=f"Std Dev: ${round(recent_std_sales[recent_years[2]])}")
 else:
     col3.metric(label="Year N/A", value="N/A", delta="N/A")
 
