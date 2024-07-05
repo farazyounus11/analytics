@@ -28,23 +28,33 @@ df = load_data()
 
 df = df.fillna(df.median())
 
-
-
+# Debugging: Print the columns and their data types
+st.write("DataFrame Columns and Data Types:")
+st.write(df.dtypes)
 
 create_data = {
+    "Industry": "multiselect",
+    "Sector": "multiselect",
+    "Name": "multiselect",
+    "Recommendation_Key": "multiselect"
+}
 
-                "Industry": "multiselect",
-                "Sector": "multiselect",
-                "Name": "multiselect",
-                "Recommendation_Key": "multiselect"}
+# Debugging: Print the columns being ignored
+ignore_columns = ["Name", "Long_Business_Summary", "Number_Of_Analyst_Opinions", "Shareholder_Rights_Risk", "Compensation_Risk", "Open", "Fifty_Two_Week_Low", "Current_Price", "Fifty_Two_Week_High", "Previous_Close", "Payout_Ratio", "Regular_Market_Volume"]
+st.write("Ignoring Columns:")
+st.write(ignore_columns)
 
+# Try creating widgets and handle possible exceptions
+try:
+    all_widgets = sp.create_widgets(df, create_data, ignore_columns=ignore_columns)
+    res = sp.filter_df(df, all_widgets)
+except Exception as e:
+    st.error(f"Error creating widgets: {e}")
+    st.stop()
 
-all_widgets = sp.create_widgets(df, create_data, ignore_columns=["Name", "Long_Business_Summary", "Number_Of_Analyst_Opinions","Shareholder_Rights_Risk","Compensation_Risk", "Open","Fifty_Two_Week_Low", "Current_Price","Fifty_Two_Week_High","Previous_Close","Payout_Ratio","Regular_Market_Volume"])
-res = sp.filter_df(df, all_widgets)
 st.write('---')
 
 st.markdown('#### Top 10 Companies Sorted by Metrics')
-
 
 sorted_by_earnings_growth = res.sort_values(by='Earnings_Quarterly_Growth', ascending=False).head(10)[['Name', 'Earnings_Quarterly_Growth']].rename(columns={'Earnings_Quarterly_Growth': 'Quarterly_Growth'})
 sorted_by_profit_margins = res.sort_values(by='Profit_Margins', ascending=False).head(10)[['Name', 'Profit_Margins']]
@@ -68,16 +78,12 @@ with col3:
     st.write('### Sorted by Free Cash Flow')
     st.write(sorted_by_free_cash_flow)
 
-
-
-
 sorted_by_total_cash = res.sort_values(by='Total_Cash', ascending=False).head(15)[['Name', 'Total_Cash']].round({'Total_Cash': 1})
 sorted_by_forward_eps = res.sort_values(by='Forward_EPS', ascending=False).head(15)[['Name', 'Forward_EPS']].round({'Forward_EPS': 1})
 sorted_by_net_income = res.sort_values(by='Net_Income_To_Common', ascending=False).head(15)[['Name', 'Net_Income_To_Common']].round({'Net_Income_To_Common': 1})
 sorted_by_total_cash['Name'] = sorted_by_total_cash['Name'].apply(lambda x: x[:20])
 sorted_by_forward_eps['Name'] = sorted_by_forward_eps['Name'].apply(lambda x: x[:20])
 sorted_by_net_income['Name'] = sorted_by_net_income['Name'].apply(lambda x: x[:20])
-
 
 col1, col2, col3 = st.columns(3)
 
@@ -92,19 +98,6 @@ with col2:
 with col3:
     st.markdown('### Sorted by Net Income to Common')
     st.dataframe(sorted_by_net_income)  # Don't display index column
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 st.markdown('### Search Up Company Information')
 search_query = st.text_input('Enter company name:', '')
@@ -154,28 +147,8 @@ else:
         st.write(f"**Summary:** {row['Long_Business_Summary']}")
         st.write('---')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 st.markdown("## Is Your Company an Outlier?")
 st.markdown("#### These four plots show where your company ranks in PEG_Ratio, Free_Cash_Flow, Revenue_Growth, & EBITDA_Margins ")
-
-
 
 # Selectbox for company selection
 compnames = df['Name'].unique()
@@ -236,7 +209,4 @@ with col3:
 with col4:
     chart4 = create_histogram(column_options[3], selected_row)
     st.altair_chart(chart4, use_container_width=True)
-
-
-
 
