@@ -1,13 +1,16 @@
- import streamlit as st
+import streamlit as st
 
-st.set_page_config(layout="wide")
 
 import pandas as pd
 import streamlit_pandas as sp
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
 import os
+
 import altair as alt
+
+
+st.set_page_config(layout="wide")
 
 # Create two columns using st.columns
 col1, col2 = st.columns(2)
