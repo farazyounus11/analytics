@@ -42,6 +42,9 @@ create_data = {
                 "Recommendation_Key": "multiselect"}
 
 
+
+
+st.write(df.columns)
 all_widgets = sp.create_widgets(df, create_data, ignore_columns=["Name", "Long_Business_Summary", "Number_Of_Analyst_Opinions","Shareholder_Rights_Risk","Compensation_Risk", "Open","Fifty_Two_Week_Low", "Current_Price","Fifty_Two_Week_High","Previous_Close","Payout_Ratio","Regular_Market_Volume"])
 
 try:
