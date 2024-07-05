@@ -1,24 +1,19 @@
 import streamlit as st
-
-
 import pandas as pd
 import streamlit_pandas as sp
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
 import os
-
 import altair as alt
-
 
 st.set_page_config(layout="wide")
 
 # Create two columns using st.columns
 col1, col2 = st.columns(2)
 with col1:
-    st.markdown("### The red sidebar widgets lets users filter for financial requirements in a company. There are many metrics you can filter for. Companies that don't meet requirments are droped!")
+    st.markdown("### The red sidebar widgets lets users filter for financial requirements in a company. There are many metrics you can filter for. Companies that don't meet requirements are dropped!")
 with col2:
-    st.markdown("### This app also helps users search up information about a companies. This app also lets users see where a company lies in earnings distribution")
-
+    st.markdown("### This app also helps users search up information about a company. This app also lets users see where a company lies in earnings distribution")
 
 @st.cache_data
 def load_data():
@@ -29,36 +24,33 @@ pd.set_option('display.max_colwidth', 20)
 file = "stock2.csv"
 df = load_data()
 
+# Fill NaN values with the median of the column
 df = df.fillna(df.median(numeric_only=True))
 
-
-
 create_data = {
-
-                "Industry": "multiselect",
-                "Sector": "multiselect",
-                "Name": "multiselect",
-                "Recommendation_Key": "multiselect"}
-
-
-
+    "Industry": "multiselect",
+    "Sector": "multiselect",
+    "Name": "multiselect",
+    "Recommendation_Key": "multiselect"
+}
 
 st.write(df.columns)
-all_widgets = sp.create_widgets(df, create_data, ignore_columns=["Ticker", "Name", "Long_Business_Summary","Shareholder_Rights_Risk","Compensation_Risk", "Open","Fifty_Two_Week_Low", "Current_Price","Fifty_Two_Week_High","Previous_Close","Payout_Ratio","Regular_Market_Volume"])
+
+# Debug: Print the dataframe columns and the ignored columns
+print("DataFrame columns:", df.columns)
+print("Ignored columns:", ["Ticker", "Name", "Long_Business_Summary", "Shareholder_Rights_Risk", "Compensation_Risk", "Open", "Fifty_Two_Week_Low", "Current_Price", "Fifty_Two_Week_High", "Previous_Close", "Payout_Ratio", "Regular_Market_Volume"])
 
 try:
+    all_widgets = sp.create_widgets(df, create_data, ignore_columns=["Ticker", "Name", "Long_Business_Summary", "Shareholder_Rights_Risk", "Compensation_Risk", "Open", "Fifty_Two_Week_Low", "Current_Price", "Fifty_Two_Week_High", "Previous_Close", "Payout_Ratio", "Regular_Market_Volume"])
     res = sp.filter_df(df, all_widgets)
-
-    
 except KeyError as e:
     # Handle the KeyError, e.g., column does not exist in DataFrame
     st.error(f"An error occurred: {e}. Please check your input and try again.")
     st.stop()  # Stop further execution of the script
-
 except Exception as e:
     # Handle any other unexpected exceptions
     st.error(f"An unexpected error occurred: {e}. Please try again later.")
-    st.stop()  # Stop further execution of the script
+    st.stop()  # S
 
 st.write('---')
 
