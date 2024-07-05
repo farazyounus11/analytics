@@ -29,8 +29,7 @@ pd.set_option('display.max_colwidth', 20)
 file = "stock2.csv"
 df = load_data()
 
-df = df.fillna(df.median())
-
+df = df.fillna(df.median(numeric_only=True))
 
 
 
