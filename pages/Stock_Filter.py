@@ -1,11 +1,13 @@
-import streamlit as st
+ import streamlit as st
+
+st.set_page_config(layout="wide")
+
 import pandas as pd
 import streamlit_pandas as sp
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
 import os
 import altair as alt
-st.set_page_config(layout="wide")
 
 # Create two columns using st.columns
 col1, col2 = st.columns(2)
@@ -37,18 +39,9 @@ create_data = {
                 "Recommendation_Key": "multiselect"}
 
 
-ignore_columns = ["Name", "Long_Business_Summary", "Number_Of_Analyst_Opinions", "Shareholder_Rights_Risk", "Compensation_Risk", "Open", "Fifty_Two_Week_Low", "Current_Price", "Fifty_Two_Week_High", "Previous_Close", "Payout_Ratio", "Regular_Market_Volume"]
-st.write("Ignoring Columns:")
-st.write(ignore_columns)
-
-# Try creating widgets and handle possible exceptions
-try:
-    all_widgets = sp.create_widgets(df, create_data, ignore_columns=ignore_columns)
-    res = sp.filter_df(df, all_widgets)
-except Exception as e:
-    st.error(f"Error creating widgets: {e}")
-    st.stop()
-
+all_widgets = sp.create_widgets(df, create_data, ignore_columns=["Name", "Long_Business_Summary", "Number_Of_Analyst_Opinions","Shareholder_Rights_Risk","Compensation_Risk", "Open","Fifty_Two_Week_Low", "Current_Price","Fifty_Two_Week_High","Previous_Close","Payout_Ratio","Regular_Market_Volume"])
+res = sp.filter_df(df, all_widgets)
+st.write('---')
 
 st.markdown('#### Top 10 Companies Sorted by Metrics')
 
