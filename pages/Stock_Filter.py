@@ -34,7 +34,6 @@ create_data = {
     "Recommendation_Key": "multiselect"
 }
 
-st.write(df.columns)
 
 # Debug: Print the dataframe columns and the ignored columns
 #print("DataFrame columns:", df.columns)
