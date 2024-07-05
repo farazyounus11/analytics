@@ -148,7 +148,7 @@ else:
             st.write(f"**Total Debt (in Mil):** {round(row['Total_Debt'] / 1000000, 2)} Mil")
             
             # Compare performance and calculate percentage difference
-        performance_difference = (row['Fifty_Two_Week_Change'] - row['S&P_Fifty_Two_Week_Change']) * 100
+        performance_difference = (row['Fifty_Two_Week_Change'] - .262) * 100
 
         # Determine color based on performance difference
         color = 'green' if performance_difference > 0 else 'red' if performance_difference < 0 else 'black'
