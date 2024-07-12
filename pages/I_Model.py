@@ -63,16 +63,6 @@ def main():
         accuracy_df = pd.DataFrame(list(accuracy_dict.items()), columns=['Feature', 'Accuracy'])
         accuracy_df = accuracy_df.sort_values(by='Accuracy', ascending=False).reset_index(drop=True)
 
-        col11, col22 = st.columns(2)
-        
-        with col11:
-            st.write(accuracy_df.head())
-        
-        with col22:
-            st.markdown("#### On the left are some suggested variables")
-            
-        if st.sidebar.checkbox('Show raw data'):
-            st.dataframe(df.head())
 
         all_columns = df.columns.tolist()
 
