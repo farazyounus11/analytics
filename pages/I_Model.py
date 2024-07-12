@@ -127,5 +127,4 @@ def main():
         st.pyplot(fig_test)
 
 if __name__ == '__main__':
-    if st.button('Run Classification Modeling'):
-        main()
+    main()
