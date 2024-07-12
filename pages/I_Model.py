@@ -15,6 +15,7 @@ from sklearn.metrics import accuracy_score, f1_score
 from sklearn.inspection import DecisionBoundaryDisplay
 
 st.set_page_config(layout="wide")
+st.markdown('## Classification Datasets')
 st.markdown("### Classification modeling can help identify things like credit card fraud, cancer detection, diabetes, and plant/species classification, buyer engagement etc!")
 
 def list_csv_files():
@@ -23,7 +24,6 @@ def list_csv_files():
 
 # Streamlit app
 def main():
-    st.markdown('## Classification Datasets')
 
     # List all CSV files in the current directory
     csv_files = list_csv_files()
