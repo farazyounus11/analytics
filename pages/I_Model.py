@@ -15,6 +15,7 @@ from sklearn.metrics import accuracy_score, f1_score
 from sklearn.inspection import DecisionBoundaryDisplay
 
 st.set_page_config(layout="wide")
+st.markdown("### Classification modeling can help identify things like credit card fraud, cancer detection, diabetes, and plant/species classification, buyer engagement etc!")
 
 def list_csv_files():
     files = os.listdir()
@@ -26,10 +27,7 @@ def main():
 
     # List all CSV files in the current directory
     csv_files = list_csv_files()
-    st.markdown("### Classification modeling helps identify things like credit card fraud, cancer, diabetes, and species classification, buyer engagement etc!")
     st.markdown("### Select two unique variables using sidebar to see if they're good at classifying a selected dataset")
-
-
 
     # Selectbox for file selection in sidebar
     selected_file = st.sidebar.selectbox('Select a Classification Dataset!', csv_files)
@@ -65,7 +63,6 @@ def main():
         accuracy_df = pd.DataFrame(list(accuracy_dict.items()), columns=['Feature', 'Accuracy'])
         accuracy_df = accuracy_df.sort_values(by='Accuracy', ascending=False).reset_index(drop=True)
 
-        
         col11, col22 = st.columns(2)
         
         with col11:
@@ -73,13 +70,7 @@ def main():
         
         with col22:
             st.markdown("#### On the left are some suggested variables")
-
-
-
-
-        
-        
-        
+            
         if st.sidebar.checkbox('Show raw data'):
             st.dataframe(df.head())
 
@@ -140,12 +131,11 @@ def main():
             )
             ax_test.scatter(X_test[:, 0], X_test[:, 1], c=y_test, cmap=cmap, edgecolor='k', s=30, label='Test')
             ax_test.set_title(f"{name} (Test)\nAccuracy: {accuracy:.2f} | F1: {f1:.2f}")
-
         # Adjust layout and display
         fig_test.tight_layout()
 
         st.pyplot(fig_test)
 
-# Run the app
 if __name__ == '__main__':
-    main()
+    if st.button('Run Classification Modeling'):
+        main()
