@@ -48,11 +48,6 @@ def main():
         remaining_columns = [col for col in all_columns if col != feature1]
         feature2 = st.sidebar.selectbox('Select second feature', remaining_columns)
 
-
-        
-        
-        st.write(f'You selected: {feature1} and {feature2}')
-
         # Extract X (features) based on user selection
         X = df[[feature1, feature2]].values
 
