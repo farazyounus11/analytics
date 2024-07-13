@@ -40,39 +40,17 @@ def main():
         y = df.pop('Y')
         encoder = LabelEncoder()
         y = encoder.fit_transform(y)
-        accuracy_dict = {}
-
-        for column in df.columns:  # Exclude the target variable 'Y'
-            # Define X as the current column
-            X_single = df[[column]]
-        
-            # Split the data into training and testing sets
-            X_trainX, X_testX, y_trainX, y_testX = train_test_split(X_single, y, test_size=0.2)
-        
-            # Initialize the logistic regression model
-            model7 = LogisticRegression(class_weight='balanced')
-        
-            # Fit the model on the training data
-            model7.fit(X_trainX, y_trainX)  # Ensure y_trainX is a 1d array
-        
-            # Predict on the testing data
-            y_predX = model7.predict(X_testX)
-            accuracyX = accuracy_score(y_testX, y_predX)
-            accuracy_dict[column] = accuracyX
-        
-        accuracy_df = pd.DataFrame(list(accuracy_dict.items()), columns=['Feature', 'Accuracy'])
-        accuracy_df = accuracy_df.sort_values(by='Accuracy', ascending=False).reset_index(drop=True)
 
 
         all_columns = df.columns.tolist()
 
         feature1 = st.sidebar.selectbox('Select first feature', all_columns)
         remaining_columns = [col for col in all_columns if col != feature1]
-
-        # Selecting feature2 from the remaining columns
         feature2 = st.sidebar.selectbox('Select second feature', remaining_columns)
 
-        # Display selected features in main area
+
+        
+        
         st.write(f'You selected: {feature1} and {feature2}')
 
         # Extract X (features) based on user selection
