@@ -83,7 +83,7 @@ st.plotly_chart(fig)
 
 
 st.title('Correlation Analysis')
-st.markdown("### Analysis after scaling the price data to be between -2 and 3. Scaling is done so that stocks priced in the thousends are comparebale to stocks priced in tens.")
+st.markdown("### Analysis after scaling the price data to be between -2 and 3. Scaling is done so that stocks priced in the thousends are comparable to stocks priced in tens or ones")
 
 stock = st.selectbox('Select a stock:', pivot_table_corr.columns )
 
