@@ -31,7 +31,7 @@ df = load_data(file_path)
 st.title('PCA Clustering of Stocks')
 valid_columns = [col for col in df.columns if col not in ['open', 'high', 'low', 'Name', 'date']]
 
-value_column = st.selectbox("Select a Metric for Correlation:", valid_columns, index=None,)
+value_column = st.selectbox("Select a Metric for Correlation:", valid_columns, index=None, placeholder="Select a Metric" )
 
 if value_column!None:
 	pivot_table = df.pivot(index='date', columns='Name', values=value_column)
@@ -86,7 +86,7 @@ if value_column!None:
 	st.title('Correlation Analysis')
 	st.markdown("### Analysis after scaling the price data to be between -2 and 3. Scaling is done so that stocks priced in the thousends are comparebale to stocks priced in tens.")
 
-	stock = st.selectbox('Select a stock:', pivot_table_corr.columns, index = None)
+	stock = st.selectbox('Select a stock:', pivot_table_corr.columns, index = None, placeholder="Select a Stock" )
 
 	if stock!None:
 		# Calculate negative correlations
