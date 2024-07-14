@@ -70,7 +70,7 @@ except Exception as e:
 
 
 
-st.markdown("### In this interactive e-commerce analytics app, you can use the sidebar to filter for Customer_Name, Order_number, Quantity_Ordered etc. The app will automatically update after you filter")
+st.markdown("### In this interactive e-commerce analytics app, you can use the sidebar to filter for Customer_Name, Order_number,Order_Number, Quantity_Ordered etc.")
 st.markdown("### If the app produces an error, that's because there at too many filters active")
 
 
