@@ -33,7 +33,7 @@ valid_columns = [col for col in df.columns if col not in ['open', 'high', 'low',
 
 value_column = st.selectbox("Select a Metric for Correlation:", valid_columns, index=None, placeholder="Select a Metric" )
 
-if value_column!None:
+if value_column!=None:
 	pivot_table = df.pivot(index='date', columns='Name', values=value_column)
 	
 	# Filter columns with less than or equal to 400 NaNs
