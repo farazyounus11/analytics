@@ -88,7 +88,7 @@ if value_column!None:
 
 	stock = st.selectbox('Select a stock:', pivot_table_corr.columns, index = None, placeholder="Select a Stock" )
 
-	if stock!None:
+	if stock!=None:
 		# Calculate negative correlations
 		stock_correlations_neg = pivot_table_corr[stock].sort_values()
 		top_5_negatively_correlated = stock_correlations_neg.head(10)
