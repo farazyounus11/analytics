@@ -85,7 +85,7 @@ st.plotly_chart(fig)
 st.title('Correlation Analysis')
 st.markdown("### Analysis after scaling the price data to be between -2 and 3. Scaling is done so that stocks priced in the thousends are comparebale to stocks priced in tens.")
 
-stock = st.selectbox('Select a stock:', pivot_table_corr.columns, index = None, placeholder="Select a Stock" )
+stock = st.selectbox('Select a stock:', pivot_table_corr.columns )
 
 # Calculate negative correlations
 stock_correlations_neg = pivot_table_corr[stock].sort_values()
