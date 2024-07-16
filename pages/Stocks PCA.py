@@ -100,7 +100,7 @@ with col1:
 
 with col2:
 	top_5_names = top_5_negatively_correlated.index
-	st.line_chart(scaled_pivot1[top_5_names])
+	st.line_chart(scaled_pivot_table[top_5_names])
 
 st.write(f"#### Top 10 most positively correlated stocks to {stock}:")
 col11, col22 = st.columns([1, 3])
@@ -110,7 +110,7 @@ with col11:
 
 with col22:
 	top_5_names = top_10_positively_correlated.index
-	st.line_chart(scaled_pivot1[top_5_names])
+	st.line_chart(scaled_pivot_table[top_5_names])
 
 
 
