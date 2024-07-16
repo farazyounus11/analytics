@@ -14,9 +14,6 @@ import os
 target_directory = '/mount/src/analytics/pages/'
 os.chdir(target_directory)
 
-
-
-
 @st.cache_data
 def load_data(file_path):
     df = pd.read_csv(file_path)
@@ -45,12 +42,10 @@ pivot_table = pivot_table[columns_to_keep]
 
 
 pivot_table = pivot_table.fillna(pivot_table.median())
-scaler = StandardScaler()
-pivot_table_scaled = scaler.fit_transform(pivot_table)
+pivot_table_scaled = pivot_table.copy()
 
-scaled_pivot1 = pd.DataFrame(pivot_table_scaled, index=pivot_table.index, columns=pivot_table.columns)
 
-scaled_pivot_table = scaled_pivot1.corr()
+scaled_pivot_table = pivot_table_scaled.corr()
 
 ##PCA
 pca = PCA(n_components=2)  # Choose number of principal components
