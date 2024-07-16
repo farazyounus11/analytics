@@ -78,10 +78,6 @@ fig.update_traces(textposition='top center')
 # Display the Plotly figure in Streamlit
 st.plotly_chart(fig)
 
-
-
-
-
 st.title('Correlation Analysis')
 st.markdown("### Analysis after scaling the price data to be between -2 and 3. Scaling is done so that stocks priced in the thousends are comparable to stocks priced in tens or ones")
 
