@@ -29,9 +29,9 @@ df = load_data(file_path)
 
 
 st.title('PCA Clustering of Stocks')
-valid_columns = [col for col in df.columns if col not in ['open', 'high', 'low', 'Name', 'date']]
+valid_columns = [col for col in df.columns if col not in ['open','close', 'high', 'low', 'Name', 'date']]
 
-value_column = st.selectbox("Select a Metric for Correlation:", valid_columns, )
+value_column = st.selectbox("Select a Metric for Correlation:", valid_columns )
 
 pivot_table = df.pivot(index='date', columns='Name', values=value_column)
 
@@ -42,8 +42,8 @@ pivot_table = pivot_table[columns_to_keep]
 
 
 pivot_table = pivot_table.fillna(pivot_table.median())
-pivot_table_scaled = pivot_table.copy()
-
+scaler = StandardScaler()
+pivot_table_scaled = scaler.fit(pivot_table)
 
 scaled_pivot_table = pivot_table_scaled.corr()
 
