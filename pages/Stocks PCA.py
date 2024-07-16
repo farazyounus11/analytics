@@ -11,8 +11,7 @@ import numpy as np
 
 import os
 
-target_directory = '/mount/src/analytics/pages/'
-os.chdir(target_directory)
+
 @st.cache_data
 def load_data(file_path):
     df = pd.read_csv(file_path)
