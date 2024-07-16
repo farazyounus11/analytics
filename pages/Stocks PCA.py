@@ -18,8 +18,6 @@ st.write("Current Directory:", os.getcwd())
 current_directory = os.getcwd()
 st.write("Current Directory:", current_directory)
 
-st.set_page_config(layout="wide")
-
 
 @st.cache_data
 def load_data(file_path):
