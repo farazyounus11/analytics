@@ -13,10 +13,8 @@ import os
 
 target_directory = '/mount/src/analytics/pages/'
 os.chdir(target_directory)
-st.write("Current Directory:", os.getcwd())
 
-current_directory = os.getcwd()
-st.write("Current Directory:", current_directory)
+
 
 
 @st.cache_data
