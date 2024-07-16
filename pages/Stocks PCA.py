@@ -36,7 +36,7 @@ pivot_table = df.pivot(index='date', columns='Name', values=value_column)
 
 # Filter columns with less than or equal to 400 NaNs
 na_counts = pivot_table.isna().sum()
-columns_to_keep = na_counts[na_counts <= 400].index
+columns_to_keep = na_counts[na_counts <= 300].index
 pivot_table = pivot_table[columns_to_keep]
 
 # Scaling
