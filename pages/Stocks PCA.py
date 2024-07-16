@@ -40,9 +40,9 @@ columns_to_keep = na_counts[na_counts <= 400].index
 pivot_table = pivot_table[columns_to_keep]
 
 
-pivot_table = pivot_table.fillna(pivot_table.median())
+pivot_table1 = pivot_table.fillna(pivot_table.median())
 scaler = StandardScaler()
-pivot_table_scaled = scaler.fit_transform(pivot_table)
+pivot_table_scaled = scaler.fit_transform(pivot_table1)
 
 scaled_pivot_table = pivot_table_scaled.corr()
 
