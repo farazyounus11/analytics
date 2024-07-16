@@ -13,7 +13,6 @@ import os
 
 target_directory = '/mount/src/analytics/pages/'
 os.chdir(target_directory)
-
 @st.cache_data
 def load_data(file_path):
     df = pd.read_csv(file_path)
@@ -22,6 +21,7 @@ def load_data(file_path):
     df['variance'] = df[['open', 'high', 'low', 'close']].var(axis=1)
     df['market_cap'] = df['price'] * df['volume']
     return df
+st.set_page_config(layout="wide")
 
 # Path to your CSV file
 file_path = "s&p500.csv"
