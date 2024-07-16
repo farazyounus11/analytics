@@ -43,7 +43,7 @@ pivot_table = pivot_table[columns_to_keep]
 
 pivot_table = pivot_table.fillna(pivot_table.median())
 scaler = StandardScaler()
-pivot_table_scaled = scaler.fit(pivot_table)
+pivot_table_scaled = scaler.fit_transform(pivot_table)
 
 scaled_pivot_table = pivot_table_scaled.corr()
 
