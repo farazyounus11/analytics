@@ -9,7 +9,10 @@ from sklearn.preprocessing import StandardScaler
 import numpy as np
 
 
+import os
 
+current_directory = os.getcwd()
+st.write("Current Directory:", current_directory)
 
 st.set_page_config(layout="wide")
 
