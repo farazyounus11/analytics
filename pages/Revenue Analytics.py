@@ -164,9 +164,6 @@ c = alt.Chart(sales_by_prodd).mark_arc().encode(
     tooltip=['PRODUCTLINE', 'SALES']
 )
 
-c.display()
-
-
 countryresult = res.groupby('COUNTRY')['SALES'].sum().reset_index()
 
 
@@ -247,7 +244,7 @@ with col2:
 
 with col3:
     st.write("Top 10 Products by Total Sales:")
-    st.write(ccc)
+    st.write(c.display())
 
 with col4:
     st.write("Most common pairs of items bought:")
