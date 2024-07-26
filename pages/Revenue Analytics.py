@@ -155,14 +155,7 @@ sales_by_postaltop = sales_by_postal.nlargest(10)
 
 
 
-sales_by_prodd = res.groupby('PRODUCTLINE')['SALES'].sum().reset_index()
 
-# Creating the pie chart using Altair
-c = alt.Chart(sales_by_prodd).mark_arc().encode(
-    theta=alt.Theta(field='SALES', type='quantitative'),
-    color=alt.Color(field='PRODUCTLINE', type='nominal'),
-    tooltip=['PRODUCTLINE', 'SALES']
-)
 
 countryresult = res.groupby('COUNTRY')['SALES'].sum().reset_index()
 
@@ -231,6 +224,18 @@ with col1:
 with col2:
     st.plotly_chart(fig)
 
+
+
+sales_by_prodd = res.groupby('PRODUCTLINE')['SALES'].sum().reset_index()
+
+# Creating the pie chart using Altair
+c = alt.Chart(sales_by_prodd).mark_arc().encode(
+    theta=alt.Theta(field='SALES', type='quantitative'),
+    color=alt.Color(field='PRODUCTLINE', type='nominal'),
+    tooltip=['PRODUCTLINE', 'SALES']
+)
+
+
 col1, col2, col3 , col4 = st.columns(4)
 
 with col1:
@@ -244,7 +249,7 @@ with col2:
 
 with col3:
     st.write("Top 10 Products by Total Sales:")
-    st.write(c.display())
+    st.altair_chart(c, use_container_width=True)
 
 with col4:
     st.write("Most common pairs of items bought:")
