@@ -144,7 +144,10 @@ with col3:
 
 
 
-
+sales_by_delay = res.groupby('STATUS')['SALES'].count()
+sales_by_delaytop5 = sales_by_delay.nlargest(10)
+sales_by_postal = res.groupby('POSTALCODE')['SALES'].sum()
+sales_by_postaltop = sales_by_postal.nlargest(10)
 
 
 
@@ -232,18 +235,6 @@ c = alt.Chart(sales_by_prodd).mark_arc().encode(
     tooltip=['PRODUCTLINE', 'SALES']
 )
 
-
-sales_by_delay = res.groupby('STATUS')['SALES'].count().reset_index()
-sales_by_delaytop5 = sales_by_delay.nlargest(10)
-
-
-
-
-
-
-
-sales_by_postal = res.groupby('POSTALCODE')['SALES'].sum()
-sales_by_postaltop = sales_by_postal.nlargest(10)
 
 
 
