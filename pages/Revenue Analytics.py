@@ -156,12 +156,16 @@ sales_by_postaltop = sales_by_postal.nlargest(10)
 
 
 sales_by_prodd = res.groupby('PRODUCTLINE')['SALES'].sum()
-sales_by_prodtop10 = sales_by_prodd.nlargest(10)
+sales_by_prodtop10 = sales_by_prodd.nlargest(10).reset_index()
 
+# Creating the pie chart using Altair
 ccc = alt.Chart(sales_by_prodtop10).mark_arc().encode(
-    theta='SALES',
-    color='PRODUCTLINE',
-tooltip=['SALES', 'PRODUCTLINE'])
+    theta=alt.Theta(field='SALES', type='quantitative'),
+    color=alt.Color(field='PRODUCTLINE', type='nominal'),
+    tooltip=['SALES', 'PRODUCTLINE']
+)
+
+ccc.display()
 
 
 countryresult = res.groupby('COUNTRY')['SALES'].sum().reset_index()
