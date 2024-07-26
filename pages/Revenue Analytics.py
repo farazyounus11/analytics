@@ -122,7 +122,7 @@ top_10_months = sales_by_monthyear.nlargest(10)
 # Display the top 10 months and their sales using Streamlit
 
 sales_by_CUSTOMER_NAME = df.groupby('CUSTOMER_NAME')['SALES'].sum()
-sales_by_CUSTOMER_NAME_10_months = sales_by_CUSTOMER_NAME.nlargest(10)
+sales_by_CUSTOMER_NAME_10_months = sales_by_CUSTOMER_NAME.nlargest(10).reset_index()
 
 
 
