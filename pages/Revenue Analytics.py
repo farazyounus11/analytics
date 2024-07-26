@@ -109,6 +109,10 @@ if st.checkbox("Show filtered table"):
 
 
 
+
+
+
+
 # Line chart for total monthly sales using st.line_chart
 st.header("Important Tables")
 res['MonthYear'] = res['ORDER_DATE'].dt.to_period('M')
@@ -118,8 +122,8 @@ top_10_months = sales_by_monthyear.nlargest(10)
 # Display the top 10 months and their sales using Streamlit
 
 sales_by_CUSTOMER_NAME = df.groupby('CUSTOMER_NAME')['SALES'].sum()
-sales_by_CUSTOMER_NAME_10_months = sales_by_CUSTOMER_NAME.nlargest(10)
-sales_by_CUSTOMER_NAME_10_months2 = st.bar_chart(sales_by_CUSTOMER_NAME_10_months, x="CUSTOMER_NAME", y="SALES")
+sales_by_CUSTOMER_NAME_10_months = sales_by_CUSTOMER_NAME.nlargest(10).reset_index()
+
 
 
 sales_by_city = res.groupby('CITY')['SALES'].sum()
@@ -133,8 +137,7 @@ with col1:
 
 with col2:
     st.write("Top 10 Customers by Total Sales:")
-    st.write(sales_by_CUSTOMER_NAME_10_months2)
-
+    st.bar_chart(sales_by_CUSTOMER_NAME_10_months.set_index('CUSTOMER_NAME'))
 with col3:
     st.write("Top 10 Cities by Total Sales:")
     st.write(top_10_cities)
