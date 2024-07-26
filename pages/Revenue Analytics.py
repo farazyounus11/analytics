@@ -158,8 +158,7 @@ sales_by_postaltop = sales_by_postal.nlargest(10)
 sales_by_prodd = res.groupby('PRODUCTLINE')['SALES'].sum()
 sales_by_prodtop10 = sales_by_prodd.nlargest(10)
 
-
-ccc = alt.Chart(df).mark_arc().encode(
+ccc = alt.Chart(sales_by_prodtop10).mark_arc().encode(
     theta='SALES',
     color='PRODUCTLINE',
 tooltip=['SALES', 'PRODUCTLINE'])
