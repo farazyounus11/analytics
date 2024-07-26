@@ -152,8 +152,17 @@ sales_by_delay = res.groupby('STATUS')['SALES'].count()
 sales_by_delaytop5 = sales_by_delay.nlargest(10)
 sales_by_postal = res.groupby('POSTALCODE')['SALES'].sum()
 sales_by_postaltop = sales_by_postal.nlargest(10)
+
+
+
 sales_by_prodd = res.groupby('PRODUCTLINE')['SALES'].sum()
 sales_by_prodtop10 = sales_by_prodd.nlargest(10)
+
+
+ccc = alt.Chart(df).mark_arc().encode(
+    theta='SALES',
+    color='PRODUCTLINE',
+tooltip=['SALES', 'PRODUCTLINE'])
 
 
 countryresult = res.groupby('COUNTRY')['SALES'].sum().reset_index()
@@ -195,8 +204,6 @@ st.pyplot(plt)
 
 def get_top_ten_common_pairs(df):
     pairs_counter = Counter()
-    
-    # Group by ORDER_NUMBER and find pairs
     grouped = df.groupby('ORDER_NUMBER')['PRODUCTLINE'].apply(list)
     
     for products in grouped:
@@ -238,7 +245,7 @@ with col2:
 
 with col3:
     st.write("Top 10 Products by Total Sales:")
-    st.write(sales_by_prodtop10)
+    st.write(ccc)
 
 with col4:
     st.write("Most common pairs of items bought:")
