@@ -130,11 +130,10 @@ sales_by_city = res.groupby('CITY')['SALES'].sum()
 top_10_cities = sales_by_city.nlargest(10)
 
 
-col1, col2, col3 = st.columns(3)
+col1, col2, col3 = st.columns([1,2,1])
 with col1:
     st.write("Top 10 Months by Total Sales:")
     st.write(top_10_months)
-
 with col2:
     st.write("Top 10 Customers by Total Sales:")
     st.bar_chart(sales_by_CUSTOMER_NAME_10_months.set_index('CUSTOMER_NAME'))
