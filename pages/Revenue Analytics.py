@@ -136,7 +136,7 @@ with col1:
     st.write(top_10_months)
 with col2:
     st.write("Top 10 Customers by Total Sales:")
-    st.bar_chart(sales_by_CUSTOMER_NAME_10_months.set_index('CUSTOMER_NAME'))
+    st.bar_chart(sales_by_CUSTOMER_NAME_10_months.set_index('CUSTOMER_NAME'), horizontal=True)
 with col3:
     st.write("Top 10 Cities by Total Sales:")
     st.write(top_10_cities)
