@@ -119,7 +119,8 @@ top_10_months = sales_by_monthyear.nlargest(10)
 
 sales_by_CUSTOMER_NAME = df.groupby('CUSTOMER_NAME')['SALES'].sum()
 sales_by_CUSTOMER_NAME_10_months = sales_by_CUSTOMER_NAME.nlargest(10)
-# Display the top 10 months and their sales using Streamlit
+sales_by_CUSTOMER_NAME_10_months2 = st.bar_chart(sales_by_CUSTOMER_NAME_10_months, x="CUSTOMER_NAME", y="SALES")
+
 
 sales_by_city = res.groupby('CITY')['SALES'].sum()
 top_10_cities = sales_by_city.nlargest(10)
@@ -132,7 +133,7 @@ with col1:
 
 with col2:
     st.write("Top 10 Customers by Total Sales:")
-    st.write(sales_by_CUSTOMER_NAME_10_months)
+    st.write(sales_by_CUSTOMER_NAME_10_months2)
 
 with col3:
     st.write("Top 10 Cities by Total Sales:")
