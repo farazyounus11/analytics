@@ -157,7 +157,6 @@ c1 = alt.Chart(sales_by_delay).mark_arc().encode(
 
 
 sales_by_postal = res.groupby('POSTALCODE')['SALES'].sum()
-sales_by_postaltop = sales_by_postal.nlargest(10)
 
 
 
@@ -252,12 +251,11 @@ with col1:
 
 with col2:
     st.write("Top 10 Zip Codes by Total Sales:")
-    st.write(sales_by_postaltop)
+    st.altair_chart(c1, use_container_width=True)
 
 with col3:
     st.write("Top 10 Products by Total Sales:")
     st.altair_chart(c, use_container_width=True)
-    st.altair_chart(c1, use_container_width=True)
 
 with col4:
     st.write("Most common pairs of items bought:")
