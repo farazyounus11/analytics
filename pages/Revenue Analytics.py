@@ -144,7 +144,7 @@ with col3:
 
 
 
-sales_by_delay = res.groupby('STATUS')['SALES'].count()
+sales_by_delay = res.groupby('STATUS')['SALES'].count().reset_index()
 sales_by_delaytop5 = sales_by_delay.nlargest(10)
 
 c1 = alt.Chart(sales_by_delay).mark_arc().encode(
