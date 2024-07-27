@@ -147,24 +147,17 @@ with col3:
 sales_by_delay = res.groupby('STATUS')['SALES'].count().reset_index()
 sales_by_delaytop5 = sales_by_delay.nlargest(10)
 
-c1 = alt.Chart(sales_by_delay).mark_arc().encode(
-    theta=alt.Theta(field='SALES', type='quantitative'),
-    color=alt.Color(field='STATUS', type='nominal'),
-    tooltip=['STATUS', 'SALES']
-)
 
 
 
 
 sales_by_postal = res.groupby('POSTALCODE')['SALES'].sum()
+sales_by_postaltop = sales_by_postal.nlargest(10)
 
 
 
 
 countryresult = res.groupby('COUNTRY')['SALES'].sum().reset_index()
-
-
-## Ploting Heat map
 color_scale = px.colors.sequential.Viridis
 fig = px.choropleth(countryresult, 
                     locations='COUNTRY',  
@@ -251,8 +244,7 @@ with col1:
 
 with col2:
     st.write("Top 10 Zip Codes by Total Sales:")
-    st.altair_chart(c1, use_container_width=True)
-
+    st.write(sales_by_postaltop)
 with col3:
     st.write("Top 10 Products by Total Sales:")
     st.altair_chart(c, use_container_width=True)
