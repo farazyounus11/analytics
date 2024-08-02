@@ -261,21 +261,7 @@ with col4:
 
 
 
-sales_by_CUSTOMER_NAME = df.groupby('CUSTOMER_NAME')['SALES'].sum().reset_index()
 
-customer_names = sales_by_CUSTOMER_NAME['CUSTOMER_NAME'].tolist()
-selected_customer = st.selectbox('Select Customer Name', customer_names)
-
-selected_customer_sales = sales_by_CUSTOMER_NAME[sales_by_CUSTOMER_NAME['CUSTOMER_NAME'] == selected_customer]['SALES'].values[0]
-
-base = alt.Chart(sales_by_CUSTOMER_NAME).mark_bar().encode(
-    x=alt.X('SALES:Q', bin=alt.Bin(maxbins=30), title='Sales'),
-    y=alt.Y('count()', title='Number of Customers')
-)
-highlight = alt.Chart(pd.DataFrame({'SALES': [selected_customer_sales]})).mark_rule(color='red').encode(
-    x='SALES:Q')
-
-chart = base + highlight
 
 
 source = data.barley()
@@ -293,6 +279,21 @@ col1, col2 = st.columns(2)
 # Display the first chart in the first column
 with col1:
     st.markdown('### Where does select customer rank?')
+    sales_by_CUSTOMER_NAME = df.groupby('CUSTOMER_NAME')['SALES'].sum().reset_index()
+
+    customer_names = sales_by_CUSTOMER_NAME['CUSTOMER_NAME'].tolist()
+    selected_customer = st.selectbox('Select Customer Name', customer_names)
+    
+    selected_customer_sales = sales_by_CUSTOMER_NAME[sales_by_CUSTOMER_NAME['CUSTOMER_NAME'] == selected_customer]['SALES'].values[0]
+    
+    base = alt.Chart(sales_by_CUSTOMER_NAME).mark_bar().encode(
+        x=alt.X('SALES:Q', bin=alt.Bin(maxbins=30), title='Sales'),
+        y=alt.Y('count()', title='Number of Customers')
+    )
+    highlight = alt.Chart(pd.DataFrame({'SALES': [selected_customer_sales]})).mark_rule(color='red').encode(
+        x='SALES:Q')
+    
+    chart = base + highlight
     st.altair_chart(chart, use_container_width=True)
 
 # Display the second chart in the second column
