@@ -10,3 +10,4 @@ streamlit_pandas
 streamlit_pdf_viewer
 plotly
 seaborn
+vega-datasets
