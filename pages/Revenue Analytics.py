@@ -8,6 +8,11 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter  # Import FuncFormatter for formatting ticks
 import plotly.express as px
 import altair as alt
+from vega_datasets import data
+
+
+
+
 
 
 st.set_page_config(layout="wide")
@@ -256,7 +261,6 @@ with col4:
 
 
 
-st.markdown('### Where does select customer rank?')
 sales_by_CUSTOMER_NAME = df.groupby('CUSTOMER_NAME')['SALES'].sum().reset_index()
 
 customer_names = sales_by_CUSTOMER_NAME['CUSTOMER_NAME'].tolist()
@@ -272,6 +276,26 @@ highlight = alt.Chart(pd.DataFrame({'SALES': [selected_customer_sales]})).mark_r
     x='SALES:Q')
 
 chart = base + highlight
-st.altair_chart(chart, use_container_width=True)
 
+
+source = data.barley()
+
+# Create the bar chart using Altair
+chart7 = alt.Chart(source).mark_bar().encode(
+    x='year:O',
+    y='sum(yield):Q',
+    color='year:N',
+    column='site:N')
+
+# Display the chart in Streamlit
+col1, col2 = st.columns(2)
+
+# Display the first chart in the first column
+with col1:
+    st.markdown('### Where does select customer rank?')
+    st.altair_chart(chart, use_container_width=True)
+
+# Display the second chart in the second column
+with col2:
+    st.altair_chart(chart7)
 
