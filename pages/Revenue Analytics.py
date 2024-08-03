@@ -21,6 +21,7 @@ def load_data():
     file_path = "sales_data.csv"  # Update with the correct path to your CSV file
     df = pd.read_csv(file_path, encoding='latin1')  # Specify the encoding here
     df['ORDER_DATE'] = pd.to_datetime(df['ORDER_DATE'], errors='coerce')  # Convert to datetime
+    df['MONTH_YEAR'] = df['ORDER_DATE'].dt.to_period('M').dt.to_timestamp()
     return df
 
 df = load_data()
@@ -184,11 +185,11 @@ fig.update_layout(
 
 ########################## Line chart code
 Linechartttt = alt.Chart(res).mark_line().encode(
-    x='ORDER_DATE:T',
+    x='MONTH_YEAR:T',
     y='sum(SALES):Q',
     color='PRODUCTLINE:N',
 ).properties(
-    width=800  # You can adjust this width value as needed
+    width=1100  # You can adjust this width value as needed
 )
 
 st.altair_chart(Linechartttt)
