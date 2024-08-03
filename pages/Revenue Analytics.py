@@ -273,6 +273,14 @@ chart7 = alt.Chart(source).mark_bar().encode(
     color='year:N',
     column='site:N')
 
+
+chart77 = alt.Chart(source).mark_bar().encode(
+    x="YEAR:N",
+    y="sum(SALES):Q",
+    xOffset="PRODUCTLINE:N",
+    color="PRODUCTLINE:N"
+)
+
 # Display the chart in Streamlit
 col1, col2 = st.columns(2)
 
@@ -298,5 +306,5 @@ with col1:
 
 # Display the second chart in the second column
 with col2:
-    st.altair_chart(chart7)
+    st.altair_chart(chart77)
 
