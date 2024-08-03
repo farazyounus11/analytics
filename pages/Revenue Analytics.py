@@ -282,7 +282,7 @@ chart77 = alt.Chart(res).mark_bar().encode(
 )
 
 # Display the chart in Streamlit
-col1, col2 = st.columns(2)
+col1, col2 = st.columns([1,3])
 
 # Display the first chart in the first column
 with col1:
