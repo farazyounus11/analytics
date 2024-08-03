@@ -306,5 +306,6 @@ with col1:
 
 # Display the second chart in the second column
 with col2:
+    st.markdown('## Yearly Sales By Productline')
     st.altair_chart(chart77)
 
