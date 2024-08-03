@@ -101,12 +101,9 @@ else:
 
 
 
-col43, co45 = st.columns(2)
-with col43:
-    st.metric(label="Numer of Transactions that Meet Filtering Criteria", value=res.shape[0])
-with col45:
-    if st.checkbox("Show Data Table"):
-        st.dataframe(res)
+
+st.metric(label="Numer of Transactions that Meet Filtering Criteria", value=res.shape[0])
+
 
 
 
