@@ -181,13 +181,16 @@ fig.update_layout(
         center=dict(lat=28.675, lon=-40.70)  # Center of the map (lat and lon can be adjusted as needed)
     )
 )
-# Assuming `st` refers to Streamlit
 
+########################## Line chart code
 Linechartttt = alt.Chart(res).mark_line().encode(
     x='MONTH:T',
     y='sum(SALES):Q',
     color='PRODUCTLINE:N',
+).properties(
+    width=800  # You can adjust this width value as needed
 )
+
 st.altair_chart(Linechartttt)
 
 
