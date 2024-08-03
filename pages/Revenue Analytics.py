@@ -183,17 +183,13 @@ fig.update_layout(
 )
 # Assuming `st` refers to Streamlit
 
-st.header("Total Monthly Sales")
-plt.figure(figsize=(12, 4))
-plt.plot(sales_by_monthyear.index.astype(str), sales_by_monthyear.values, marker='o', linestyle='-')
-plt.title('Total Sales Over Time (Monthly)')
-plt.xlabel('Month-Year')
-plt.ylabel('Total Sales')
-plt.grid(True)
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.gca().get_yaxis().set_major_formatter(FuncFormatter(lambda x, _: '{:,.0f}'.format(x)))
-st.pyplot(plt)
+Linechartttt = alt.Chart(res).mark_line().encode(
+    x='MONTH:T',
+    y='sum(SALES):Q',
+    color='PRODUCTLINE:N',
+)
+st.altair_chart(Linechartttt)
+
 
 
 def get_top_ten_common_pairs(df):
@@ -308,15 +304,5 @@ with col1:
 with col2:
     st.markdown('## Yearly Sales By Productline')
     st.altair_chart(chart77)
-
-
-
-Linechartttt = alt.Chart(res).mark_line().encode(
-    x='MONTH:T',
-    y='sum(SALES):Q',
-    color='PRODUCTLINE:N',
-)
-st.altair_chart(Linechartttt)
-
 
 
