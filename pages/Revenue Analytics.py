@@ -274,7 +274,7 @@ chart7 = alt.Chart(source).mark_bar().encode(
     column='site:N')
 
 
-chart77 = alt.Chart(source).mark_bar().encode(
+chart77 = alt.Chart(res).mark_bar().encode(
     x="YEAR:N",
     y="sum(SALES):Q",
     xOffset="PRODUCTLINE:N",
