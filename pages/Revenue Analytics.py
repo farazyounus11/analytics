@@ -157,7 +157,6 @@ fig = px.choropleth(countryresult,
                     locationmode='country names',  
                     color="SALES",
                     hover_name='COUNTRY',
-                    title='Interactive Map of Sales by Country',  # Corrected title
                     color_continuous_scale=color_scale,
                     width=900,  # Adjust width as needed
                     height=500 )
@@ -211,6 +210,7 @@ with col1:
     st.bar_chart(avgysales)
 
 with col2:
+    st.markdown("#### Interactive Map of Sales by Country")
     st.plotly_chart(fig)
 
 
