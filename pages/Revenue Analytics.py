@@ -106,13 +106,6 @@ st.metric(label="Numer of Transactions that Meet Filtering Criteria", value=res.
 
 
 
-
-
-
-
-
-
-
 # Line chart for total monthly sales using st.line_chart
 st.header("Important Tables")
 res['MonthYear'] = res['ORDER_DATE'].dt.to_period('M')
@@ -167,7 +160,7 @@ fig = px.choropleth(countryresult,
                     title='Interactive Map of Sales by Country',  # Corrected title
                     color_continuous_scale=color_scale,
                     width=900,  # Adjust width as needed
-                    height=500 )
+                    height=450 )
 
 fig.update_layout(
     geo=dict(
