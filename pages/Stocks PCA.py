@@ -38,8 +38,6 @@ pivot_table = df.pivot(index='date', columns='Name', values=value_column)
 na_counts = pivot_table.isna().sum()
 columns_to_keep = na_counts[na_counts <= 300].index
 pivot_table = pivot_table[columns_to_keep]
-st.write(pivot_table)
-
 
 
 
