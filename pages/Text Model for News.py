@@ -6,7 +6,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.stem import PorterStemmer
 import nltk
 from nltk.corpus import stopwords
-nltk.download('stopwords')
 current_directory = os.path.dirname(os.path.abspath(__file__))
 os.chdir(current_directory)
 
@@ -16,6 +15,7 @@ os.chdir(current_directory)
 #selected_category_label = st.radio("Select a category", list(label_to_category.values()))
 #selected_true_label = [key for key, value in label_to_category.items() if value == selected_category_label][0]
 #st.write("Selected true label:", selected_true_label)
+nltk.download('stopwords')
 
 
 porter_stemmer = PorterStemmer()
