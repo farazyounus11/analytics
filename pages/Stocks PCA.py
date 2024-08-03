@@ -28,7 +28,7 @@ df = load_data(file_path)
 
 
 st.title('PCA Clustering of Stocks')
-valid_columns = [col for col in df.columns if col not in ['open','close', 'high', 'low', 'Name', 'date']]
+valid_columns = [col for col in df.columns if col not in ['open','close', 'high', 'low', 'Name', 'date', 'volume' ]]
 
 value_column = st.selectbox("Select a Metric for Correlation:", valid_columns )
 
