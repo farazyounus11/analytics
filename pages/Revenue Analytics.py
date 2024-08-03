@@ -311,7 +311,7 @@ with col2:
 
 
 
-Linechartttt alt.Chart(res).mark_line().encode(
+Linechartttt = alt.Chart(res).mark_line().encode(
     x='MONTH:T',
     y='sum(SALES):Q',
     color='PRODUCTLINE:N',
