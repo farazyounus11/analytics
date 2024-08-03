@@ -189,7 +189,7 @@ Linechartttt = alt.Chart(res).mark_line().encode(
     y='sum(SALES):Q',
     color='PRODUCTLINE:N',
 ).properties(
-    width=1100  # You can adjust this width value as needed
+    width=1250  # You can adjust this width value as needed
 )
 
 st.altair_chart(Linechartttt)
