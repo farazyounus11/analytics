@@ -309,3 +309,14 @@ with col2:
     st.markdown('## Yearly Sales By Productline')
     st.altair_chart(chart77)
 
+
+
+Linechartttt alt.Chart(res).mark_line().encode(
+    x='MONTH:T',
+    y='sum(SALES):Q',
+    color='PRODUCTLINE:N',
+)
+st.altair_chart(Linechartttt)
+
+
+
