@@ -99,11 +99,16 @@ if len(recent_years) > 2:
 else:
     col3.metric(label="Year N/A", value="N/A", delta="N/A")
 
-st.metric(label="Numer of Transactions", value=res.shape[0])
 
 
-if st.checkbox("Show filtered table"):
-    st.dataframe(res)
+col43, co45 = st.columns(2)
+with col43:
+    st.metric(label="Numer of Transactions that Meet Filtering Criteria", value=res.shape[0])
+with col45:
+    if st.checkbox("Show Data Table"):
+        st.dataframe(res)
+
+
 
 
 
