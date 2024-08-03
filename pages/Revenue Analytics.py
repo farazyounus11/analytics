@@ -184,7 +184,7 @@ fig.update_layout(
 
 ########################## Line chart code
 Linechartttt = alt.Chart(res).mark_line().encode(
-    x='MONTH:T',
+    x='ORDER_DATE:T',
     y='sum(SALES):Q',
     color='PRODUCTLINE:N',
 ).properties(
