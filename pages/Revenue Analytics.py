@@ -218,7 +218,7 @@ comdf['Most common pair'] = comdf['Most common pair'].apply(lambda x: f"{x[0]} &
 
 avgysales = res.groupby(by="YEAR")['SALES'].sum()
 
-col1, col2 = st.columns([1, 2])
+col1, col2 = st.columns([1, 3])
 with col1:
     st.markdown("#### Yearly Sales")
     st.bar_chart(avgysales)
