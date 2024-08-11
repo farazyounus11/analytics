@@ -80,6 +80,7 @@ if file_path:
         st.write(cumulative_explained_variance)
 
 
+    st.markdown("### Here you can select number of clusters. You can also choose which principal components to view.")
 
 
     # Clustering
@@ -113,6 +114,7 @@ if file_path:
     # Display the Plotly figure in Streamlit
     st.plotly_chart(fig)
 
+st.markdown("### Here you can learn about the industries/sectors in a particular cluster")
 
 
 selected_cluster = st.slider('Select Cluster Number:', min_value=0, max_value=num_clusters-1, value=0)
