@@ -84,7 +84,7 @@ if file_path:
 
     # Clustering
     num_clusters = st.slider("Select number of clusters:", min_value=9, max_value=20, value=16)
-    kmeans = KMeans(n_clusters=num_clusters, , random_state=42)
+    kmeans = KMeans(n_clusters=num_clusters, random_state=42)
     clusters = kmeans.fit_predict(X_pca)
 
     # Prepare data for plotting
