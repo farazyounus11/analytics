@@ -16,7 +16,22 @@ def load_data(file_path):
     zero_counts = (df == 0).sum()
     columns_to_keep = zero_counts[zero_counts <= 100].index
     df = df[columns_to_keep]
-    return df
+
+    tickers = df.columns.unique()
+
+    data = []
+
+    for ticker in tickers:
+        stock = yf.Ticker(ticker)
+        info = stock.info
+        sector = info.get('sector', 'N/A')
+        industry = info.get('industry', 'N/A')
+        data.append({'Ticker': ticker, 'Sector': sector, 'Industry': industry})
+        industriesss = pd.DataFrame(data)
+
+
+
+    return df, industriesss
 
 # List of files to choose from
 files = "S&P_Price.csv"
@@ -112,26 +127,16 @@ if file_path:
 selected_cluster = st.slider('Select Cluster Number:', min_value=0, max_value=num_clusters-1, value=0)
 pcafilter = pca_df[pca_df['Cluster'] == selected_cluster]
 
-tickers  = pcafilter['Name'].unique()
+tickersfilt  = pcafilter['Name'].unique()
+
 
 
 col11, col22 = st.columns([2, 4])
 
 # Display line charts in each column
 with col11:
-    data = []
-
-# Fetch sector and industry for each ticker
-    for ticker in tickers:
-        stock = yf.Ticker(ticker)
-        info = stock.info
-        sector = info.get('sector', 'N/A')
-        industry = info.get('industry', 'N/A')
-        data.append({'Ticker': ticker, 'Sector': sector, 'Industry': industry})
-
-# Convert the data into a DataFrame
-    industriesss = pd.DataFrame(data)
-    st.write(industriesss)
+    tickersfiltered =industriesss[industriesss['Ticker'].isin(tickersfilt)]
+    st.write(tickersfiltered)
 
 with col22:
     st.line_chart(df[tickers])
