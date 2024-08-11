@@ -93,8 +93,14 @@ if file_path:
     pca_df['Name'] = X.index  # Use the original column names as names
 
     # User selects which PCA columns to plot
-    pc_x = st.selectbox("Select X-axis PCA component:", options=[f'PC{i+1}' for i in range(n_components)], index=0)
-    pc_y = st.selectbox("Select Y-axis PCA component:", options=[f'PC{i+1}' for i in range(n_components)], index=1)
+    col1, col2 = st.columns(2)
+
+    # Place the select boxes in the respective columns
+    with col1:
+        pc_x = st.selectbox("Select X-axis PCA component:", options=[f'PC{i+1}' for i in range(n_components)], index=0)
+
+    with col2:
+        pc_y = st.selectbox("Select Y-axis PCA component:", options=[f'PC{i+1}' for i in range(n_components)], index=1)
 
     # Plotting with Plotly
     fig = px.scatter(pca_df, x=pc_x, y=pc_y, color='Cluster', text='Name',
