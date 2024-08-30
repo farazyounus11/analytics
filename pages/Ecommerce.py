@@ -21,7 +21,6 @@ st.markdown("### Use the Sidebar to Filter Data")
 
 # Define the filter configuration
 create_data = {
-    "Transaction Date": "slider",
     "Product Category": "multiselect",
     "Product Description": "multiselect",
     "Purchase Completed": "multiselect"
