@@ -30,21 +30,25 @@ try:
 except Exception as e:
     st.error(f"Error with date slider: {str(e)}")
 
-# Filter by Product Category
-product_categories = df['Product Category'].unique()
 
-selected_categories = st.sidebar.multiselect("Select Product Categories", options=product_categories, default=["Furniture"])
-Productdesc = st.sidebar.multiselect("Purchase Status", options=df['Product Description'].unique(), default=["Wall Art"])
-purchase_status = st.sidebar.multiselect("Purchase Status", options=df['Purchase Completed'].unique(), default=["Completed"])
-
-# Apply filters
 filtered_df = df[
     (df['Transaction Date'] >= selected_start_date) & 
-    (df['Transaction Date'] <= selected_end_date)
-]
+    (df['Transaction Date'] <= selected_end_date)]
 
+# Filter by Product Category
+product_categories = df['Product Category'].unique()
+selected_categories = st.sidebar.multiselect("Select Product Categories", options=product_categories, default=["Furniture"])
 if selected_categories:
     filtered_df = filtered_df[filtered_df['Product Category'].isin(selected_categories)]
+
+
+
+
+Productdesc = st.sidebar.multiselect("Purchase Status", options=df['Product Description'].unique(), default=["Wall Art"])
+
+purchase_status = st.sidebar.multiselect("Purchase Status", options=df['Purchase Completed'].unique(), default=["Completed"])
+
+
 
 if Productdesc:
     filtered_df = filtered_df[filtered_df['Purchase Completed'].isin(Productdesc)]
