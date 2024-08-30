@@ -32,9 +32,9 @@ except Exception as e:
 
 # Filter by Product Category
 product_categories = df['Product Category'].unique()
-selected_categories = st.sidebar.multiselect("Select Product Categories", options=product_categories, default=["Furniture"])
 
-# Filter by Purchase Completed
+selected_categories = st.sidebar.multiselect("Select Product Categories", options=product_categories, default=["Furniture"])
+Productdesc = st.sidebar.multiselect("Purchase Status", options=df['Product Description'].unique(), default=["Wall Art"])
 purchase_status = st.sidebar.multiselect("Purchase Status", options=df['Purchase Completed'].unique(), default=["Completed"])
 
 # Apply filters
@@ -45,6 +45,9 @@ filtered_df = df[
 
 if selected_categories:
     filtered_df = filtered_df[filtered_df['Product Category'].isin(selected_categories)]
+
+if Productdesc:
+    filtered_df = filtered_df[filtered_df['Purchase Completed'].isin(Productdesc)]
 
 if purchase_status:
     filtered_df = filtered_df[filtered_df['Purchase Completed'].isin(purchase_status)]
