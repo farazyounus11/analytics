@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import pydeck as pdk
+import streamlit_pandas as sp
 
 st.set_page_config(layout="wide")
 
@@ -18,50 +19,23 @@ df = load_dataframe(file_path)
 st.markdown("## E-commerce Transactions Visualization")
 st.markdown("### Use the Sidebar to Filter Data")
 
-try:
-    min_date = df['Transaction Date'].min().to_pydatetime()
-    max_date = df['Transaction Date'].max().to_pydatetime()
-    selected_start_date, selected_end_date = st.sidebar.slider(
-        "Select date range",
-        min_value=min_date,
-        max_value=max_date,
-        value=(min_date, max_date)
-    )
-except Exception as e:
-    st.error(f"Error with date slider: {str(e)}")
+# Define the filter configuration
+create_data = {
+    "Transaction Date": "multiselect",
+    "Product Category": "multiselect",
+    "Product Description": "multiselect",
+    "Purchase Completed": "multiselect"
+}
 
-
-filtered_df = df[
-    (df['Transaction Date'] >= selected_start_date) & 
-    (df['Transaction Date'] <= selected_end_date)]
-
-# Filter by Product Category
-product_categories = filtered_df['Product Category'].unique()
-
-selected_categories = st.sidebar.multiselect("Select Product Categories", options=product_categories, default=["Furniture"])
-
-
-if selected_categories:
-    filtered_df = filtered_df[filtered_df['Product Category'].isin(selected_categories)]
-
-
-
-
-Productdesc = st.sidebar.multiselect("Purchase Status", options=filtered_df['Product Description'].unique(), default=[])
-
-purchase_status = st.sidebar.multiselect("Purchase Status", options=filtered_df['Purchase Completed'].unique(), default=["Completed"])
-
-
-
-if Productdesc:
-    filtered_df = filtered_df[filtered_df['Purchase Completed'].isin(Productdesc)]
-
-if purchase_status:
-    filtered_df = filtered_df[filtered_df['Purchase Completed'].isin(purchase_status)]
+# Create filtering widgets
+all_widgets = sp.create_widgets(df, create_data, ignore_columns=["Transaction ID"])  # Adjust ignore_columns as needed
+filtered_df = sp.filter_df(df, all_widgets)
 
 if not filtered_df.empty:
     st.metric(label="Number of Transactions", value=len(filtered_df))
+
     transaction_counts_by_date = filtered_df.groupby(['Transaction Date', 'Product Category']).size().unstack(fill_value=0)
+    
     st.header('Map', divider='gray')
     st.pydeck_chart(pdk.Deck(
         map_style=None,
@@ -91,6 +65,7 @@ if not filtered_df.empty:
             ),
         ],
     ))
+
     st.line_chart(transaction_counts_by_date)
 else:
     st.warning("No data available for selected filters")
