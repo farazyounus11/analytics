@@ -44,7 +44,7 @@ if selected_categories:
 
 
 
-Productdesc = st.sidebar.multiselect("Purchase Status", options=df['Product Description'].unique(), default=["Wall Art"])
+Productdesc = st.sidebar.multiselect("Purchase Status", options=df['Product Description'].unique(), default=[])
 
 purchase_status = st.sidebar.multiselect("Purchase Status", options=df['Purchase Completed'].unique(), default=["Completed"])
 
