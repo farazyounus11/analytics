@@ -33,7 +33,7 @@ filtered_df = sp.filter_df(df, all_widgets)
 if not filtered_df.empty:
     st.metric(label="Number of Transactions", value=len(filtered_df))
 
-    transaction_counts_by_date = filtered_df.groupby(['Transaction Date', 'Product Category']).size().unstack(fill_value=0)
+    transaction_counts_by_date = filtered_df.groupby(['Product Category']).size().unstack(fill_value=0)
     
     st.header('Map', divider='gray')
     st.pydeck_chart(pdk.Deck(
