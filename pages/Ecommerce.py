@@ -27,7 +27,7 @@ create_data = {
 }
 
 # Create filtering widgets
-all_widgets = sp.create_widgets(df, create_data)  # Adjust ignore_columns as needed
+all_widgets = sp.create_widgets(df, create_data, , ignore_columns=["Transaction Date"])  # Adjust ignore_columns as needed
 filtered_df = sp.filter_df(df, all_widgets)
 
 if not filtered_df.empty:
