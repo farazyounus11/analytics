@@ -36,17 +36,20 @@ filtered_df = df[
     (df['Transaction Date'] <= selected_end_date)]
 
 # Filter by Product Category
-product_categories = df['Product Category'].unique()
+product_categories = filtered_df['Product Category'].unique()
+
 selected_categories = st.sidebar.multiselect("Select Product Categories", options=product_categories, default=["Furniture"])
+
+
 if selected_categories:
     filtered_df = filtered_df[filtered_df['Product Category'].isin(selected_categories)]
 
 
 
 
-Productdesc = st.sidebar.multiselect("Purchase Status", options=df['Product Description'].unique(), default=[])
+Productdesc = st.sidebar.multiselect("Purchase Status", options=filtered_df['Product Description'].unique(), default=[])
 
-purchase_status = st.sidebar.multiselect("Purchase Status", options=df['Purchase Completed'].unique(), default=["Completed"])
+purchase_status = st.sidebar.multiselect("Purchase Status", options=filtered_df['Purchase Completed'].unique(), default=["Completed"])
 
 
 
