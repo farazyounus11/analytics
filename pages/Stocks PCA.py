@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 # Cache the data loading function
 import yfinance as yf
-
+st.set_page_config(layout="wide")
 st.markdown("### This is a sample of the stock data. I will use statistical techniques like PCA to learn from the data. The data is already scaled and in chronological order!")
 
 @st.cache_data
