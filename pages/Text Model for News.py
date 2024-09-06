@@ -6,10 +6,15 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.stem import PorterStemmer
 import nltk
 from nltk.corpus import stopwords
+
+# Set the current working directory
 current_directory = os.path.dirname(os.path.abspath(__file__))
 os.chdir(current_directory)
 
-nltk.download('stopwords')
+try:
+    stop_words = set(stopwords.words('english'))
+except LookupError:
+    nltk.download('stopwords')
 #label_to_category = {1: "World",2: "Sports",3: "Business",4: "Sci/Tech"}
 
 #selected_category_label = st.radio("Select a category", list(label_to_category.values()))
