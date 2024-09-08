@@ -15,7 +15,7 @@ from sklearn.metrics import accuracy_score, f1_score
 from sklearn.inspection import DecisionBoundaryDisplay
 
 st.set_page_config(layout="wide")
-st.markdown('## Classification Datasets')
+st.markdown('## Classification Machine Learning ')
 st.markdown("### Classification modeling can help identify things like credit card fraud, cancer detection, diabetes, and plant/species classification, buyer engagement etc!")
 
 def list_csv_files():
@@ -29,10 +29,10 @@ def main():
     csv_files = list_csv_files()
     
     default_file_index = csv_files.index('Credit_Card_Fraud_Classification.csv')
-    st.markdown("### Select two unique variables using sidebar to see if they're good at classifying a selected dataset")
+    st.markdown("### Select two unique variables using below to see if they're good at classification problem")
 
     # Selectbox for file selection in sidebar
-    selected_file = st.selectbox('Select a Classification Dataset!', csv_files, index= default_file_index)
+    selected_file = st.selectbox('Select a Classification Problem!', csv_files, index= default_file_index)
 
     if selected_file:
         # Load the selected CSV file
