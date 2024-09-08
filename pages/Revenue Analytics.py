@@ -297,7 +297,7 @@ with col2:
 
 
 
-st.header('Map of Big Customers', divider='gray')
+st.header('Map of Big Customers by Product Line', divider='gray')
 
 @st.cache_data
 def load_comdf3():
