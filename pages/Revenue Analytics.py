@@ -296,6 +296,9 @@ with col2:
     st.altair_chart(chart77)
 
 
+
+st.header('Map of Big Customers', divider='gray')
+
 @st.cache_data
 def load_comdf3():
     df = pd.read_csv("ecomm1.csv")
@@ -334,7 +337,6 @@ with col3:
 
 if not com_filtered_df.empty:
     transaction_counts_by_date = com_filtered_df.groupby(['Transaction Date', 'Product Category']).size().unstack(fill_value=0)
-    st.header('Map', divider='gray')
     st.pydeck_chart(pdk.Deck(
         map_style=None,
         initial_view_state=pdk.ViewState(
