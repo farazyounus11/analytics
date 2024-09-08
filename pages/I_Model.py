@@ -62,14 +62,14 @@ def main():
 
         # List of classifiers to visualize
         classifiers = [
-            ("Logistic Regression", LogisticRegression()),
-            ("K-Nearest Neighbors", KNeighborsClassifier(n_neighbors=3)),
-            ("Support Vector Machine", SVC(kernel="linear", C=0.025, probability=True)),
-            ("Decision Tree", DecisionTreeClassifier(max_depth=5)),
-            ("Random Forest", RandomForestClassifier(max_depth=5)),
-            ("AdaBoost", AdaBoostClassifier(n_estimators=20)),
-            ("Gradient Boosting", GradientBoostingClassifier(n_estimators=20)),
-            ("Neural Network", MLPClassifier(alpha=1, max_iter=300))
+            ("Logistic Regression", LogisticRegression(C=1.0, penalty='l2', solver='liblinear')),  # L2 regularization (default)
+            ("K-Nearest Neighbors", KNeighborsClassifier(n_neighbors=3)),  # No direct regularization, but the number of neighbors acts as a regularizer
+            ("Support Vector Machine", SVC(kernel="linear", C=0.025, probability=True)),  # Regularization via the C parameter
+            ("Decision Tree", DecisionTreeClassifier(max_depth=5, min_samples_split=4, min_samples_leaf=2)),  # Regularization via depth and sample splits
+            ("Random Forest", RandomForestClassifier(max_depth=5, min_samples_split=4, min_samples_leaf=2)),  # Same as Decision Tree
+            ("AdaBoost", AdaBoostClassifier(n_estimators=20, learning_rate=0.5)),  # Learning rate can act as a regularizer
+            ("Gradient Boosting", GradientBoostingClassifier(n_estimators=20, learning_rate=0.1, max_depth=3, min_samples_split=4, min_samples_leaf=2)),  # Regularization via learning rate and tree parameters
+            ("Neural Network", MLPClassifier(alpha=0.001, max_iter=150))  # L2 regularization with alpha
         ]
 
         # List of color maps to use
