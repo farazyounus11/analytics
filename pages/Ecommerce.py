@@ -28,8 +28,6 @@ with col2:
         default=['Completed']
     )
 
-with col3:
-    st.metric(label="Number of Transactions", value=len(comdf))
 
 
 
@@ -38,6 +36,10 @@ if selected_categories:
 
 if purchase_status:
     com_filtered_df = com_filtered_df[com_filtered_df['Purchase Completed'].isin(purchase_status)]
+
+with col3:
+    st.metric(label="Number of Transactions", value=len(com_filtered_df))
+
 
 if not com_filtered_df.empty:
     st.metric(label="Number of Transactions", value=len(com_filtered_df))
