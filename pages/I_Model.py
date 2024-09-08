@@ -30,7 +30,7 @@ def main():
     st.markdown("### Select two unique variables using sidebar to see if they're good at classifying a selected dataset")
 
     # Selectbox for file selection in sidebar
-    selected_file = st.sidebar.selectbox('Select a Classification Dataset!', csv_files)
+    selected_file = st.selectbox('Select a Classification Dataset!', csv_files, index= 'Credit_Card_Fraud_Classification.csv')
 
     if selected_file:
         # Load the selected CSV file
@@ -44,9 +44,9 @@ def main():
 
         all_columns = df.columns.tolist()
 
-        feature1 = st.sidebar.selectbox('Select first feature', all_columns)
+        feature1 = st.selectbox('Select first feature', all_columns)
         remaining_columns = [col for col in all_columns if col != feature1]
-        feature2 = st.sidebar.selectbox('Select second feature', remaining_columns)
+        feature2 = st.selectbox('Select second feature', remaining_columns)
 
         # Extract X (features) based on user selection
         X = df[[feature1, feature2]].values
