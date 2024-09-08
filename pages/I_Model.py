@@ -27,7 +27,8 @@ def main():
 
     # List all CSV files in the current directory
     csv_files = list_csv_files()
-    default_file_index = list_csv_files.index('Credit_Card_Fraud_Classification.csv')
+    
+    default_file_index = list_csv_files.index(1)
     st.markdown("### Select two unique variables using sidebar to see if they're good at classifying a selected dataset")
 
     # Selectbox for file selection in sidebar
