@@ -48,12 +48,12 @@ def main():
 
         col1, col2 = st.columns(2)
         with col1:
-            feature1 = st.selectbox('Select first feature', all_columns)
+            feature1 = st.selectbox('Select First variable', all_columns)
         
         remaining_columns = [col for col in all_columns if col != feature1]
         
         with col2:
-            feature2 = st.selectbox('Select second feature', remaining_columns)
+            feature2 = st.selectbox('Select Second variable', remaining_columns)
 
         X = df[[feature1, feature2]].values
 
