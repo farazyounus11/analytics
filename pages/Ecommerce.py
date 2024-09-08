@@ -2,13 +2,20 @@ import streamlit as st
 import pandas as pd
 import pydeck as pdk
 
-comdf = pd.read_csv("ecomm1.csv")
-comdf['Transaction Date'] = pd.to_datetime(comdf['Transaction Date'])
+
+@st.cache_data
+def load_comdf3():
+    df = pd.read_csv("ecomm1.csv")
+    df['Transaction Date'] = pd.to_datetime(df['Transaction Date'])
+    df.to_csv("ecomm2.csv", index=False)
+    
+    return df
+    
+comdf = load_comdf3()
 
 product_categories = comdf['Product Category'].unique()
 col1, col2 = st.columns(2)
 
-# In the first column, add the product categories multiselect
 with col1:
     selected_categories = st.multiselect(
         "Select Product Categories", 
@@ -60,6 +67,5 @@ if not filtered_df.empty:
         ],
     ))
     st.line_chart(transaction_counts_by_date)
-    st.scatter_chart(transaction_counts_by_date)
 else:
     st.warning("No data available for selected filters")
