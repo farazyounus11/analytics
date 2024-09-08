@@ -60,6 +60,6 @@ if not filtered_df.empty:
         ],
     ))
     st.line_chart(transaction_counts_by_date)
-    st.write(transaction_counts_by_date)
+    st.scatter_chart(transaction_counts_by_date)
 else:
     st.warning("No data available for selected filters")
