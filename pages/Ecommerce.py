@@ -12,19 +12,26 @@ def load_comdf3():
 comdf = load_comdf3()
 
 product_categories = comdf['Product Category'].unique()
-col1, col2 = st.columns(2)
+col1, col2, col3 = st.columns(3)
 
 with col1:
     selected_categories = st.multiselect(
-        "Select Product Categories", 
-        options=product_categories, 
-        default=['Automotive Parts'])
-    
+        "Select Product Categories",
+        options=product_categories,
+        default=['Automotive Parts']
+    )
+
 with col2:
     purchase_status = st.multiselect(
-        "Purchase Status", 
-        options=comdf['Purchase Completed'].unique(), 
-        default=['Completed'])
+        "Purchase Status",
+        options=comdf['Purchase Completed'].unique(),
+        default=['Completed']
+    )
+
+with col3:
+    st.metric(label="Number of Transactions", value=len(comdf))
+
+
 
 if selected_categories:
     com_filtered_df = comdf[comdf['Product Category'].isin(selected_categories)]
