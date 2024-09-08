@@ -6,9 +6,20 @@ comdf = pd.read_csv("ecomm1.csv")
 comdf['Transaction Date'] = pd.to_datetime(comdf['Transaction Date'])
 
 product_categories = comdf['Product Category'].unique()
-selected_categories = st.multiselect("Select Product Categories", options=product_categories, default=['Automotive Parts'])
-purchase_status = st.multiselect("Purchase Status", options=comdf['Purchase Completed'].unique(), default=['Completed'])
+col1, col2 = st.columns(2)
 
+# In the first column, add the product categories multiselect
+with col1:
+    selected_categories = st.multiselect(
+        "Select Product Categories", 
+        options=product_categories, 
+        default=['Automotive Parts'])
+    
+with col2:
+    purchase_status = st.multiselect(
+        "Purchase Status", 
+        options=comdf['Purchase Completed'].unique(), 
+        default=['Completed'])
 
 if selected_categories:
     filtered_df = comdf[comdf['Product Category'].isin(selected_categories)]
@@ -49,5 +60,6 @@ if not filtered_df.empty:
         ],
     ))
     st.line_chart(transaction_counts_by_date)
+    st.write(transaction_counts_by_date)
 else:
     st.warning("No data available for selected filters")
