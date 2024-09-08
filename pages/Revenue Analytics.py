@@ -336,7 +336,7 @@ with col3:
     st.metric(label="Number of Transactions", value=len(com_filtered_df))
 
 
-if not selected_categories.empty:
+if not com_filtered_df.empty:
     transaction_counts_by_date = com_filtered_df.groupby(['Transaction Date', 'Product Category']).size().unstack(fill_value=0)
     st.pydeck_chart(pdk.Deck(
         map_style=None,
