@@ -169,7 +169,8 @@ fig.update_layout(
     )
 )
 
-########################## Line chart code
+st.markdown("### Line Chart of Different Product Lines")
+
 Linechartttt = alt.Chart(res).mark_line().encode(
     x='MONTH_YEAR:T',
     y='sum(SALES):Q',
