@@ -18,15 +18,13 @@ with col1:
     selected_categories = st.multiselect(
         "Select Product Categories",
         options=product_categories,
-        default=['Automotive Parts']
-    )
+        default=['Automotive Parts'])
 
 with col2:
     purchase_status = st.multiselect(
         "Purchase Status",
         options=comdf['Purchase Completed'].unique(),
-        default=['Completed']
-    )
+        default=['Completed'])
 
 
 
@@ -42,7 +40,6 @@ with col3:
 
 
 if not com_filtered_df.empty:
-    st.metric(label="Number of Transactions", value=len(com_filtered_df))
     transaction_counts_by_date = com_filtered_df.groupby(['Transaction Date', 'Product Category']).size().unstack(fill_value=0)
     st.header('Map', divider='gray')
     st.pydeck_chart(pdk.Deck(
