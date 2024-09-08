@@ -50,7 +50,7 @@ create_data = {
     "DEALSIZE": "multiselect",
     "POSTALCODE": "multiselect"}
 
-all_widgets = sp.create_widgets(df, create_data, ignore_columns=["CONTACTLASTNAME", "CONTACTFIRSTNAME"])
+all_widgets = sp.create_widgets(df, create_data, ignore_columns=["CONTACTLASTNAME", "CONTACTFIRSTNAME", "MONTH", "YEAR"])
 
 try:
     res = sp.filter_df(df, all_widgets)
