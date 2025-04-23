@@ -116,30 +116,30 @@ if file_path:
 
 st.markdown("### Here you can learn about the industries/sectors in a particular cluster")
 
+if st.button('Run Analysis'):
+    selected_cluster = st.slider('Select Cluster Number:', min_value=0, max_value=num_clusters-1, value=0)
+    pcafilter = pca_df[pca_df['Cluster'] == selected_cluster]
+    tickers = pcafilter['Name'].unique()
 
-selected_cluster = st.slider('Select Cluster Number:', min_value=0, max_value=num_clusters-1, value=0)
-pcafilter = pca_df[pca_df['Cluster'] == selected_cluster]
+    col11, col22 = st.columns([2, 4])
 
-tickers  = pcafilter['Name'].unique()
+    # Display line charts in each column
+    with col11:
+        data = []
+        # Fetch sector and industry for each ticker
+        for ticker in tickers:
+            stock = yf.Ticker(ticker)
+            info = stock.info
+            sector = info.get('sector', 'N/A')
+            industry = info.get('industry', 'N/A')
+            data.append({'Ticker': ticker, 'Sector': sector, 'Industry': industry})
 
+        # Convert the data into a DataFrame
+        industriesss = pd.DataFrame(data)
+        st.write(industriesss)
 
-col11, col22 = st.columns([2, 4])
-
-# Display line charts in each column
-with col11:
-    data = []
-
-# Fetch sector and industry for each ticker
-    for ticker in tickers:
-        stock = yf.Ticker(ticker)
-        info = stock.info
-        sector = info.get('sector', 'N/A')
-        industry = info.get('industry', 'N/A')
-        data.append({'Ticker': ticker, 'Sector': sector, 'Industry': industry})
-
-# Convert the data into a DataFrame
-    industriesss = pd.DataFrame(data)
-    st.write(industriesss)
+    with col22:
+        st.line_chart(df[tickers])
 
 with col22:
     st.line_chart(df[tickers])
