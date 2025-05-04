@@ -3,15 +3,7 @@ import streamlit as st
 from streamlit_pdf_viewer import pdf_viewer
 
 
-previous_page = st.session_state.get('current_page', None)
-current_page = st.experimental_get_query_params().get('page', [None])[0]
 
-if previous_page and previous_page != current_page:
-    # Page changed
-    if previous_page == 'page_a':
-        # Cleanup actions
-        st.session_state.running = False
-        print("Stopped process from Page A.")
 
 
 st.set_page_config(page_title="Home",layout="wide")
@@ -45,3 +37,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
