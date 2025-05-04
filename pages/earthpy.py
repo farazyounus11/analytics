@@ -11,12 +11,13 @@ st.header('By Faraz Younus | M.S. Stats & Data Science', divider='gray')
 st.write("You can use the sidebar to select Severity")
 
 
-import streamlit as st
-import pandas as pd
+@st.cache_data  # This decorator caches the data
+def load_data():
+    df = pd.read_csv("earthq.csv")
+    df['date'] = pd.to_datetime(df['date'], infer_datetime_format=True, errors='coerce')
+    return df
 
-# Assuming 'date' column is in a format like 'YYYY-MM-DD' or similar that pandas can parse
-df = pd.read_csv("earthq.csv")
-df['date'] = pd.to_datetime(df['date'], infer_datetime_format=True, errors='coerce')
+df = load_data()
 
 # Load your dataset
 min_depth, max_depth = df['depth'].min(), df['depth'].max()
